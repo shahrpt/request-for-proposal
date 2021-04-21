@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ba24d78703145ebb61c86062810dd88" Name="Diagram1">
+        <EntityTypeShape EntityType="UrbanRFPModel.address_x_contact" Width="1.5" PointX="9" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.address_x_organization" Width="1.5" PointX="3" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.co_address" Width="1.5" PointX="0.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.co_contact" Width="1.5" PointX="3.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.co_favourite" Width="1.5" PointX="5.25" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.co_organization" Width="1.5" PointX="0.75" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.co_page_view" Width="1.5" PointX="5.25" PointY="59.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.co_permission" Width="1.5" PointX="6" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.contact_x_organization" Width="1.5" PointX="6" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.contact_x_product" Width="1.5" PointX="11.25" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.contact_x_RACI" Width="1.5" PointX="8.25" PointY="59.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.contact_x_request" Width="1.5" PointX="5.25" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.contact_x_response" Width="1.5" PointX="13.5" PointY="49.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.lkup_cxr_rlt_code" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.lkup_population" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.lkup_RACI" Width="1.5" PointX="6" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.lkup_rfp_type" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.lkup_solo_multiple" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.product_x_request" Width="1.5" PointX="8.25" PointY="64.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.ProductSubtype" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.ProductType" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_attachment" Width="1.5" PointX="8.25" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_event" Width="1.5" PointX="11.25" PointY="59.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_event_invitee" Width="1.5" PointX="13.5" PointY="60.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_page" Width="1.5" PointX="5.25" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_product" Width="1.5" PointX="6" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_request" Width="1.5" PointX="3" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_respond_invitation" Width="1.5" PointX="11.25" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_response" Width="1.5" PointX="11.25" PointY="48.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_scope_of_work" Width="1.5" PointX="9" PointY="69.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_score" Width="1.5" PointX="16.5" PointY="49.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_score_rules" Width="1.5" PointX="18.75" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_sop_section" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_task" Width="1.5" PointX="5.25" PointY="90.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_timeline_master_template" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_timeline_org_template" Width="1.5" PointX="3" PointY="68.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_validation_reference" Width="1.5" PointX="8.25" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_vendor_allowance" Width="1.5" PointX="3" PointY="73" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.score_x_request" Width="1.5" PointX="11.25" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.SystemMenu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.timeline" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.attachment_x_event" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.attachment_x_organization" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.attachment_x_product" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.attachment_x_request" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.attachment_x_response" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.organization_x_request" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UrbanRFPModel.rfp_question" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="UrbanRFPModel.FK_address_x_contact_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_address_co_address" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_address_x_organization_co_address" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_address_x_organization_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_page_view_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_permission_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_org_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_product_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_proposal_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_RACI_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_response_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_event_invitee_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_respond_invitation_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_score_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_validation_reference_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rp_event_co_contact" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_favourite_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_favourite_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_favourite_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_org_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_attachment_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_page_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_proposal_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_response_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_timeline_org_template_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_validation_reference_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_vendor_allowance_co_organization" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_page_view_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_co_page_view_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_product_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_RACI_lkup_RACI" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_RACI_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_RACI_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_proposal_rfp_proposal" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_contact_x_response_contact_x_response" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_attachment_contact_x_response" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_proposal_x_product_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_proposal_x_product_rfp_proposal" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_attachment_rfp_proposal" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_attachment_rfp_response" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_event_invitee_rfp_event" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rp_event_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_page_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_validation_reference_rfp_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_respond_invitation_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_response_rfp_proposal" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_score_rules_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_task_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_validation_reference_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_score_x_request_rfp_request" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_score_rfp_score" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_score_x_request_rfp_scope_of_work" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_rfp_score_rules_rfp_score" ManuallyRouted="false" />
+        <AssociationConnector Association="UrbanRFPModel.FK_MainMenu_SubMenu" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,297 @@
+﻿@{ 
+    string tempClass = Guid.NewGuid().ToString();
+}
+@using UrbanRFP.Helpers
+<div class="dropzone @ViewBag.Name" actions="/File"></div>
+<div class="preview-@tempClass"></div>
+<input type="hidden" id="@ViewBag.Name" name="@ViewBag.Name" class="@tempClass" />
+<script>
+     var removeoption = true;
+     @if(ViewBag.PicId != "")
+     {    
+        <text>
+            var VMode = '@ViewBag.ViewMode';
+            var pid = '@ViewBag.PicId';
+
+            if (VMode != "")
+            {
+                removeoption = false;
+            }
+        
+            if (pid.indexOf(',') > -1)
+            {
+               var dropzoneControl = $('div.@ViewBag.Name')[0].dropzone;
+               if (dropzoneControl) {
+                   dropzoneControl.destroy();
+               }
+               $("div.@ViewBag.Name").dropzone(
+               {
+                    url: "/File",
+                    maxFiles: @ViewBag.MaxFiles,
+                    addRemoveLinks: removeoption,
+                    success: function (fileInfo, result) {
+                        if (result.Message == "success") {
+                            if (typeof(attach_file) === "function") {
+                                attach_file(result.rfa_key, "@ViewBag.Name");
+                            }
+
+                            $('.@tempClass').val(function (i, val) {
+                                return val + (val ? ',' : '') + result.rfa_key;
+                            });
+
+                            $(fileInfo.previewElement).data("url", result.Url);
+                            $(fileInfo.previewElement).click(function () {
+                                var uploadOverlay = $('.upload-image-overlay');
+                                var uploadOverlayImage = $('.upload-image-overlay img');
+                                uploadOverlayImage.attr('src', result.Url);
+                                uploadOverlay.fadeIn(100);
+                                $('body').css('overflow', 'hidden');
+                                $('.upload-image-overlay-close').click(function () {
+                                    uploadOverlay.fadeOut(100);
+                                    $('body').css('overflow', 'auto');
+                                });
+                            });
+                        }
+                    },
+                    removedfile: function (file) {
+
+                       if(file.PicId != undefined)
+                       {
+                           var arrList = $(".@tempClass").val().split(',');
+                           var index = arrList.indexOf(file.PicId.toString());
+
+                           if (index > -1) {
+                               if (typeof(remove_file) === "function") {
+                                    remove_file(file.PicId.toString());
+                               }
+
+                               arrList.splice(index, 1);
+                               $(".@tempClass").val(arrList.toString());
+                           }
+                       }
+                       else
+                       {
+                           var response = JSON.parse(file.xhr.response);
+
+                           if (response.message == "success") {
+                               var arrList = $(".@tempClass").val().split(',');
+                               var index = arrList.indexOf(response.rfa_key.toString());
+
+                               if (index > -1)
+                               {
+                                   if (typeof(remove_file) === "function") {
+                                        remove_file(response.rfa_key.toString());
+                                   }
+
+                                   arrList.splice(index, 1);
+                                   $(".@tempClass").val(arrList.toString());
+                               }
+                           }
+                       }
+
+                       file.previewElement.remove();
+                    },
+                    init:function(){
+                       var thisDropzone = this;
+
+                       var arr =  pid.split(',');
+                        $.each(arr,function(index,value) {
+                            $.get("/File/GetFileDetail?id="+arr[index], function(result) {
+                                var mockFile = { name: result.rfa_file_name,type:result.rfa_mime,processing:true,accepted:true,PicId:result.rfa_key }; // here we get the file name and size as response
+                                $('.@tempClass').val(function (i, val) {
+                                    return val + (val ? ',' : '') + result.rfa_key;
+                                });
+                                thisDropzone.files.push(mockFile);
+                                thisDropzone.emit('addedfile', mockFile);
+                                thisDropzone.createThumbnailFromUrl(mockFile, '@ConfigHelper.GetSettingAsString("UploadsURL")'+"/"+result.rfa_file_path+"/"+result.rfa_file_name);
+                                thisDropzone.emit('complete', mockFile);
+                                thisDropzone._updateMaxFilesReachedClass();
+
+                                $(mockFile.previewElement).data("url", '@ConfigHelper.GetSettingAsString("UploadsURL")'+"/"+result.rfa_file_path+"/"+result.rfa_file_name);
+                                $(mockFile.previewElement).click(function () {
+                                    var uploadOverlay = $('.upload-image-overlay');
+                                    var uploadOverlayImage = $('.upload-image-overlay img');
+                                    uploadOverlayImage.attr('src', '@ConfigHelper.GetSettingAsString("UploadsURL")'+"/"+result.rfa_file_path+"/"+result.rfa_file_name);
+                                    uploadOverlay.fadeIn(100);
+                                    $('body').css('overflow', 'hidden');
+                                    $('.upload-image-overlay-close').click(function () {
+                                        uploadOverlay.fadeOut(100);
+                                        $('body').css('overflow', 'auto');
+                                    });
+                                });
+                            });
+                        });
+                    }
+               });
+            }
+            else
+            {
+                var dropzoneControl = $('div.@ViewBag.Name')[0].dropzone;
+                if (dropzoneControl) {
+                    dropzoneControl.destroy();
+                }
+
+                $("div.@ViewBag.Name").dropzone(
+                {
+                    url: "/File",
+                    addRemoveLinks: removeoption,
+                    maxFiles: @ViewBag.MaxFiles,
+                    success: function (fileInfo, result) {
+                        if (result.message == "success") {
+                            if (typeof(attach_file) === "function") {
+                                attach_file(result.rfa_key, "@ViewBag.Name");
+                            }
+
+                            $('.@tempClass').val(function (i, val) {
+                                return val + (val ? ',' : '') + result.rfa_key;
+                            });
+                        }
+                    },
+                    init:function(){
+                        var thisDropzone = this;
+
+                        $.get("/File/GetFileDetail?id="+'@ViewBag.PicId', function(result) {
+                            var mockFile = { name: result.rfa_file_name,size : 4200,type:result.rfa_mime,processing:true,accepted:true,PicId:result.rfa_key }; // here we get the file name and size as response
+                        
+                            $('.@tempClass').val(function (i, val) {
+                                return val + (val ? ',' : '') + result.rfa_key;
+                            });
+
+                            thisDropzone.files.push(mockFile);
+                            thisDropzone.emit('addedfile', mockFile);
+                            thisDropzone.createThumbnailFromUrl(mockFile, '@ConfigHelper.GetSettingAsString("UploadsURL")'+"/"+result.rfa_file_path+"/"+result.rfa_file_name);
+                            thisDropzone.emit('complete', mockFile);
+                            thisDropzone._updateMaxFilesReachedClass();
+                            $(mockFile.previewElement).data("url", '@ConfigHelper.GetSettingAsString("UploadsURL")'+"/"+result.rfa_file_path+"/"+result.rfa_file_name);
+                            $(mockFile.previewElement).click(function () {
+                                var uploadOverlay = $('.upload-image-overlay');
+                                var uploadOverlayImage = $('.upload-image-overlay img');
+                                uploadOverlayImage.attr('src', '@ConfigHelper.GetSettingAsString("UploadsURL")'+"/"+result.rfa_file_path+"/"+result.rfa_file_name);
+                                uploadOverlay.fadeIn(100);
+                                $('body').css('overflow', 'hidden');
+                                $('.upload-image-overlay-close').click(function () {
+                                    uploadOverlay.fadeOut(100);
+                                    $('body').css('overflow', 'auto');
+                                });
+                            });
+                        });
+                    },
+                    removedfile: function (file) {
+
+                       if(file.PicId != undefined)
+                       {
+                           var arrList = $(".@tempClass").val().split(',');
+                           var index = arrList.indexOf(file.PicId.toString());
+
+                           if (index > -1) {
+                               if (typeof(remove_file) === "function") {
+                                    remove_file(file.PicId.toString());
+                               }
+                               arrList.splice(index, 1);
+                               $(".@tempClass").val(arrList.toString());
+                           }
+                       }
+                       else
+                       {
+                           var response = JSON.parse(file.xhr.response);
+
+                           if (response.message == "success") {
+                               var arrList = $(".@tempClass").val().split(',');
+                               var index = arrList.indexOf(response.rfa_key.toString());
+
+                               if (index > -1) {
+                                   if (typeof(remove_file) === "function") {
+                                        remove_file(response.rfa_key.toString());
+                                   }
+
+                                   arrList.splice(index, 1);
+                                   $(".@tempClass").val(arrList.toString());
+                               }
+                           }
+                       }
+
+                       file.previewElement.remove();
+                    }
+                });
+            }
+        </text>
+      }
+     else
+     {
+       <text>
+        var dropzoneControl = $('div.@ViewBag.Name')[0].dropzone;
+        if (dropzoneControl) {
+            dropzoneControl.destroy();
+        }
+
+        $("div.@ViewBag.Name").dropzone(
+        {
+            url: "/File",
+            addRemoveLinks: true,
+            maxFiles: @ViewBag.MaxFiles,
+            success: function (fileInfo, result) {
+
+                if (result.message == "success") {
+                    if (typeof(attach_file) === "function") {
+                        attach_file(result.rfa_key, "@ViewBag.Name");
+                    }
+
+                    $('.@tempClass').val(function (i, val) {
+
+                        return val + (val ? ',' : '') + result.rfa_key;
+                    });
+
+                    $(fileInfo.previewElement).data("url", result.Url);
+                    $(fileInfo.previewElement).click(function () {
+                        var uploadOverlay = $('.upload-image-overlay');
+                        var uploadOverlayImage = $('.upload-image-overlay img');
+                        uploadOverlayImage.attr('src', result.Url);
+                        uploadOverlay.fadeIn(100);
+                        $('body').css('overflow', 'hidden');
+                        $('.upload-image-overlay-close').click(function () {
+                            uploadOverlay.fadeOut(100);
+                            $('body').css('overflow', 'auto');
+                        });
+                    });
+                }
+            },
+            removedfile: function (file) {
+                if(file.PicId != undefined)
+                {
+                    if (typeof(remove_file) === "function") {
+                        remove_file(file.PicId);
+                    }
+
+                    var arrList = $(".@tempClass").val().split(',');
+                    var index = arrList.indexOf(file.PicId.toString());
+
+                    if (index > -1) {
+                        arrList.splice(index, 1);
+                        $(".@tempClass").val(arrList.toString());
+                    }
+                }
+                else
+                {
+                    var response = JSON.parse(file.xhr.response);
+
+                    if (response.message == "success") {
+                        var arrList = $(".@tempClass").val().split(',');
+                        var index = arrList.indexOf(response.rfa_key.toString());
+
+                        if (index > -1) {
+                            if (typeof(remove_file) === "function") {
+                                remove_file(response.rfa_key.toString());
+                            }
+
+                            arrList.splice(index, 1);
+                            $(".@tempClass").val(arrList.toString());
+                        }
+                    }
+                }
+
+                file.previewElement.remove();
+            }
+        });
+    </text>
+    }
+</script>

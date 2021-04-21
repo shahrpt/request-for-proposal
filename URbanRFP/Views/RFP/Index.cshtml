@@ -1,0 +1,330 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@model IList<RfpRequest>
+
+@{
+    ViewBag.Title = "My RFPs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 1;
+}
+<script src="~/Content/Scripts/AppScripts/rfp.js"></script>
+<script src="~/Content/Scripts/sweetalert.min.js"></script>
+<link href="~/Content/css/step-wizard.css" rel="stylesheet" />
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">My Toolkit</a></li>
+    </ul>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-11 padding-zero">
+                <p class="srchtxt dspinline">My RFPs</p>
+                <div style="float:right;margin-top:15px;">
+                    <a href="/rfp/templates" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add new RFP</a>
+                </div>
+                <div class="bdrline bdrline2" style="margin: 0px;border-color: #5DA9D8;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" mgbody ovflow">
+                <table class="table table-responsive table-striped tbldashboard" style="width: 90%;">
+                    <thead>
+                        <tr class="throw">
+                            <th style="width:2%"></th>
+                            <th style="width:15%" class="mainth ht47">RFP NAME</th>
+                            <th style="width:75%" class="mainth"><span style="margin-left: 7%;">PROGRESS</span></th>
+                            <th class="mainth wd8"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><span class="legend-box btn-gray"></span></td>
+                                <td class="text-blue">@(counter++). <a href="/rfp?rfp_key=@item.rfp_key">@item.rfp_name</a></td>
+                                <td>
+                                    <div class="stepwizard">
+                                        <div class="stepwizard-row setup-panel">
+                                            <div class="stepwizard-step col-xs-2">
+                                                @if (item.RACIContactList.Count > 0)
+                                                {
+                                                    <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#step-1" type="button" class="btn btn-circle-current btn-circle">1</a>
+                                                }
+                                                <p>RACI</p>
+                                            </div>
+                                            <div class="stepwizard-step col-xs-2">
+                                                @if (item.RACIContactList.Count > 0 && !string.IsNullOrWhiteSpace(item.rfp_sow_project_timeline))
+                                                {
+                                                    <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                                }
+                                                else if (item.RACIContactList.Count > 0 && string.IsNullOrWhiteSpace(item.rfp_sow_project_timeline))
+                                                {
+                                                    <a href="#step-2" type="button" class="btn btn-circle-current btn-circle">2</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#step-2" type="button" class="btn btn-circle-default btn-circle">2</a>
+                                                }
+                                                <p>Timeline</p>
+                                            </div>
+                                            <div class="stepwizard-step col-xs-2">
+                                                @if (!string.IsNullOrWhiteSpace(item.rfp_scope_of_work))
+                                                {
+                                                    <a href="#step-3" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#step-3" type="button" class="btn btn-circle-default btn-circle">3</a>
+                                                }
+                                                <p>SOW</p>
+                                            </div>
+                                            <div class="stepwizard-step col-xs-2">
+                                                @if (item.ScoreRules != null && item.ScoreRules.Count > 0)
+                                                {
+                                                    <a href="/rfp/criteria?rfp_key=@item.rfp_key" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/rfp/criteria?rfp_key=@item.rfp_key" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                                }
+                                                <p>Scoring</p>
+                                            </div>
+                                            <div class="stepwizard-step col-xs-2">
+                                                <a href="/rfp/score?rfp_key=@item.rfp_key" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                                <p>Score process</p>
+                                            </div>
+                                            <div class="stepwizard-step col-xs-2">
+                                                @if (!string.IsNullOrWhiteSpace(item.rfp_submission_instructions))
+                                                {
+                                                    <a href="#step-6" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                                }
+                                                <p>Submission instructions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="/rfp/templates?rfp_key=@item.rfp_key"><img src="/Content/images/fa-edit.png"></a>&nbsp;&nbsp;
+                                    <a class="btn-del-rfp" data-key="@item.rfp_key"><img src="/Content/images/delete.png"></a>
+                                </td>
+                            </tr>
+                        }
+                        <!--<tr>
+                            <td><span class="legend-box btn-gray"></span></td>
+                            <td class="text-blue">2. Name Here</td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-current btn-circle">3</a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-4" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="legend-box btn-gray"></span></td>
+                            <td class="text-blue">3. Name Here</td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-current btn-circle">2</a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-default btn-circle">3</a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-4" type="button" class="btn btn-circle-default btn-circle">4</a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="legend-box btn-gray"></span></td>
+                            <td class="text-blue">4. Name Here</td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-4" type="button" class="btn btn-circle-current btn-circle">4</a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="legend-box btn-gray"></span></td>
+                            <td class="text-blue">5. Name Here</td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-current btn-circle">3</a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-4" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="legend-box btn-gray"></span></td>
+                            <td class="text-blue">6. Name Here</td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-4" type="button" class="btn btn-circle-current btn-circle">4</a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="legend-box btn-gray"></span></td>
+                            <td class="text-blue">7. Name Here</td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-4" type="button" class="btn btn-circle-current btn-circle">4</a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-default btn-circle">5</a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-default btn-circle">6</a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

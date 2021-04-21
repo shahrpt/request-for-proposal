@@ -1,0 +1,258 @@
+﻿@using ICMA;
+@using ICMA.Models;
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        .ad_submenu {
+            display: none;
+            position: absolute;
+            bottom: 95px;
+            left: 48px;
+            width: 350px;
+            background: #fff;
+            -webkit-box-shadow: 2px 0px 2px #E5E5E5;
+            border-left: 1px solid rgba(0, 0, 0, 0.2);
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+            margin: 10px 0px;
+            box-shadow: 2px 0px 2px #E5E5E5;
+            list-style: none;
+            font-family: ibm_plex_sansregular, sans-serif;
+            z-index: 10000;
+        }
+
+            .ad_submenu li {
+                padding: 5px 10px;
+            }
+
+                .ad_submenu li a {
+                    color: #18608D;
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+    </style>
+
+    @if (SessionHelper.CurrentUser != null)
+    {
+        <text>
+            <script>
+                (function (apiKey) {
+                    (function (p, e, n, d, o) {
+                        var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = [];
+                        v = ['initialize', 'identify', 'updateOptions', 'pageLoad']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
+                            o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
+                        })(v[w]);
+                        y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+                        z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
+                    })(window, document, 'script', 'pendo');
+
+                    // Call this whenever information about your visitors becomes available
+                    // Please use Strings, Numbers, or Bools for value types.
+                    pendo.initialize({
+                        visitor: {
+                            id: '@SessionHelper.CurrentUser.User.ct_key',   // Required if user is logged in
+                            email: '@SessionHelper.CurrentUser.User.ct_email',
+                            firstName: '@SessionHelper.CurrentUser.User.ct_first_name',
+                            lastName: '@SessionHelper.CurrentUser.User.ct_last_name',
+                            phone : '@SessionHelper.CurrentUser.User.ct_phone'
+                            // role:         // Optional
+
+                            // You can add any additional visitor level key-values here,
+                            // as long as it's not one of the above reserved names.
+                        },
+
+                        account: {
+                            id: '@SessionHelper.CurrentUser.User.ct_key', // Highly recommended
+                            name: '@(SessionHelper.CurrentUser.User.ct_first_name + " " + SessionHelper.CurrentUser.User.ct_last_name)',        // Optional
+                            creationDate: '@SessionHelper.CurrentUser.User.ct_add_date'
+                            // planLevel:    // Optional
+                            // planPrice:    // Optional
+                            // creationDate: // Optional
+
+                            // You can add any additional account level key-values here,
+                            // as long as it's not one of the above reserved names.
+                        }
+                    });
+                })('3100e645-97d7-481d-4018-a336d13dd6be');
+            </script>
+        </text>
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICMA | @ViewBag.Title</title>
+    <link href="~/Content/tablesorter/themes/blue/style.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/script")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @RenderSection("styles", required: false)
+</head>
+<body>
+
+    @if (SessionHelper.CurrentUser != null)
+    {
+
+
+     <ul class="ad_submenu">
+         @if (SessionHelper.CurrentUser.User.per_type == "Admin")
+         {
+             <text>
+                 <li style="margin:0px; padding:0px !important;">
+                     <button class="btn btn-filter btn-hidAdSubmenu" style="cursor: pointer; margin: 0px;margin-bottom: 10px; background-color:#dddddd">
+                         Hide Menue
+                         <div style="float:right"><i class="fa fa-angle-left"></i></div>
+                     </button>
+                 </li>
+
+                 <li>
+                     <a href=""><i class="fa fa-angle-double-right"></i> <span>Email templates</span></a>
+                 </li>
+             </text>
+         }
+         @if (ICMA.Models.SessionHelper.CurrentUser.User.per_type == "RFP"
+             ||  ICMA.Models.SessionHelper.CurrentUser.User.per_type == "Vendor")
+         {
+             <text>
+                 <li>
+                     <a href="@Url.Action("index","OrgDashboard")"><i class="fa fa-angle-double-right"></i> <span>Admin Dashboard</span></a>
+                 </li>
+                 <li>
+                     <a href=""><i class="fa fa-angle-double-right"></i> <span>Utilities</span></a>
+                 </li>
+             </text>
+         }
+
+     </ul>
+    }
+    <!-- LHN -->
+    <aside class="aside-closed">
+        <a href="" class="close-menu"><img id="close-img" src="~/Content/images/close-menu.svg" alt=""></a>
+
+        <ul class="up ul-opened" id="app_menu"></ul>
+
+        <ul class="down up ul-opened" id="app_setting">
+
+            <li data-id="100" class="main-menu">
+                <a href=""><img src="~/Content/images/notice.svg" alt=""> <span>Notifications</span></a>
+            </li>
+
+            @if (SessionHelper.CurrentUser != null && (ICMA.Models.SessionHelper.CurrentUser.User.per_type == "RFP"
+         || ICMA.Models.SessionHelper.CurrentUser.User.per_type == "Vendor"))
+            {
+
+                <li data-id="101">
+                    <a href="@Url.Action("index","OrgDashboard")"><img src="~/Content/images/levels.svg" alt=""> <span>User Settings</span></a>
+
+                </li>
+            }
+            @if (SessionHelper.CurrentUser != null && ICMA.Models.SessionHelper.CurrentUser.User.per_type == "Admin")
+            {
+
+                <li data-id="101">
+                    <a href="@Url.Action("index","SystemUsers")"><img src="~/Content/images/levels.svg" alt=""> <span>User Settings</span></a>
+
+                </li>
+            }
+
+            @if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type != "Admin"
+                && SessionHelper.CurrentUser.User.per_type != "RFP" && SessionHelper.CurrentUser.User.per_type != "Vendor")
+            {
+
+                <li data-id="101">
+                    <a href="#"><img src="~/Content/images/levels.svg" alt=""> <span>User Settings</span></a>
+
+                </li>
+            }
+
+            @if (ICMA.Models.SessionHelper.CurrentUser == null)
+            {
+                <text>
+
+                    <li data-id="101">
+                        <a href="#"><img src="~/Content/images/levels.svg" alt=""> <span>User Settings</span></a>
+
+                    </li>
+                    <li data-id="103" class="main-menu">
+                        <a href="/Account/Login">
+                            <img src="~/Content/images/user.svg" alt="Login" title="Login"> <span>Login</span>
+                        </a>
+                    </li>
+                </text>
+            }
+            else
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>
+                        <li data-id="103" class="main-menu"><a href="javascript:document.getElementById('logoutForm').submit()"><img src="~/Content/images/user.svg" title="Log out" alt="Log out"> <span>Log out</span></a></li>
+                    </text>
+                }
+            }
+        </ul>
+    </aside>
+
+    <!-- Content -->
+    <div class="content">
+        @RenderBody()
+    </div>
+    <input type="hidden" id="current-action" value="@Html.Action().ToLower()" />
+    <p id="demo"></p>
+    <div class="upload-image-overlay"><span class="upload-image-overlay-close">&#x2715;</span><img src="" /></div>
+
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/Content/Scripts/AppScripts/home.js"></script>
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/Scripts/AppScripts/custom.js"></script>
+    <script src="~/Content/scripts/vanillaCalendar.js"></script>
+
+    <script>
+        var errorAjax = function (err) {
+            console.log(err);
+            alert("Something went terribly wrong. Please check your input data and try again");
+            //swal.fire({
+            //    title: "Error",
+            //    text: "Something went terribly wrong. Please check your input data and try again. ",
+            //    type: "error",
+            //    showCancelButton: false,
+            //    confirmButtonText: 'Ok'
+            //});
+            $('.btnSubmit').prop('disabled', false);
+        }
+        var alertMsg = function (type, title, text) {
+            swal.fire({
+                title: title,
+                text: text,
+                type: type,
+                showCancelButton: false,
+                confirmButtonText: 'Ok'
+            });
+        }
+    </script>
+</body>
+</html>

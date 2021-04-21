@@ -1,0 +1,89 @@
+﻿@using UrbanRFP.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content" style="margin: 5% 10%;">
+        @if (ViewBag.Message != null)
+        {
+            <div class="row">
+                <div class="col-md-offset-1 col-md-11">
+                    <div class="alert alert-success"><i class="fa fa-check"></i>&nbsp;@ViewBag.Message</div>
+                    <hr />
+                </div>
+            </div>
+        }
+        @if (ViewBag.Error != null)
+        {
+            <div class="row">
+                <div class="col-md-offset-1 col-md-11">
+                    <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;@ViewBag.Error</div>
+                    <hr />
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-offset-1 col-md-11">
+                <span class="srchtxt">Login</span><br /><br />
+                <hr />
+            </div>
+        </div>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5 individualdt">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5 individualdt">
+                    @Html.LabelFor(m => m.UserName, "Email", new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Please enter email..." })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5 individualdt">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Please enter password..." })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5">
+                    <p class="individualpara">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe, "Remember me?")
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5">
+                    <button type="submit" class="btn btn-lg btn-default">Login</button>
+                    <div style="float: right;margin-top: 10px;"><a href="/account/forgotpassword">Forgot your password?</a></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5 text-center">
+                    <p class="individualpara">
+                        <br />
+                        Don't have an account?
+                        <a href="/Account/Register">Register now</a>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

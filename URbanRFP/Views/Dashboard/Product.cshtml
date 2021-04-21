@@ -1,0 +1,317 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@model RfpProduct
+@{
+    ViewBag.title = "My Dashboard Product";
+}
+<link href="~/Content/css/charts.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-nav-wizard.css" rel="stylesheet" />
+<script src="~/Content/Scripts/AppScripts/text-shortner.js"></script>
+<script src="~/Content/Scripts/AppScripts/charts.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="/dashboard">My dashboard</a></li>
+        <li><a href="#">@Model.prd_name</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-8">
+                <span class="srchtxt">@Model.prd_name</span>
+            </div>
+            <div class="col-md-4 text-right" style="padding-top:15px">
+                <a href="/product/edit?prd_key=@Model.prd_key" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                <a href="/dashboard" target="_blank">Product showcase page&nbsp;&nbsp;<img src="/content/images/external-link.png" /></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="bordered-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="srchtxt myrfps" style="float:left;margin-top:15px">My response to RFQs</p>
+                            <div class="mgbody mt5">
+                                <div class="styleSelectdashbaord">
+                                    <select class="units">
+                                        <option value="">Sort by</option>
+                                        <option value="">In progress</option>
+                                        <option value="">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rfp-list txtcenter" style="margin-top:15px">
+                                <div class="rfq-pieID legend left"><span>5</span><em> Submitted</em></div>
+                                <div class="rfq-pieID pie-mini"></div>
+                                <div class="rfq-pieID legend right"><span>1</span><em> Awaiting answer</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mt26 mt0 clrwhite mgbody">
+                                <div class="rfp-list bdrline bdrline2"></div>
+                                <div class="rfp-list mgbody ovflow" style="margin:0px 15px">
+                                    <table class="tbldashboard tablesorter tbl-dash-rfq-list">
+                                        <thead>
+                                            <tr class="throw">
+                                                <th class="mainth ht47">
+                                                    RFQ
+                                                </th>
+                                                <th class="mainth">
+                                                    REQUESTOR'S NAME
+                                                </th>
+                                                <th class="mainth">
+                                                    REQUEST DATE
+                                                </th>
+                                                <th class="mainth">
+                                                    STATUS
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tblbdydash">
+                                            <tr>
+                                                <td class="fzpd"> <a href="/rfq/request">Duis aute irure dolor in reprehenderit</a></td>
+                                                <td class="fzpd">John Jameson</td>
+                                                <td class="fzpd">01.02.2013</td>
+                                                <td class="fzpd text-success">Submitted</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fzpd"> <a href="/rfq/request">Lorem ipsum dolor sit amet</a></td>
+                                                <td class="fzpd">Alice Applegate</td>
+                                                <td class="fzpd">01.02.2013</td>
+                                                <td class="fzpd text-success">Submitted</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fzpd"> <a href="/rfq/request">Excepteur sint occaecat cupidatat</a></td>
+                                                <td class="fzpd">Bob Bailey</td>
+                                                <td class="fzpd">01.02.2013</td>
+                                                <td class="fzpd text-success">Submitted</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fzpd"> <a href="/rfq/request">Non proident</a></td>
+                                                <td class="fzpd">Jane Jonesley</td>
+                                                <td class="fzpd">01.02.2013</td>
+                                                <td class="fzpd text-warning">Awaiting answer</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br class="rfp-list" />
+                <div class="bordered-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="srchtxt myrfps" style="float:left;margin-top:15px">My proposals</p>
+                            <div class="mgbody mt5">
+                                <div class="styleSelectdashbaord">
+                                    <select class="units">
+                                        <option value="">Sort by</option>
+                                        <option value="">In progress</option>
+                                        <option value="">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="txtcenter" style="margin-top:15px">
+                                <div class="rfp-pieID legend left"><em>Completed</em><br /><span>4</span></div>
+                                <div class="rfp-pieID pie"></div>
+                                <div class="rfp-pieID legend right"><em>In progress</em><br /><span>3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mt26 mt0 clrwhite mgbody">
+                                <div class="rfp-list bdrline bdrline2"></div>
+                                <div class="rfp-list mgbody ovflow">
+                                    <table class="tbldashboard tablesorter tbl-dash-rfp-list">
+                                        <thead>
+                                            <tr class="throw">
+                                                <th class="width2"></th>
+                                                <th class="mainth ht47 wdth9">
+                                                    NAME
+                                                </th>
+                                                <th class="mainth nav-td">
+                                                    PLAN & PUBLISH
+                                                </th>
+                                                <th class="mainth nav-td">COLLECT</th>
+                                                <th class="mainth nav-td">
+                                                    EVALUATE
+                                                </th>
+                                                <th class="mainth nav-td">
+                                                    AWARD
+                                                </th>
+                                                <th class="mainth txtcenter" style="width:1% !important;">
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tblbdydash">
+                                            <tr>
+                                                <td class="txtcenter fzpd">1</td>
+                                                <td class="fzpd"> <a href="/dashboard/proposal">Speed cameras</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;8 RFPs collected</a></li>
+                                                        <li class="active rfq-evaluate"><a href="#">6 RFPs scoring</a></li>
+                                                        <li class="rfq-award"><a href="#">&nbsp;</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltodosendbtn ">Send ITA</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="txtcenter">2</td>
+                                                <td><a href="/dashboard/proposal">U-Turn signage</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;12 RFPs collected</a></li>
+                                                        <li class="active rfq-evaluate"><a href="#">12 RFPs scoring</a></li>
+                                                        <li class="rfq-award"><a href="#">&nbsp;</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltodosendbtn ">Send ITA</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="txtcenter">3</td>
+                                                <td><a href="/dashboard/proposal">Parking lot cones</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="active rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;2 RFPs collected</a></li>
+                                                        <li class="rfq-evaluate"><a href="#">&nbsp;</a></li>
+                                                        <li class="rfq-award"><a href="#">&nbsp;</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltodoscorebtn ">Score</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="txtcenter">4</td>
+                                                <td><a href="/dashboard/proposal">Sidewalks</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;RFPs collected</a></li>
+                                                        <li class="done rfq-evaluate"><a href="#">20 RFPs scored</a></li>
+                                                        <li class="done rfq-award"><a href="#">Awarded 12.08.18</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltodovalidatebtn ">Validate vendor</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="txtcenter">5</td>
+                                                <td><a href="#">Traffic lights</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;7 RFPs collected</a></li>
+                                                        <li class="done rfq-evaluate"><a href="#">5 RFPs scoring</a></li>
+                                                        <li class="done rfq-award"><a href="#">Awarded 01.16.18</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltodovalidatebtn ">Validate vendor</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="txtcenter">6</td>
+                                                <td><a href="#">Crosswalk zebras</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;4 RFPs collected</a></li>
+                                                        <li class="done rfq-evaluate"><a href="#">4 RFPs scoring</a></li>
+                                                        <li class="done rfq-award"><a href="#">Awarded 01.04.18</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltododonebtn "><img class="doneimg" src="~/Content/images/tick-img.png" /> Done  </button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="txtcenter">7</td>
+                                                <td><a href="#">Garage guages</a></td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                                        <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;1 RFPs collected</a></li>
+                                                        <li class="done rfq-evaluate"><a href="#">1 RFPs scoring</a></li>
+                                                        <li class="done rfq-award"><a href="#">Awarded 02.05.18</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter"><button type="button" class="tbltododonebtn "> <img class="doneimg" src="~/Content/images/tick-img.png" /> Done</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bordered-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="srchtxt myrfps" style="margin-top:15px;margin-left:0px !important">Analytics</p>
+                            <p class="text-right">Views this month: <span class="text-blue"><b>10</b></span></p>
+                            <p>
+                                <img src="/Content/images/line-graph.png" width="260" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row border-bottom" style="margin: 5px 0px;">
+                        <div class="col-md-8 padding-zero">Total views to date</div>
+                        <div class="col-md-4 padding-zero text-right text-blue"><strong>68</strong></div>
+                    </div>
+                    <div class="row border-bottom" style="margin: 5px 0px;">
+                        <div class="col-md-8 padding-zero">Saved as favorite</div>
+                        <div class="col-md-4 padding-zero text-right text-blue"><strong>21</strong></div>
+                    </div>
+                    <div class="row border-bottom" style="margin: 5px 0px;">
+                        <div class="col-md-8 padding-zero">Average rating</div>
+                        <div class="col-md-4 padding-zero text-right text-blue">
+                            <i class="fa fa-star text-blue"></i><i class="fa fa-star text-blue"></i><i class="fa fa-star text-blue"></i><i class="fa fa-star text-blue"></i><i class="fa fa-star text-blue"></i>
+                        </div>
+                    </div>
+                </div>
+                <br class="rfp-list" />
+                <div class="bordered-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="srchtxt myrfps" style="margin-top:15px;margin-left:0px !important">Key Persons (RACI)</p>
+                            <p>
+                                <span class="text-blue">John Jameson</span><br />
+                                Vice President / Recommender<br />
+                                <a>JohnJ@abcdefg.org</a>
+                            </p>
+                            <p>
+                                <span class="text-blue">Alice Applegate</span><br />
+                                President / Approver<br />
+                                <a>AliceA@abcdefg.org</a>
+                            </p>
+                            <p>
+                                <span class="text-blue">Bob Bailey</span><br />
+                                Senior Vice President / Consultant<br />
+                                <a>BobB@abcdefg.org</a>
+                            </p>
+                            <p>
+                                <span class="text-blue">Jane Jonesley</span><br />
+                                Executive Vice President / Informee<br />
+                                <a>JaneJ@abcdefg.org</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ht500"></div>
+<script src="~/Content/tablesorter/jquery.metadata.js"></script>
+<script src="~/Content/tablesorter/jquery.tablesorter.min.js"></script>
+<script src="~/Content/Scripts/AppScripts/dashboard.js"></script>

@@ -1,0 +1,148 @@
+.nav-wizard > li {
+    float: left;
+    min-width: 120px;
+    text-align: center;
+    line-height: 20px;
+}
+
+.nav-wizard > li > a {
+    position: relative;
+    background-color: #eeeeee;
+    color: white;
+    padding: 5px 15px;
+}
+
+.nav-wizard > li > a .badge {
+    margin-left: 3px;
+    color: #eeeeee;
+    background-color: #428bca;
+}
+
+.nav-wizard > li:not(:first-child) > a {
+    padding-left: 34px;
+}
+
+.nav-wizard > li:not(:first-child) > a:before {
+    width: 0px;
+    height: 0px;
+    border-top: 15px inset transparent;
+    border-bottom: 15px inset transparent;
+    border-left: 10px solid #ffffff;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+}
+
+.nav-wizard > li:not(:last-child) > a {
+    margin-right: 2px;
+}
+
+.nav-wizard > li:not(:last-child) > a:after {
+    width: 0px;
+    height: 0px;
+    border-top: 15px inset transparent;
+    border-bottom: 15px inset transparent;
+    border-left: 10px solid #eeeeee;
+    position: absolute;
+    content: "";
+    top: 0;
+    right: -10px;
+    z-index: 2;
+}
+
+.nav-wizard > li:first-child > a {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.nav-wizard > li:last-child > a {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.nav-wizard > li.done:hover > a {
+    background-color: #6DC30F;
+}
+
+.nav-wizard > li.done:hover > a:before,
+.nav-wizard > li:hover > a:before {
+    border-right-color: #6DC30F;
+}
+
+.nav-wizard > li.done:hover > a:after,
+.nav-wizard > li:hover > a:after {
+    border-left-color: #6DC30F;
+}
+
+.nav-wizard > li.done > a {
+    background-color: #6DC30F;
+}
+
+.nav-wizard > li.done > a:before {
+    border-right-color: #6DC30F;
+}
+
+.nav-wizard > li.done > a:after {
+    border-left-color: #6DC30F;
+}
+
+.nav-wizard > li.active > a,
+.nav-wizard > li.active > a:hover,
+.nav-wizard > li.active > a:focus {
+    color: #ffffff;
+    background-color: #F5A623;
+}
+
+.nav-wizard > li.active > a:after {
+    border-left-color: #F5A623;
+}
+
+.nav-wizard > li.active > a .badge {
+    color: #F5A623;
+    background-color: #ffffff;
+}
+
+.nav-wizard > li.disabled > a {
+    color: #777777;
+}
+
+.nav-wizard > li.disabled > a:hover,
+.nav-wizard > li.disabled > a:focus {
+    color: #777777;
+    text-decoration: none;
+    background-color: #eeeeee;
+    cursor: default;
+}
+
+.nav-wizard > li.disabled > a:before {
+    border-right-color: #eeeeee;
+}
+
+.nav-wizard > li.disabled > a:after {
+    border-left-color: #eeeeee;
+}
+
+.nav-wizard.nav-justified > li {
+    float: none;
+}
+
+.nav-wizard.nav-justified > li > a {
+    padding: 10px 15px;
+}
+
+@media (max-width: 768px) {
+    .nav-wizard.nav-justified > li > a {
+        border-radius: 4px;
+        margin-right: 0;
+    }
+
+    .nav-wizard.nav-justified > li > a:before,
+    .nav-wizard.nav-justified > li > a:after {
+        border: none !important;
+    }
+}
+.nav-td {
+    width: 10%;
+    padding-left: 10px;
+}

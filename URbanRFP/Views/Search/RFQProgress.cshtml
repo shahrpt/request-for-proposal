@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.title = "RFQ Progress";
+}
+
+<link href="~/Content/css/vanillaCalendar.css" rel="stylesheet" />
+<div class="bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">City Traffic Management</a></li>
+    </ul>
+</div>
+<div class="logo-desc d-flexs">
+    <div class="desc mgbody">
+        <form action="@Url.Action("Result", "Home")">
+            <div class="search">
+                <input type="text" class="ht45" placeholder="city traffic management">
+                <span class="icnsrch">
+                    <img src="~/Content/images/search-icon.png" alt="">
+                </span>
+                <input type="submit" class="ht45" value="Search">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="mt35 mgbody">
+    <a href="/Home/Result" class="bckresult"><img class="bckimg" src="~/Content/images/left-arrow_2.png" /> Back to search results</a>
+</div>
+<div class="mt26 clrwhite mgbody">
+
+    <p class="srchtxt pt15">Urban Footprint</p>
+
+    <div class="individualdata individualtype">
+        <p class="individualdt">TYPE</p>
+        <p class="individualpara">Mobility</p>
+    </div>
+
+    <div class="individualdata individualsubtype">
+        <p class="individualdt">SUBTYPE</p>
+        <p class="individualpara">Public Transportation</p>
+    </div>
+
+    <div class="wd28 individualdata">
+        <p class="individualdt">DESCRIPTION</p>
+        <p class="individualpara mr">Streamlines land use and mobility planning decision with actionable data for all us locations</p>
+    </div>
+
+    <div class="wd32 individualdata">
+        <p class="individualdt">BENEFITS</p>
+        <p class="individualpara mb60 mr">
+            Gets you quick answers to complex questions. With parcel-based land use data and over 890 environmental, social and mobility datasets, you can access existing conditions with advanced analytics and mapping features for your proposal.
+        </p>
+    </div>
+    <div class="individualdata wd10">
+        <p class="individualdt">ORGANIZATION</p>
+        <p class="individualpara">Skybrowse</p>
+    </div>
+    <div class="individualdata individualstatus">
+        <p class="individualdt">STATUS</p>
+        <p class="individualpara">Not Contacted</p>
+    </div>
+</div>
+<div class="mt26 mt0 clrwhite mgbody">
+    <div class="bdrline"></div>
+    <div>
+        <p class="srchtxt pt15 dspinline">My Request for Quote</p>
+        <p class="individualdt cnclrfq"> <a class="anchortag" href="#"><img class="imgmr" src="~/Content/images/arrow-down.png" /> Cancel My RFQ</a></p>
+    </div>
+
+    <div class="individualdata wd50 wd97">
+        <p class="individualdt">SUMMARY</p>
+        <p class="individualpara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="wd32 individualdata">
+        <p class="individualdt">AVAILABLE DOCS</p>
+        <p class="individualpara mb60 mr">
+            <a href="#"><img src="~/Content/images/docs.png" /></a>
+        </p>
+    </div>
+    <div class="individualdata wd10 ">
+        <p class="individualdt">DUE BY DATE</p>
+        <input type="date" id="datepicked" class="individualpara bd" />
+    </div>
+    <div class="individualdata individualstatus">
+        <p class="individualdt"> <a class="anchortag" href="#">Hide Details</a></p>
+
+    </div>
+    <div class="individualdata wd50 wd97 mrg10">
+        <p class="individualdt">REQUIREMENTS</p>
+        <p class="individualpara">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  <span class="individualdt"> <a class="anchortag" href="#">(show more)</a></span>
+    </div>
+    <div class="individualdata wdth100 mt10">
+        <p class="individualdt">CONTACT  (hide full details)</p>
+    </div>
+    <div class="individualdata cntdata mt10 ">
+        <p class="individualpara">Name</p>
+        <p class="individualdt">J.Q.Public</p>
+    </div>
+    <div class="individualdata individualsubtype mt10" style="width:80%">
+        <p class="individualpara">Title</p>
+        <p class="individualdt">Director of Operations</p>
+    </div>
+    <div class="individualdata cntdata mt10 cntemail">
+        <p class="individualpara">Email</p>
+        <p class="individualdt">JQPublic@Skybrowse.net</p>
+    </div>
+    <div class="individualdata individualsubtype mt10 cntemail mgl" style="width:80%" ">
+        <p class="individualpara">Phone</p>
+        <p class="individualdt">1(246)555-1234</p>
+    </div>
+    <div class="individualdata individualtype mt10">
+        <p class="individualpara">Address</p>
+        <p class="individualpara">125 Main Street</p>
+        <p class="individualpara">Springfield,MA12345</p>
+    </div>
+
+
+</div>
+<div class="mgbody btndiv ">
+    <div class="dilb mt10">
+        <button type="submit" class="sendreq wd155">Save for later</button>
+        <button id="btnSendRfq" type="button" class="sndinvite  widh">Send RFQ</button>
+    </div>
+</div>
+<div class="ht300"></div>
+
+
+<script>
+    window.addEventListener('load', function () {
+        vanillaCalendar.init({
+            disablePastDays: true
+        });
+    });
+
+</script>

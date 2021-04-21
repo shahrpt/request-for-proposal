@@ -1,0 +1,185 @@
+﻿@model ICMA.Models.co_contact
+
+@{
+    Layout = null;
+}
+
+
+@using (Ajax.BeginForm("SaveUser", "SystemUsers", new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "successSaveUser(data)",
+    OnFailure = "errorAjax()"
+}))
+{
+    @Html.AntiForgeryToken()
+
+
+    <input type="hidden" id="hdnUserID" name="upID" value="@ViewBag.CID" />
+    <div class="modal-body ">
+        <span class="srchtxt" id="formTitle" style="font-size:28px;">Add New User</span>
+        <hr />
+        <div class="">
+            <div class="individualdt">
+                <label class="control-label">Email</label>
+
+            </div>
+            <div class="">
+                <input type="email" class="form-control @(String.IsNullOrEmpty(ViewBag.CID + "")?"txtEmail":"")" id="txtEmail"
+                       @(String.IsNullOrEmpty(ViewBag.CID + "") ? "" : "readonly")
+                       name="ct_email" placeholder="Please enter email..."
+                       value="@Model.ct_email" required="required" />
+
+                <span class="text-danger check-user-exists" style="display:none;">This email is already registered</span>
+            </div>
+            @if (String.IsNullOrEmpty(ViewBag.CID + ""))
+            {
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="individualdt">
+                            <label class="control-label">Password</label>
+                        </div>
+                        <div class="">
+
+                            @Html.PasswordFor(m => m.ct_password, new { @class = "form-control", @placeholder = "Please enter password...", required = "required" })
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="individualdt">
+                            <label class="control-label">Confirm Password</label>
+                        </div>
+                        <div class="">
+
+                            <input type="password" class="form-control"
+                                   name="ConfirmPassword" required="required" />
+                           
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">First Name</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_first_name, new { @class = "form-control", @placeholder = "Please enter first name...", required = "required" })
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Last Name</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_last_name, new { @class = "form-control", @placeholder = "Please enter last name...", required = "required" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Phone</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_phone, new { @class = "form-control", @placeholder = "Please enter Phone..." })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Fax</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_fax, new { @class = "form-control", @placeholder = "Please enter fax..." })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="individualdt">
+                        <label class="cbContainer">
+                            Is Active
+                            <input type="checkbox" value="true" name="IsActive" @(Model.ct_active == 1 ? "checked" : "")>
+                            <input type="hidden" value="false" name="IsActive" />
+                            <span class="checkmark"></span>
+                        </label>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="individualdt">
+                        <label class="control-label">Permission</label>
+                    </div>
+                    <div class="">
+                        <select class="form-control" name="Permission">
+                            <option value=""> Not Selected </option>
+                            <option value="Vendor" @(ViewBag.Perm == "Vendor" ? "selected" : "")>  Vendor </option>
+                            <option value="RFP" @(ViewBag.Perm == "RFP" ? "selected" : "")>  RFP </option>
+                            <option value="Admin" @(ViewBag.Perm == "Admin" ? "selected" : "")>  Admin </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row orgInput" style="display:none">
+                <hr />
+                <div class="col-lg-6">
+                    <div class="individualdt">
+
+                        <label class="control-label">Organization Name</label>
+
+                    </div>
+                    <div class="">
+                        <input name="OrgName" value="@ViewBag.OrgName" class="form-control"
+                               placeholder="Please enter organization name..."  @(String.IsNullOrEmpty(ViewBag.CID + "") ? "required" : "") />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Organization Domain</label>
+                    </div>
+
+                    <div class="">
+                        <input name="OrgDomain" value="@ViewBag.OrgDomain" class="form-control"
+                               placeholder="Please enter organization domain..." @(String.IsNullOrEmpty(ViewBag.CID + "") ? "required" : "") />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row orgData" style="@(String.IsNullOrEmpty(ViewBag.CID + "")?"display:none":"")">
+                <hr />
+                <div class="col-lg-6">
+                    <div class="individualdt">
+
+                        <label class="control-label">Organization Name</label>
+
+                    </div>
+                    <div class="">
+                        <strong class="OrgName">@ViewBag.OrgName</strong>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Organization Domain</label>
+                    </div>
+                    <div class="">
+                        <strong class="OrgDomain">@ViewBag.OrgDomain</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btnSubmit bLink"><i class="fa fa-save"></i> Save</button>
+        <button type="button" class="btn btn-secondary bLink" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+    </div>
+}
+
+

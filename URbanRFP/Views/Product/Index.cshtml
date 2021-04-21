@@ -1,0 +1,100 @@
+﻿@using UrbanRFP.Domain.ViewModel;
+@model List<ProductOrganizationViewModel>
+@{
+    ViewBag.title = "Products & services overview";
+}
+<script src="~/Content/Scripts/AppScripts/text-shortner.js"></script>
+<script src="~/Content/Scripts/AppScripts/prod.js"></script>
+<script src="~/Content/Scripts/sweetalert.min.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Products & services overview</a></li>
+    </ul>
+</div>
+@*<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+        <div class=" col-md-12 text-blue">
+            <a class="bckresult" href="/dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+        </div>
+    </div>*@
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="clrwhite">
+                    <p class="srchtxt dspinline" style="margin-top:0px;float:left;">Products & services overview</p>
+                    <div style="float:right;padding-top: 15px;"><a class="btn btn-default" href="/product/create"><i class="fa fa-plus"></i>&nbsp;Add new product</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="bordered-section">
+            <div class="row">
+                <div class="">
+                    <div class="mt26 mt0 clrwhite mgbody">
+                        <div class="rfp-list mgbody ovflow">
+                            <table class="wd100 table-responsive tablesorter" style="margin-top: 0px;border-top: 0px;">
+                                <thead>
+                                    <tr class="throw">
+                                        <th></th>
+                                        <th class="mainth ht47">
+                                            SOLUTIONS
+                                        </th>
+                                        @*<th class="mainth">
+                                                    ANALYTICS
+                                            </th>*@
+                                        <th class="mainth text-center">
+                                            VIEWS LAST MONTH
+                                        </th>
+                                        <th class="mainth text-center">
+                                            AVG. VIEWS PER MONTH
+                                        </th>
+                                        <th class="mainth text-center">
+                                            RFQs
+                                        </th>
+                                        <th class="mainth text-center">
+                                            INVITATIONS
+                                        </th>
+                                        <th class="mainth">
+                                            VALIDATION
+                                        </th>
+                                        <th class="mainth wd8">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tblbdydash">
+                                    @if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var product in Model)
+                                        {
+                                            <tr>
+                                                <td></td>
+                                                <td class="fzpd"><a href="/dashboard/product?prd_key=@product.prd_key">@product.prd_name</a></td>
+                                                @*<td class="fzpd"><img src="~/Content/images/analytics.png" /></td>*@
+                                                <td class="fzpd text-center"><b>@product.last_month_views</b></td>
+                                                <td class="fzpd text-center"><b>@product.avg_month_views</b></td>
+                                                <td class="fzpd text-center"><b>@product.total_rfq</b></td>
+                                                <td class="fzpd text-center"><b>@product.invites</b></td>
+                                                <td class="txtcenter"></td>
+                                                <td class="txtcenter">
+                                                    <a href="/product/edit?prd_key=@product.prd_key"><img src="/Content/images/fa-edit.png"></a>&nbsp;&nbsp;
+                                                    <a class="btn-del-product" data-key="@product.prd_key"><img src="/Content/images/delete.png"></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="8" class="text-center">No product/service found!</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ht500"></div>
+<script src="~/Content/tablesorter/jquery.metadata.js"></script>
+<script src="~/Content/tablesorter/jquery.tablesorter.min.js"></script>

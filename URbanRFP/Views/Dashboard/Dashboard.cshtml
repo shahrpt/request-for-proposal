@@ -1,0 +1,420 @@
+﻿@using UrbanRFP.Domain.ViewModel;
+@using ICMA.Models
+@{
+    ViewBag.title = "My Dashboard";
+    int in_progress = 0, completed = 0;
+    List<RfpOrgViewModel> rfp_list = (List<RfpOrgViewModel>)ViewData["MyRFPs"];
+
+    if (rfp_list != null && rfp_list.Count > 0)
+    {
+        completed = rfp_list.Count(p => p.rfp_award_date != null);
+        in_progress = rfp_list.Count(p => p.rfp_award_date == null);
+    }
+}
+<link href="~/Content/css/charts.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-nav-wizard.css" rel="stylesheet" />
+<script src="~/Content/Scripts/AppScripts/text-shortner.js"></script>
+<script src="~/Content/Scripts/AppScripts/charts.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">My dashboard</a></li>
+    </ul>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="clrwhite">
+            <p class="srchtxt dspinline" style="margin-top:0px">My dashboard</p>
+            <div class="sideview">View&nbsp;&nbsp;<img data-view="list" id="change-list-view" src="/Content/images/list-view.png" /> <i class="fa fa-angle-down"></i></div>
+        </div>
+        <div class="bordered-section">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="srchtxt myrfps" style="float:left;margin-top:15px">My RFPs</p>
+                    @*@if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type == "RFP")
+                    {
+                        <div style="float:right;padding-top:15px;"><a href="/rfp/create" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;Create new RFP</a></div>
+                    }*@
+                    <div class="txtcenter" style="margin-top:15px">
+                        <div class="govt rfp-pieID legend left"><em>Completed</em><br /><span>@completed</span></div>
+                        <div class="govt rfp-pieID pie"></div>
+                        <div class="govt rfp-pieID legend right"><em>In progress</em><br /><span>@in_progress</span></div>
+                    </div>
+                    <div class="mgbody mt5">
+                        <div class="styleSelectdashbaord">
+                            <select class="units rfp-status-filter">
+                                <option value="0">Show All</option>
+                                <option value="1">In progress</option>
+                                <option value="2">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt26 mt0 clrwhite mgbody">
+                        <div class="rfp-list bdrline bdrline2"></div>
+                        <div class="rfp-list mgbody ovflow">
+                            <table class="tbldashboard tablesorter tbl-dash-rfp-list">
+                                <thead>
+                                    <tr class="throw">
+                                        <th class="width2" style="width: 1%;"></th>
+                                        <th class="mainth ht47 wdth9">
+                                            TITLE
+                                        </th>
+                                        <th class="mainth wdth9">
+                                            CATEGORY
+                                        </th>
+                                        <th class="mainth wdth9">
+                                            DEPARTMENT
+                                        </th>
+                                        <th class="mainth nav-td">
+                                            PLAN & PUBLISH
+                                        </th>
+                                        <th class="mainth nav-td">COLLECT</th>
+                                        <th class="mainth nav-td">
+                                            EVALUATE
+                                        </th>
+                                        <th class="mainth nav-td">
+                                            AWARD
+                                        </th>
+                                        <th class="mainth wdth9 txtcenter">
+                                            TO DO
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tblbdydash">
+                                    @if (rfp_list != null && rfp_list.Count > 0)
+                                    {
+                                        foreach (var rfp in (IList<RfpOrgViewModel>)ViewData["MyRFPs"])
+                                        {
+                                            <tr class="@(rfp.rfp_award_date != null ? "status-done" : "status-inprogress")">
+                                                <td class="txtcenter fzpd"></td>
+                                                <td class="fzpd"> <a href="/rfp?rfp_key=@rfp.rfp_key">@rfp.rfp_bid_number_in_LG&nbsp;@rfp.rfp_name</a></td>
+                                                <td class="fzpd">@rfp.rfp_type_name</td>
+                                                <td class="fzpd">@rfp.org_legal_name</td>
+                                                <td colspan="4">
+                                                    <ul class="nav nav-wizard">
+                                                        <li class="@(rfp.rfp_published ? "done" : "active") rfq-plan"><a href="#">@Html.Raw(rfp.rfp_published ? "<i class='fa fa-check'></i>" : "")&nbsp;</a></li>
+                                                        <li class="@(!rfp.rfp_published ? "" : (rfp.rfp_close_date < DateTime.Now ? "done" : "active")) rfq-collect"><a href="#">@Html.Raw(rfp.rfp_close_date < DateTime.Now ? "<i class='fa fa-check'></i>" : "")&nbsp;@(rfp.rfp_published ? rfp.response_count + " RFPs collected" : "")</a></li>
+                                                        <li class="@(!rfp.rfp_published ? "" : (rfp.rfp_close_date < DateTime.Now && !rfp.scoring_completed ? "active" : "done")) rfq-evaluate"><a href="#">@rfp.score_count RFPs scoring</a></li>
+                                                        <li class="@(rfp.rfp_award_date != null ? "done" : "") rfq-award"><a href="#">@(rfp.rfp_award_date != null ? ((DateTime)rfp.rfp_award_date).ToString("MM.dd.yyyy") : "")&nbsp;</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="txtcenter">
+                                                    @if (rfp.rfp_close_date > DateTime.Now)
+                                                    {
+                                                        <button type='button' class='tbltodoscorebtn'>Score</button>
+                                                    }
+                                                    else if (rfp.rfp_close_date > DateTime.Now && !rfp.scoring_completed)
+                                                    {
+                                                        <button type="button" class="tbltodosendbtn ">Send ITA</button>
+                                                    }
+                                                    else if (rfp.rfp_award_date != null)
+                                                    {
+                                                        <button type="button" class="tbltododonebtn "><img class="doneimg" src="~/Content/images/tick-img.png" /> Done  </button>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr class="status-none">
+                                            <td colspan="9" class="text-center">No RFP found!</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rfp-tile mgbody ovflow" style="display:none;">
+                            @if (rfp_list != null && rfp_list.Count > 0)
+                            {
+                                foreach (var rfp in (IList<RfpOrgViewModel>)ViewData["MyRFPs"])
+                                {
+                                    <div class="col-md-3 @(rfp.rfp_award_date != null ? "status-done" : "status-inprogress")">
+                                        <div class="rfq-box">
+                                            <h4 class="text-blue">@rfp.rfp_name</h4>
+                                            <p>
+                                                Category:<br />
+                                                <span class="text-blue">@rfp.rfp_type_name</span>
+                                            </p>
+                                            <p>
+                                                Department:<br />
+                                                <span class="text-blue">@rfp.org_legal_name</span>
+                                            </p>
+                                            <p>
+                                                <a class="btn btn-lg @(!rfp.rfp_published ? "tbltodoscorebtn" : "tbltododonebtn")">@Html.Raw(rfp.rfp_published ? "<i class='fa fa-check'></i>" : "")&nbsp;Plan &amp; Publish</a><br />
+                                                <a class="btn btn-lg @(!rfp.rfp_published ? "todobutton" : (rfp.rfp_close_date < DateTime.Now ? "tbltododonebtn" : "tbltodoscorebtn"))">@Html.Raw(rfp.rfp_published && rfp.rfp_close_date < DateTime.Now ? "<i class='fa fa-check'></i>" : (rfp.rfp_published ? "<i class='fa fa-circle-o'></i>" : ""))&nbsp;Collect</a><br />
+                                                <a href="/rfp?rfp_key=@rfp.rfp_key" class="btn btn-lg @(!rfp.rfp_published ? "todobutton" : (rfp.rfp_close_date < DateTime.Now && !rfp.scoring_completed ? "tbltodoscorebtn" : "tbltododonebtn"))">@Html.Raw(!rfp.rfp_published ? "" : (rfp.rfp_close_date < DateTime.Now && !rfp.scoring_completed ? "<i class='fa fa-circle-o'></i>" : "<i class='fa fa-check'></i>"))&nbsp;Evaluate</a><br />
+                                                <a class="btn btn-lg @(rfp.rfp_award_date != null ? "tbltododonebtn" : "todobutton")">Award</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="status-none text-center">No RFP found!</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br class="rfp-list" />
+        <div class="bordered-section">
+            @{ 
+                var rfqs = (ViewData["MyRFQs"] != null && ((List<RfpReqOrgInvitationViewModel>)ViewData["MyRFQs"]).Count > 0)? (List<RfpReqOrgInvitationViewModel>)ViewData["MyRFQs"] : new List<RfpReqOrgInvitationViewModel>();
+                int rfq_submitted = rfqs.Count, rfq_awaiting = rfqs.Count;
+            }
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="srchtxt myrfps" style="float:left;margin-top:15px">My RFQs</p>
+                    <div class="rfp-list txtcenter" style="margin-top:15px">
+                        <div class="rfq-pieID legend left"><span>@rfq_submitted</span><em> Submitted</em></div>
+                        <div class="rfq-pieID pie-mini"></div>
+                        <div class="rfq-pieID legend right"><span>@rfq_awaiting</span><em> Awaiting answer</em></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt26 mt0 clrwhite mgbody">
+                        <div class="rfp-list bdrline bdrline2"></div>
+                        <div class="rfp-list mgbody ovflow" style="margin:0px 15px">
+                            <table class="tbldashboard tablesorter tbl-dash-rfq-list">
+                                <thead>
+                                    <tr class="throw">
+                                        <th class="mainth ht47">
+                                            RFQ TITLE
+                                        </th>
+                                        <th class="mainth">
+                                            REQUESTOR'S NAME
+                                        </th>
+                                        <th class="mainth">
+                                            REQUEST DATE
+                                        </th>
+                                        <th class="mainth">
+                                            STATUS
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tblbdydash">
+                                    @foreach (var rfq in rfqs)
+                                    {
+                                        <tr>
+                                            <td class="fzpd"> <a href="/rfq?rfp_key=@rfq.rfp_key">@rfq.rfp_name</a></td>
+                                            <td class="fzpd">@rfq.inv_full_name</td>
+                                            <td class="fzpd">@(((DateTime)rfq.inv_add_date).ToString("MM.dd.yyyy"))</td>
+                                            <td class="fzpd text-success">@(string.IsNullOrWhiteSpace(rfq.inv_status) ? "Submitted" : rfq.inv_status)</td>
+                                        </tr>
+                                    }
+                                    @*<tr>
+                                        <td class="fzpd"> <a href="/rfq?prdkey=590d563a-4914-45a4-9cf6-021dcb30a16c">Duis aute irure dolor in reprehenderit</a></td>
+                                        <td class="fzpd">John Jameson</td>
+                                        <td class="fzpd">01.02.2013</td>
+                                        <td class="fzpd text-success">Submitted</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fzpd"> <a href="/rfq?prdkey=590d563a-4914-45a4-9cf6-021dcb30a16c">Lorem ipsum dolor sit amet</a></td>
+                                        <td class="fzpd">Alice Applegate</td>
+                                        <td class="fzpd">01.02.2013</td>
+                                        <td class="fzpd text-success">Submitted</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fzpd"> <a href="/rfq?prdkey=590d563a-4914-45a4-9cf6-021dcb30a16c">Excepteur sint occaecat cupidatat</a></td>
+                                        <td class="fzpd">Bob Bailey</td>
+                                        <td class="fzpd">01.02.2013</td>
+                                        <td class="fzpd text-success">Submitted</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fzpd"> <a href="/rfq?prdkey=590d563a-4914-45a4-9cf6-021dcb30a16c">Non proident</a></td>
+                                        <td class="fzpd">Jane Jonesley</td>
+                                        <td class="fzpd">01.02.2013</td>
+                                        <td class="fzpd text-warning">Awaiting answer</td>
+                                    </tr>*@
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rfp-tile mgbody ovflow" style="display:none;">
+                            <div class="col-md-3">
+                                <div class="rfq-box">
+                                    <h4 class="text-blue">Duis aute irure dolor in reprehenderit</h4>
+                                    <p>
+                                        Category:<br />
+                                        <span class="text-blue">Mobility</span>
+                                    </p>
+                                    <p>
+                                        Department:<br />
+                                        <span class="text-blue">Public Transportation</span>
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Plan &amp; Publish</a><br />
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Collect</a><br />
+                                        <a href="/home/rfp" class="btn btn-lg tbltodoscorebtn"><i class="fa fa-circle-o"></i>&nbsp;Post RFP</a><br />
+                                        <a class="btn btn-lg todobutton">Award</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="rfq-box">
+                                    <h4 class="text-blue">Lorem ipsum dolor sit amet</h4>
+                                    <p>
+                                        Category:<br />
+                                        <span class="text-blue">Mobility</span>
+                                    </p>
+                                    <p>
+                                        Department:<br />
+                                        <span class="text-blue">Public Transportation</span>
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Plan &amp; Publish</a><br />
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Collect</a><br />
+                                        <a class="btn btn-lg tbltodoscorebtn"><i class="fa fa-circle-o"></i>&nbsp;Post RFP</a><br />
+                                        <a class="btn btn-lg todobutton">Award</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="rfq-box">
+                                    <h4 class="text-blue">Excepteur sint occaecat cupidatat</h4>
+                                    <p>
+                                        Category:<br />
+                                        <span class="text-blue">Mobility</span>
+                                    </p>
+                                    <p>
+                                        Department:<br />
+                                        <span class="text-blue">Public Transportation</span>
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Plan &amp; Publish</a><br />
+                                        <a class="btn btn-lg tbltodoscorebtn"><i class="fa fa-circle-o"></i>&nbsp;Collect</a><br />
+                                        <a class="btn btn-lg todobutton">&nbsp;Post RFP</a><br />
+                                        <a class="btn btn-lg todobutton">Award</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="rfq-box">
+                                    <h4 class="text-blue">Non proident</h4>
+                                    <p>
+                                        Category:<br />
+                                        <span class="text-blue">Mobility</span>
+                                    </p>
+                                    <p>
+                                        Department:<br />
+                                        <span class="text-blue">Public Transportation</span>
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Plan &amp; Publish</a><br />
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Collect</a><br />
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Post RFP</a><br />
+                                        <a class="btn btn-lg tbltododonebtn"><i class="fa fa-check"></i>&nbsp;Awarded</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br class="rfp-list" />
+        <div class="bordered-section">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="srchtxt myrfps" style="float:left;margin-top:15px">My favorite solutions</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 padding-zero">
+                    <div class="mt26 mt0 clrwhite mgbody">
+                        <div class="rfp-list mgbody ovflow">
+                            <table class="wd100 table-responsive tablesorter table-favorite">
+                                <thead>
+                                    <tr class="throw">
+                                        <th></th>
+                                        <th class="mainth ht47"><b>PRODUCT</b></th>
+                                        <th class="mainth wd10"><b>CATEGORY 1</b> </th>
+                                        <th class="mainth wd19"><b>CATEGORY 2</b></th>
+                                        <th class="mainth wd25"><b>DESCRIPTION</b></th>
+                                        <th class="mainth orgndiv"><b>ORGANIZATION</b></th>
+                                        <th class="mainth"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewData["Favorites"] != null && ((IList<ProductOrganizationViewModel>)ViewData["Favorites"]).Count() > 0)
+                                    {
+                                        var product_list = (IList<ProductOrganizationViewModel>)ViewData["Favorites"];
+                                        Random rand = new Random();
+
+                                        foreach (var product in product_list)
+                                        {
+                                            <tr>
+                                                <td></td>
+                                                <td><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.prd_name</a></td>
+                                                <td><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.prd_type_name</a></td>
+                                                <td><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.prd_subtype_name</a></td>
+                                                <td>
+                                                    <p class="comment">
+                                                        @Html.Raw(product.prd_description)
+                                                    </p>
+                                                </td>
+                                                <td><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.org_legal_name</a><div style="margin-top: 33px;"><div style="float:right"><a href="/rfq/edit?prdkey=@product.prd_key" class="btn btn-default btn-auto">RFQ</a><button class="btn btn-default btn-auto">Invite to a RFP</button></div></div></td>
+                                                <td class="clrtext" style="vertical-align:bottom"></td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="8" class="text-center">No product/service found!</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rfp-tile mgbody ovflow" style="display:none;">
+                            @if (ViewData["Favorites"] != null && ((IList<ProductOrganizationViewModel>)ViewData["Favorites"]).Count() > 0)
+                            {
+                                var product_list = (IList<ProductOrganizationViewModel>)ViewData["Favorites"];
+
+                                foreach (var product in product_list)
+                                {
+                                    <div class="col-md-3">
+                                        <div class="rfq-box rfq-box-blue">
+                                            <h4 class="text-blue"><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.prd_name</a></h4>
+                                            <p>
+                                                Category 1:<br />
+                                                <span class="text-blue"><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.prd_type_name</a></span>
+                                            </p>
+                                            <p>
+                                                Category 2:<br />
+                                                <span class="text-blue"><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.prd_subtype_name</a></span>
+                                            </p>
+                                            <p>
+                                                Description:<br />
+                                                <span class="text-blue comment">@Html.Raw(product.prd_description)</span>
+                                            </p>
+                                            <p>
+                                                Organization:<br />
+                                                <span class="text-blue"><a href="/search/IndividualResult?prdkey=@product.prd_key">@product.org_legal_name</a></span>
+                                            </p>
+                                            <p>
+                                                <a href="/rfq/edit?prdkey=@product.prd_key" class="btn btn-default btn-auto" style="float:left;">RFQ</a>
+                                                <button class="btn btn-default">Invite to a RFP</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ht500"></div>
+<script src="~/Content/tablesorter/jquery.metadata.js"></script>
+<script src="~/Content/tablesorter/jquery.tablesorter.min.js"></script>
+<script src="~/Content/Scripts/AppScripts/dashboard.js"></script>

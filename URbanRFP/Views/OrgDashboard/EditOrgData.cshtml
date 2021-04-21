@@ -1,0 +1,134 @@
+﻿
+@model ICMA.Models.co_organization
+
+@{
+    Layout = null;
+}
+
+
+@using (Ajax.BeginForm("SaveOrg", "OrgDashboard", new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "successSaveOrg(data)",
+    OnFailure = "errorAjax()"
+}))
+{
+    @Html.AntiForgeryToken()
+
+
+    <input type="hidden" id="hdnOrgID" name="upID" value="@Model.org_key" />
+    <div class="modal-body ">
+        <span class="srchtxt" id="formTitle" style="font-size:28px;">Edit Organization Data</span>
+        <hr />
+        <div class="">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Name:</label>
+
+                    </div>
+                    <div class="">
+                        <input type="text" class="form-control" 
+                               name="org_legal_name" placeholder="Please enter organization name..."
+                               value="@Model.org_legal_name" required="required" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Type</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_entity_type, new { @class = "form-control", @placeholder = "Please enter type...", required = "required" })
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="individualdt">
+                <label class="control-label">Business</label>
+            </div>
+            <div class="">
+                @Html.TextBoxFor(m => m.org_description, new { @class = "form-control", @placeholder = "Please enter business...", required = "required" })
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Timezone</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_timezone, new { @class = "form-control", @placeholder = "Please enter timezone...", required = "required" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Website</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_website, new { @class = "form-control", @placeholder = "Please enter website...", required = "required" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Established</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_date_created, new { @class = "form-control", @placeholder = "Please enter established...", required = "required" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Number of Employees</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_vendor_number_of_employees, new { @class = "form-control", @placeholder = "Please enter number of employees...", required = "required" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Annual Revenue</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_ann_revenue, new { @class = "form-control", @placeholder = "Please enter annual revenue...", required = "required" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Federal Tax ID</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.org_federal_tax_id, new { @class = "form-control", @placeholder = "Please enter federal tax ID...",  })
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+
+            <div class="">
+                <div class="individualdt">
+                    <label class="control-label">Specialities</label>
+                </div>
+                <div class="">
+                    @Html.TextAreaFor(m => m.org_specialities, new { @class = "form-control", @placeholder = "Please enter specialities...", required = "required" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btnSubmit bLink"><i class="fa fa-save"></i> Save</button>
+        <button type="button" class="btn btn-secondary bLink" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+    </div>
+}
+
+
+

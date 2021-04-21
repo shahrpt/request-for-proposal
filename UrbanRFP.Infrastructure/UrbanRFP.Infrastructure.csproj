@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA226D69-1D70-44BE-82DC-E6729EB3449B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UrbanRFP.Infrastructure</RootNamespace>
+    <AssemblyName>UrbanRFP.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Constants.cs" />
+    <Compile Include="Core\IRepository.cs" />
+    <Compile Include="Core\RepositoryBase.cs" />
+    <Compile Include="Core\Result.cs" />
+    <Compile Include="Core\Status.cs" />
+    <Compile Include="Entity\CoContact.cs" />
+    <Compile Include="Entity\CoFavorite.cs" />
+    <Compile Include="Entity\ContactRACI.cs" />
+    <Compile Include="Entity\CoOrganization.cs" />
+    <Compile Include="Entity\CoPermission.cs" />
+    <Compile Include="Entity\CoRole.cs" />
+    <Compile Include="Entity\CurrentUser.cs" />
+    <Compile Include="Entity\DataObject.cs" />
+    <Compile Include="Entity\CoPageView.cs" />
+    <Compile Include="Entity\ProductOrganization.cs" />
+    <Compile Include="Entity\ProductRfpType.cs" />
+    <Compile Include="Entity\RACI.cs" />
+    <Compile Include="Entity\RACIFilter.cs" />
+    <Compile Include="Entity\RfpAttachment.cs" />
+    <Compile Include="Entity\RfpProduct.cs" />
+    <Compile Include="Entity\ProductSubType.cs" />
+    <Compile Include="Entity\ProductType.cs" />
+    <Compile Include="Entity\RfpRequest.cs" />
+    <Compile Include="Entity\RfpRespondInvitation.cs" />
+    <Compile Include="Entity\RfpScoreRule.cs" />
+    <Compile Include="Entity\SearchFilter.cs" />
+    <Compile Include="Entity\SystemMenu.cs" />
+    <Compile Include="Entity\UserProfile.cs" />
+    <Compile Include="Helpers\ImageExtension.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Helpers\Utility.cs" />
+    <Compile Include="Interfaces\IMiscRepository.cs" />
+    <Compile Include="Interfaces\IProductRfpTypeRepository.cs" />
+    <Compile Include="Interfaces\IRfpAttachmentRepository.cs" />
+    <Compile Include="Interfaces\IContactRepository.cs" />
+    <Compile Include="Interfaces\IGeneralRepository.cs" />
+    <Compile Include="Interfaces\IOrganizationRepository.cs" />
+    <Compile Include="Interfaces\IProductSubtypeRepository.cs" />
+    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\IProductTypeRepository.cs" />
+    <Compile Include="Interfaces\IRfpRequestRepository.cs" />
+    <Compile Include="Interfaces\IScoreRuleRepository.cs" />
+    <Compile Include="Interfaces\ISearchRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Repositories\GeneralRepository.cs" />
+    <Compile Include="Repositories\MiscRepository.cs" />
+    <Compile Include="Repositories\OrganizationRepository.cs" />
+    <Compile Include="Repositories\ProductRfpTypeRepository.cs" />
+    <Compile Include="Repositories\ProductSubtypeRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\ProductTypeRepository.cs" />
+    <Compile Include="Repositories\RfpAttachmentRepository.cs" />
+    <Compile Include="Repositories\RfpRequestRepository.cs" />
+    <Compile Include="Repositories\ScoreRuleRepository.cs" />
+    <Compile Include="Repositories\SearchRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UrbanRFP.Domain\UrbanRFP.Domain.csproj">
+      <Project>{387e7381-7a12-4317-95ba-32c559622ae3}</Project>
+      <Name>UrbanRFP.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

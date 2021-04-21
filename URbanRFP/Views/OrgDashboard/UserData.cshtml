@@ -1,0 +1,54 @@
+﻿@model ICMA.Models.co_contact
+
+<input type="hidden" value="@Model.ct_key" id="keyUser" />
+<a class="btn-edit text-warning btnChangePassword" data-section="sec-sow"><i class="fa fa-lock text-warning"></i> Change Password</a>
+@if (ICMA.Models.SessionHelper.CurrentUser.User.per_type == "Vendor")
+{
+
+    <div class="">
+        <h5 class="color-site small-weight m-b-0">Name</h5>
+        <p class="text-blue">@Model.ct_first_name @Model.ct_last_name</p>
+    </div>
+    <div class="">
+        <h5 class="color-site small-weight m-b-0">Email</h5>
+        <p class="text-blue">@Model.ct_email</p>
+    </div>
+    <div class="">
+        <h5 class="color-site small-weight m-b-0">Premission</h5>
+        <span class="text-blue">@Model.co_permission.Select(s => s.per_type).FirstOrDefault()</span>
+    </div>
+    <div class="">
+        <h5 class="color-site small-weight m-b-0">Pone</h5>
+        <span class="text-blue">@(String.IsNullOrEmpty(Model.ct_phone) ? "N/A" : Model.ct_phone)</span>
+    </div>
+    <div class="" style="display:none">
+        <h5 class="color-site small-weight m-b-0">Fax</h5>
+        <span class="text-blue">@(String.IsNullOrEmpty(Model.ct_fax) ? "N/A" : Model.ct_fax)</span>
+    </div>
+}
+@if (ICMA.Models.SessionHelper.CurrentUser.User.per_type == "RFP")
+{
+    <div class="row">
+
+        <div class="col-sm-4">
+            <h5 class="color-site small-weight m-b-0">Name</h5>
+            <p class="text-blue">@Model.ct_first_name @Model.ct_last_name</p>
+        </div>
+        <div class="col-sm-4">
+            <h5 class="color-site small-weight m-b-0">Email</h5>
+            <p class="text-blue">@Model.ct_email</p>
+        </div>
+        <div class="col-sm-4" >
+            <h5 class="color-site small-weight m-b-0">Premission</h5>
+            <span class="text-blue">@Model.co_permission.Select(s => s.per_type).FirstOrDefault()</span>
+        </div>
+        <div class="col-sm-4">
+            <h5 class="color-site small-weight m-b-0">Pone</h5>
+            <span class="text-blue">@(String.IsNullOrEmpty(Model.ct_phone) ? "N/A" : Model.ct_phone)</span>
+        </div>
+        <div class="col-sm-4">
+            <h5 class="color-site small-weight m-b-0">Fax</h5>
+            <span class="text-blue">@(String.IsNullOrEmpty(Model.ct_fax) ? "N/A" : Model.ct_fax)</span>
+        </div>
+    </div>
+}

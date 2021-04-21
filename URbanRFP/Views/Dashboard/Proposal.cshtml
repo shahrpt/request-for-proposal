@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "My dashboard - RFP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/bootstrap-nav-wizard.css" rel="stylesheet" />
+<link href="~/Content/css/charts.css" rel="stylesheet" />
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("", "Dashboard")">My dashboard</a></li>
+        <li><a href="#">RFP: Real time traffic detection</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left:15px;margin-top:0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="col-md-12">
+        <p class="srchtxt pt15 dspinline" style="padding-bottom:0px;margin-bottom:0px">The proposal for RFP: Real time traffic detection</p>
+    </div>
+    <div class="col-md-6">
+        <table class="tbldashboard" style="margin-left:15px;">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <ul class="nav nav-wizard">
+                            <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i>&nbsp;Plan & scope</a></li>
+                            <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;Prepare & Submit</a></li>
+                            <li class="todo rfq-evaluate"><a href="#">Post RFP</a></li>
+                            <li class="todo rfq-award"><a href="#">Award notification</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 text-right">
+        <button class="btn btn-lg btn-default" style="margin-right: 15px;">Save for Review</button>
+        <button class="btn btn-lg btn-default" style="margin-right: 15px;">Submit</button>
+    </div>
+</div>
+<div class="mt26 mt0 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="bdrline bdrline2"></div>
+            <div class=" mgbody ovflow">
+                <table class="tbldashboard">
+                    <thead>
+                        <tr class="throw">
+                            <td class="width2"></td>
+                            <td class="mainth ht47 wdth10">ISSUE DATE</td>
+                            <td class="mainth wdth10">RFP DEADLINE</td>
+                            <td class="mainth wdth10">RFP CLOSE DATE</td>
+                            <td class="mainth wdth10">RFP AWARD DATE</td>
+                            <td class="mainth wdth10">LOCAL GOVERNMENT</td>
+                            <td class="mainth wdth10">DIVISION</td>
+                            <td class="mainth wdth10">DEPARTMENT</td>
+                            <td class="mainth wdth10">CATEGORY</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>1.4.19 0.00</td>
+                            <td>1.18.19 0.00</td>
+                            <td>1.25.19 0.00</td>
+                            <td>1.25.19 0.00</td>
+                            <td>City of Chino, CA</td>
+                            <td>Infrastructure</td>
+                            <td>Public Transport</td>
+                            <td>Mobility</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="margin-top:0px;">
+            <div class="bdrline bdrline2 bdrline-blue" style="margin: 10px 15px !important;"></div>
+            <div class="mgbody ovflow">
+                <div>
+                    <div class="col-md-8">
+                        <div class="col-md-11 rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <p class="individualdt"><br />SUMMARY</p>
+                                <p class="individualpara">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-11 rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <p class="individualdt"><br />PROPOSED SOLUTION</p>
+                                <p class="individualpara">
+                                    <ol style="margin:0px 15px;">
+                                        <li>
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </li>
+                                        <li>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        </li>
+                                    </ol>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-11 rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <p class="individualdt"><br />PROJECT TIMELINE</p>
+                                <p class="individualpara">
+                                    01.02.19<br />
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br />03.22.19<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-11 rfq-box rfq-box-lightblue">
+                            <div>
+                                <p class="individualdt"><br />PRICING</p>
+                                <p class="individualpara">
+                                    <div class="col-md-9 border-bottom padding-zero">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit<br />
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum<br />
+                                        Excepteur sint occaecat cupidatat non proident in culpa qui officia<br />
+                                    </div>
+                                    <div class="col-md-3 text-right border-bottom padding-zero">
+                                        <b>$123,456</b><br />
+                                        <b>$987,654</b><br />
+                                        <b>$321,098</b>
+                                    </div>
+                                    <div class="col-md-9 padding-zero">
+                                        Lorem ipsum dolor sit amet
+                                    </div>
+                                    <div class="col-md-3 text-right padding-zero">
+                                        <b>$1,432,208</b>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-11 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />REFERENCES</p>
+                            <p class="individualpara text-blue">
+                                A. B. Norman		<a>a.b.noman@domain.com</a><br />
+                                Jack Smythe			<a>jack.smythe@mail.com</a><br />
+                                Steve Leaweather	<a>steve.l@somethinggreat.net</a>
+                            </p>
+                        </div>
+                        <div class="col-md-11 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />ATTACHMENTS</p>
+                            <p class="individualpara admin-docs">
+                                <a><img src="/Content/images/icon-doc.png">Letters</a>
+                                <a><img src="/Content/images/icon-doc.png">Checklist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-bottom: 10px;">
+                        <div class="row">
+                            <div class="col-md-11 rfq-box rfq-box-lightblue">
+                                <p class="srchtxt myrfps" style="margin-left:0px !important; margin-top:15px">Preparation team</p>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        John Jameson<br />Project role
+                                    </div>
+                                    <div class="col-md-8 text-right">
+                                        <div class="w3-progress-container w3-round-xlarge">
+                                            <div class="w3-progressbar w3-round-xlarge" style="width:100%"></div>
+                                        </div>
+                                    </div>
+                                </div><br />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Alice Applegate<br />Project role
+                                    </div>
+                                    <div class="col-md-8 text-right">
+                                        <div class="w3-progress-container w3-round-xlarge" style="width: 65%;float: left;">
+                                            <div class="w3-progressbar w3-round-xlarge" style="width:40%"></div>
+                                        </div>
+                                        <button class="btn btn-warning btn-auto">Alert</button>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Bob Bailey<br />Project role
+                                    </div>
+                                    <div class="col-md-8 text-right">
+                                        <div class="w3-progress-container w3-round-xlarge" style="width:65%;float: left;">
+                                            <div class="w3-progressbar w3-round-xlarge" style="width:0%"></div>
+                                        </div>
+                                        <button class="btn btn-warning btn-auto">Alert</button>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Jane Jonsley<br />Project role
+                                    </div>
+                                    <div class="col-md-8 text-right">
+                                        <div class="w3-progress-container w3-round-xlarge" style="width: 65%;float: left;">
+                                            <div class="w3-progressbar w3-round-xlarge" style="width:0%"></div>
+                                        </div>
+                                        <button class="btn btn-warning btn-auto">Alert</button>
+                                    </div>
+                                </div>
+                                <br />
+                                <a><i class="fa fa-plus"></i>&nbsp;Add team member</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/Scripts/dropzone.js"></script>
+<script src="~/Content/Scripts/AppScripts/rfp.js"></script>

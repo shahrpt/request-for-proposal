@@ -1,0 +1,221 @@
+﻿@using ICMA.Models;
+@model UrbanRFP.Models.AppResponseModel<UrbanRFP.Domain.ViewModel.ProductOrganizationViewModel>
+@{
+    ViewBag.title = "Individual Result";
+}
+
+<script src="~/Content/Scripts/AppScripts/prod.js"></script>
+<script src="~/Content/Scripts/sweetalert.min.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">City Traffic Management</a></li>
+    </ul>
+</div>
+<div class="logo-desc d-flexs">
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <a style="margin-left:25px;" href="/Search/Result" class="bckresult"><img class="bckimg" src="~/Content/images/left-arrow_2.png" /> Back to search results</a>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12 desc mgbody">
+                <div class="search">
+                    <input type="text" class="ht45 txtSearch" placeholder="city traffic management" autofocus>
+                    <span class="icnsrch">
+                        <img src="~/Content/images/search-icon.png" alt="">
+                    </span>
+                    <input type="button" name="btnSearch" class="ht45 btnSearch" value="Search">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mt26 clrwhite mgbody">
+    @if (Model.Data != null)
+    {
+        <div class="page-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <span class="srchtxt">@Model.Data.prd_name</span><br />
+                    <span><a class="text-blue" href="@Model.Data.prd_website" target="_blank">@Model.Data.prd_website</a></span>
+                </div>
+                @if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type == "Vendor")
+                {
+                    <div class="col-md-4">
+                        <div class="col-md-offset-2 col-md-8" style="padding-top: 15px;"><a href="#" target="_blank">See all products from this vendor&nbsp;&nbsp;<img src="/content/images/external-link.png" /></a></div>
+                        <div class="col-md-1" style="float:right;margin-top:15px"><i class="fa fa-star-o fa-custom" data-key="@Model.Data.prd_key" data-type="prd" onclick="mark_favorite(this);"></i></div>
+                    </div>
+                }
+            </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-md-6">
+                    <p class="text-blue font-18">@Model.Data.total_views Views / @Model.Data.total_likes <i class="fa fa-star fa-custom"></i></p>
+                </div>
+                <div class="col-md-6">
+                    <div style="float:right">
+                        @if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type == "Vendor" && SessionHelper.CurrentUser.User.org_key == Model.Data.org_key)
+                        {
+                            <a href="/product/edit?prd_key=@Model.Data.prd_key" class="btn btn-lg btn-primary">Edit</a>
+                            <a data-key="@Model.Data.prd_key" class="btn-del-product btn btn-lg btn-danger">Delete</a>
+                        }
+                        else
+                        {
+                            <button id="btnSendRfq" type="submit" class="btn btn-default btn-auto sndinvite">RFQ</button>
+                            <button type="button" class="btn btn-default btn-auto sndinvite">Invite to a RFP</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="individualdt">DESCRIPTION</p>
+                    <p class="individualpara mr">@Model.Data.prd_description</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="individualdt">FEATURES</p>
+                    <p class="individualpara mr">@Model.Data.prd_features</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="individualdt">BENEFITS</p>
+                    <p class="individualpara mr">@Model.Data.prd_benefits</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="individualdt">PRICING STRUCTURE</p>
+                    <p class="individualpara mr">@Model.Data.prd_pricing</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="individualdt">KEY CONTACT</p>
+                    <p class="individualpara mr">
+                        Charlie Hobbs<br />
+                        213-551-0131<br />
+                        <a href="mailto:CHobbs@smartparking.com">CHobbs@smartparking.com</a>
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-2">
+                    <p class="individualdt">CATEGORY 1</p>
+                    <p class="individualpara mr">@Model.Data.prd_type</p>
+                </div>
+                <div class="col-md-2">
+                    <p class="individualdt">CATEGORY 2</p>
+                    <p class="individualpara mr">
+                        @Model.Data.prd_subtype
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="individualdt">ORGANIZATION</p>
+                            <p class="individualpara mr">@Model.Data.org_legal_name</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="individualdt">ORG TYPE</p>
+                            <p class="individualpara mr">@Model.Data.org_description</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="individualdt">BUSINESS</p>
+                            <p class="individualpara mr">@Model.Data.org_description</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="individualdt">ESTABLISHED</p>
+                            <p class="individualpara mr"></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="individualdt">NO OF EMPLOYEES</p>
+                            <p class="individualpara mr">@Model.Data.org_vendor_number_of_employees</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="individualdt">LOCATION</p>
+                            <p class="individualpara mr">2095 Rose Street, Suite 201, Berkeley,<br />CA 94709, US</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="individualdt">ANNUAL REVENUE</p>
+                            <p class="individualpara mr">@Model.Data.org_ann_revenue</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="individualdt">QUALIFIED IN:</p>
+                            <p class="individualpara mr">@Model.Data.org_qualified_LG_flag</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="individualdt">FEDERAL TAX ID</p>
+                            <p class="individualpara mr">@Model.Data.org_federal_tax_id</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="individualdt">SPECIALITIES</p>
+                            <p class="individualpara mr">@Model.Data.org_specialities</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="individualdt">CUSTOMERS</p>
+                                    <p class="individualpara mr">
+                                        50 Customers as of 2019
+                                        <br />
+                                    </p>
+                                    <span class="individualpara mr">Validated Customers:</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="individualpara mr">City of Dunnellon</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <span class="individualdt"><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="individualpara mr">City of Leesburg</span>
+                                </div>
+                                <div class="col-md-5">
+                                    <span class="individualdt"><i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    }
+    else
+    {
+        <p class="no-individual-record">No record found.</p>
+    }
+</div>
+@if (Model.Data != null)
+{
+    <div class="mgbody btndiv">
+        <div class="dilb">
+            @if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type == "Vendor" && SessionHelper.CurrentUser.User.org_key == Model.Data.org_key)
+            {
+                <a href="/product/edit?prd_key=@Model.Data.prd_key" class="btn btn-lg btn-primary">Edit</a>
+                <a data-key="@Model.Data.prd_key" class="btn-del-product btn btn-lg btn-danger">Delete</a>
+            }
+            else
+            {
+                <button id="btnSendRfq" type="submit" class="btn btn-default btn-auto sndinvite">RFQ</button>
+                <button type="button" class="btn btn-default btn-auto sndinvite">Invite to a RFP</button>
+            }
+        </div>
+    </div>
+}

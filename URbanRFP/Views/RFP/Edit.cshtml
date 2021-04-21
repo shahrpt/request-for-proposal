@@ -1,0 +1,399 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@model RfpRequest
+@{
+    ViewBag.Title = "RFP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/dropzone.css" rel="stylesheet" />
+<link href="~/Content/css/step-wizard.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-datepicker.css" rel="stylesheet" />
+<link href="~/Content/summernote/summernote.min.css" rel="stylesheet" />
+<script src="~/Content/Scripts/dropzone.js"></script>
+<script src="~/Content/Scripts/sweetalert.min.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">@Model.rfp_name</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/rfp/templates?rfp_key=@Model.rfp_key"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-8">
+                @Html.HiddenFor(p=>p.rfp_key)
+                <span class="srchtxt">@Model.rfp_name @(string.IsNullOrWhiteSpace(Model.rfp_bid_number_in_LG) ? "" : "(RFP# " + Model.rfp_bid_number_in_LG + ")")</span>
+            </div>
+            <div class="col-md-4 text-right">
+                <div class="col-md-offset-1 col-md-11" style="padding-top: 15px;"><a href="/rfp" target="_blank">See all RFPs from this organization&nbsp;&nbsp;<img src="/content/images/external-link.png" /></a></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-6">
+                <p class="text-blue font-18">@Model.total_views Views / @Model.total_likes <i class="fa fa-star fa-custom"></i></p>
+            </div>
+            <div class="col-md-6">
+                <div style="float:right">
+                    <a href="/rfp" class="btn btn-lg btn-default">Cancel</a>
+                    <button type="button" class="btn btn-lg btn-default">Publish</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="sec-intro" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-intro"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-intro"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-intro"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Introduction</p>
+                                <div class="sec-intro" data-field="rfp_summary">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_summary))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="sec-sow" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-sow"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-sow"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-sow"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Scope of work</p>
+                                <div class="sec-sow" data-field="rfp_scope_of_work">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_scope_of_work))
+                                </div>
+                                <p class="text-blue">1. Introduction</p>
+                                <div class="sec-sow" data-field="rfp_sow_introduction">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_introduction))
+                                </div>
+                                <p class="text-blue">2. Solution requirements</p>
+                                <div class="sec-sow" data-field="rfp_sow_solution_requirements">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_solution_requirements))
+                                </div>
+                                <p class="text-blue">3. Project timeline</p>
+                                <div class="sec-sow" data-field="rfp_sow_project_timeline">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_project_timeline))
+                                </div>
+                                <p class="text-blue">4. Cost</p>
+                                <div class="sec-sow" data-field="rfp_sow_cost">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_cost))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="sec-questionnaire" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-questionnaire"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-questionnaire"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-questionnaire"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Questionnaire</p>
+                                <div class="sec-questionnaire" data-field="rfp_questionnaire">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_questionnaire))
+                                </div>
+                                <!-- Change /upload-target to your upload address -->
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        @{Html.RenderAction("FileUploader", "File", new { name = "QuestionnaireFiles", maxFiles = 5, PicId = Model.QuestionnaireFiles });}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="sec-evaluation" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-evaluation-process"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-evaluation-process"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-evaluation-process"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Evaluation process</p>
+                                <div class="sec-evaluation-process" data-field="rfp_evaluation_process">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_evaluation_process))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="sec-criteria" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-evaluation-criteria"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-evaluation-criteria"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-evaluation-criteria"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Evaluation criteria</p>
+                                <div class="sec-evaluation-criteria" data-field="rfp_evaluation_criteria">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_evaluation_criteria))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="sec-instructions" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-submission-instructions"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-submission-instructions"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-submission-instructions"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Submission instructions</p>
+                                <div class="sec-submission-instructions" data-field="rfp_submission_instructions">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_submission_instructions))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="sec-terms" class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <div style="float:right;" class="div-update">
+                                    <a class="btn-cancel-html" data-section="sec-tnc"><i class="fa fa-times" title="save"></i></a>
+                                    <a class="btn-save-html" data-section="sec-tnc"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                </div>
+                                <a class="btn-edit" data-section="sec-tnc"><img src="/Content/images/fa-edit.png" /></a>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Terms & conditions</p>
+                                <div class="sec-tnc" data-field="rfp_terms_conditions">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_terms_conditions))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Attachments</p>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        @{Html.RenderAction("FileUploader", "File", new { name = "RfpAttachments", maxFiles = 5, PicId = Model.RfpAttachments });}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="sec-timeline" class="rfq-box rfq-box-lightblue">
+                            <br />
+                            <p class="f30">Important dates</p>
+                            <table class="table table-responsive">
+                                <tr>
+                                    <td>Publish date<i class="text-danger">&nbsp;*</i></td>
+                                    <td>
+                                        <div style="float:right;" class="div-update">
+                                            <a class="btn-cancel" data-section="sec-pub-date"><i class="fa fa-times" title="save"></i></a>
+                                            <a class="btn-save" data-section="sec-pub-date"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                        </div>
+                                        <a class="btn-edit-auto" style="float:right" data-section="sec-pub-date"><img src="/Content/images/fa-edit.png" /></a>
+                                        <div class="holder" style="height:0px;overflow:hidden">
+                                            <input name="date" class="datepicker-input" type="text" data-section="sec-pub-date" data-type="date" data-field="rfp_issue_date"/>
+                                        </div>
+                                        <span style="float:right" class="date sec-pub-date" contenteditable="false">@(Model.rfp_issue_date == null ? "" : ((DateTime)Model.rfp_issue_date).ToString("MMMM d, yyyy"))</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Question date<i class="text-danger">&nbsp;*</i></td>
+                                    <td class="text-right">
+                                        <div style="float:right;" class="div-update">
+                                            <a class="btn-cancel" data-section="sec-quest-date"><i class="fa fa-times" title="save"></i></a>
+                                            <a class="btn-save" data-section="sec-quest-date"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                        </div>
+                                        <a class="btn-edit-auto" style="float:right" data-section="sec-quest-date"><img src="/Content/images/fa-edit.png" /></a>
+                                        <div class="holder" style="height:0px;overflow:hidden">
+                                            <input name="date" class="datepicker-input" type="text" data-section="sec-quest-date" data-field="rfp_question_deadline" data-type="date" />
+                                        </div>
+                                        <div style="float:right" class="date sec-quest-date" contenteditable="false">@(Model.rfp_question_deadline == null ? "" : ((DateTime)Model.rfp_question_deadline).ToString("MMMM d, yyyy"))</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Question answer date<i class="text-danger">&nbsp;*</i></td>
+                                    <td class="text-right">
+                                        <div style="float:right;" class="div-update">
+                                            <a class="btn-cancel" data-section="sec-qa-date"><i class="fa fa-times" title="save"></i></a>
+                                            <a class="btn-save" data-section="sec-qa-date"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                        </div>
+                                        <a class="btn-edit-auto" style="float:right" data-section="sec-qa-date"><img src="/Content/images/fa-edit.png" /></a>
+                                        <div class="holder" style="height:0px;overflow:hidden">
+                                            <input name="date" class="datepicker-input" type="text" data-section="sec-qa-date" data-field="rfp_question_answer_deadline" data-type="date"/>
+                                        </div>
+                                        <div style="float:right" class="date sec-qa-date" contenteditable="false">@(Model.rfp_question_answer_deadline == null ? "" : ((DateTime)Model.rfp_question_answer_deadline).ToString("MMMM d, yyyy"))</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Close date<i class="text-danger">&nbsp;*</i></td>
+                                    <td class="text-right">
+                                        <div style="float:right;" class="div-update">
+                                            <a class="btn-cancel" data-section="sec-close-date"><i class="fa fa-times" title="save"></i></a>
+                                            <a class="btn-save" data-section="sec-close-date"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                        </div>
+                                        <a class="btn-edit-auto" style="float:right" data-section="sec-close-date"><img src="/Content/images/fa-edit.png" /></a>
+                                        <div class="holder" style="height:0px;overflow:hidden">
+                                            <input name="date" class="datepicker-input" type="text" data-section="sec-close-date" data-type="date" data-field="rfp_close_date" />
+                                        </div>
+                                        <div style="float:right" class="date sec-close-date" contenteditable="false">@(Model.rfp_close_date == null ? "" : ((DateTime)Model.rfp_close_date).ToString("MMMM d, yyyy"))</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Close time<i class="text-danger">&nbsp;*</i></td>
+                                    <td class="text-right">
+                                        <div style="float:right;" class="div-update">
+                                            <a class="btn-cancel" data-section="sec-close-time"><i class="fa fa-times" title="save"></i></a>
+                                            <a class="btn-save" data-section="sec-close-time"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                        </div>
+                                        <a class="btn-edit-auto" style="float:right" data-section="sec-close-time"><img src="/Content/images/fa-edit.png" /></a>
+                                        <div class="holder" style="height:0px;overflow:hidden">
+                                            <input name="date" class="datepicker-input" type="text" data-section="sec-close-time" data-type="date" data-field="rfp_close_date"/>
+                                        </div>
+                                        <div style="float:right" class="date sec-close-time" contenteditable="false">@(Model.rfp_close_date == null ? "" : ((DateTime)Model.rfp_close_date).ToString("HH:mm:ss"))</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Anticipated award date<i class="text-danger">&nbsp;*</i></td>
+                                    <td class="text-right">
+                                        <div style="float:right;" class="div-update">
+                                            <a class="btn-cancel" data-section="sec-award-date"><i class="fa fa-times" title="save"></i></a>
+                                            <a class="btn-save" data-section="sec-award-date"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                        </div>
+                                        <a class="btn-edit-auto" style="float:right" data-section="sec-award-date"><img src="/Content/images/fa-edit.png" /></a>
+                                        <div class="holder" style="height:0px;overflow:hidden">
+                                            <input name="date" class="datepicker-input" type="text" data-section="sec-award-date" data-type="date" data-field="rfp_award_date"/>
+                                        </div>
+                                        <div style="float:right" class="date sec-award-date" contenteditable="false">@(Model.rfp_award_date == null ? "" : ((DateTime)Model.rfp_award_date).ToString("MMMM d, yyyy"))</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr />
+                            <i class="text-danger">*&nbsp;</i>mandatory information<br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="float:right;" class="div-update">
+                                        <a class="btn-cancel" data-section="sec-date-notes"><i class="fa fa-times" title="save"></i></a>
+                                        <a class="btn-save" data-section="sec-date-notes"><i class="fa fa-save" title="save"></i></a>&nbsp;
+                                    </div>
+                                    <a class="btn-edit-auto" style="float:right" data-section="sec-date-notes"><img src="/Content/images/fa-edit.png" /></a>
+                                    <em>
+                                        <div class="sec-date-notes" data-field="rfp_date_notes">
+
+                                            @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_date_notes))
+                                        </div>
+                                    </em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="sec-raci" class="col-md-12">
+                        @{Html.RenderPartial("~/Views/Contact/RACIList.cshtml", Model.RACIContactList);}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="sec-categories" class="rfq-box rfq-box-lightblue sec-categories">
+                            <br />
+                            <div style="float:right;" class="div-update">
+                                <a class="btn-cancel-list" data-section="sec-categories"><i class="fa fa-times" title="Cancel"></i></a>
+                                <a class="btn-save-list" data-section="sec-categories"><i class="fa fa-save" title="Save"></i></a>&nbsp;
+                            </div>
+                            <a class="btn-edit-list" style="float: right;" data-section="sec-categories"><img src="/Content/images/fa-edit.png" /></a>
+                            <p class="f30">Categories</p><br />
+                            <p class="text-blue">CATEGORY 1</p>
+                            <p class="category-item">
+                                <span>@(string.IsNullOrWhiteSpace(Model.rfp_type_name) ? "" : Model.rfp_type_name.ToUpper())</span>
+                                @Html.DropDownListFor(m => m.rfp_type, new SelectList((List<ProductType>)ViewData["Categories"], "Id", "Name"), "Please select category...", new { @class = "form-control hide" })
+                            </p>
+                            <p class="text-blue">CATEGORY 2</p>
+                            <p class="category-item">
+                                <span>@(string.IsNullOrWhiteSpace(Model.rfp_subtype_name) ? "" : Model.rfp_subtype_name.ToUpper())</span>
+                                @Html.DropDownListFor(m => m.rfp_subtype, new SelectList((List<ProductType>)ViewData["Categories"], "Id", "Name"), "Please select category...", new { @class = "form-control hide" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/Scripts/dropzone.js"></script>
+<script src="~/Content/summernote/summernote.min.js"></script>
+<script src="~/Content/Scripts/AppScripts/rfp.js"></script>
+<script src="~/Content/Scripts/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        var elem = $('#sec-' + window.location.hash.replace('#', ''));
+        if (elem) {
+            $('html,body').animate({
+                scrollTop: $('#sec-' + window.location.hash.replace('#', '')).offset().top
+            }, 100);
+
+            $('#sec-' + window.location.hash.replace('#', '') + ' .btn-edit').trigger('click');
+            $('#sec-' + window.location.hash.replace('#', '') + ' .btn-exp-coll').trigger('click');
+        }
+    });
+
+    function attach_file(rfa_key, file_section) {
+        var file_type = (file_section == "QuestionnaireFiles") ? "QA" : "AA";
+        var rfp_key = $("#rfp_key").val();
+
+        $.getJSON('/rfp/Attach_File?rfp_key=' + rfp_key+'&rfa_key='+rfa_key+'&file_type='+file_type, null, function (result) {
+            ShowResult(result);
+        });
+    }
+
+    function remove_file(rfa_key) {
+        $.getJSON('/rfp/Remove_File?rfa_key=' + rfa_key, null, function (result) {
+            ShowResult(result);
+        });
+    }
+
+    function remove_raci(ct_key) {
+        var rfp_key = $("#rfp_key").val();
+
+        $.getJSON('/rfp/Remove_RACI?rfp_key=' + rfp_key+'&ct_key='+ct_key, null, function (result) {
+            ShowResult(result);
+        });
+    }
+
+    function add_raci(ct_key, lk5_key) {
+        var rfp_key = $("#rfp_key").val();
+
+        $.getJSON('/rfp/Attach_RACI?rfp_key=' + rfp_key+'&ct_key='+ct_key+'&lk5_key='+lk5_key, null, function (result) {
+            ShowResult(result);
+        });
+    }
+</script>

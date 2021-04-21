@@ -1,0 +1,123 @@
+﻿@using UrbanRFP.Infrastructure.Entity;
+@using System.Web.Script.Serialization;
+@using Newtonsoft.Json;
+
+@model RfpRequest
+@{
+    ViewBag.Title = "RFP Score card";
+    JavaScriptSerializer serializer = new JavaScriptSerializer();
+}
+<script src="~/Content/Scripts/AppScripts/text-shortner.js"></script>
+<script src="~/Content/Scripts/jquery.canvasjs.min.js"></script>
+<script src="~/Content/Scripts/AppScripts/score-card.js"></script>
+<script src="~/Content/Scripts/sweetalert.min.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="/rfp">My Toolkit</a></li>
+        <li><a href="#">Evaluation criteria</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/rfp"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to all submissions</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="clrwhite">
+                    <p class="srchtxt dspinline" style="margin-top:0px;float:left;">Score card: @Model.rfp_name @(string.IsNullOrWhiteSpace(Model.rfp_bid_number_in_LG) ? "" : "(RFP# " + Model.rfp_bid_number_in_LG + ")")</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <p class="individualdt">VENDOR</p>
+                <p class="individualpara">
+                    NIC<br />
+                    1234 Main Street<br />
+                    Anytown 12345<br />
+                    (210)555.1234<br />
+                </p>
+                <p class="individualdt">CONTACT</p>
+                <p class="individualpara">
+                    Vincent Law<br />
+                    v_law@egov.com
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p class="individualdt">PROPOSAL SUMMARY</p>
+                <p class="individualpara">
+                    @Html.HiddenFor(m => m.rfp_key)
+                    @Html.Raw(Model.rfp_summary)
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11 padding-zero">
+                <div style="float:right;padding-top:30px;">
+                    <a class="btn-exp-coll" style="position:relative;right:15px;"><i class="fa fa-minus"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11">
+                <hr class="bdrline-blue" />
+                <table id="tbl-score-card" class="wd100 table-responsive tablesorter" style="margin-top: 0px;border-top: 0px;">
+                    <thead>
+                        <tr class="throw">
+                            <th></th>
+                            <th class="mainth wd25">
+                                CRITERIA
+                            </th>
+                            <th class="mainth wd25">
+                                DETAILS
+                            </th>
+                            <th class="mainth text-center">
+                                POINTS
+                            </th>
+                            <th class="mainth text-center">
+                                WEIGHT
+                            </th>
+                            <th class="mainth text-center">
+                                SCORE
+                            </th>
+                            <!--<th class="mainth"></th>-->
+                        </tr>
+                    </thead>
+                    <tbody class="tblbdydash">
+                        @if (Model.ScoreRules != null && Model.ScoreRules.Count > 0)
+                        {
+                            for (int i = 0; i < Model.ScoreRules.Count; i++)
+                            {
+                                <tr id="rule-@Model.ScoreRules[i].eva_key">
+                                    <td></td>
+                                    <td class="fzpd"><a>@(i + 1). <div class="edit" data-field="eva_criteria_name" style="display:inline-block">@Model.ScoreRules[i].eva_criteria_name</div></a></td>
+                                    <td class="fzpd"><div class="edit" data-field="eva_criteria_description" style="display:inline-block">@Model.ScoreRules[i].eva_criteria_description</div></td>
+                                    <td class="fzpd text-center"><div class="edit text-blue" data-field="eva_point_max" style="display:inline-block"><strong>@Model.ScoreRules[i].eva_point_max</strong></div></td>
+                                    <td class="fzpd text-center"><div class="edit" data-field="eva_weight" style="display:inline-block">@(Model.ScoreRules[i].eva_weight)</div></td>
+                                    <td class="fzpd text-center"><div class="edit text-blue" data-field="eva_score" style="display:inline-block"><strong>@Model.ScoreRules[i].eva_point_max</strong></div></td>
+                                    <!--<td class="txtcenter">
+                            <a class="btn-edit-rule" data-key="@Model.ScoreRules[i].eva_key" data-section="rule-@Model.ScoreRules[i].eva_key"><img src="/Content/images/fa-edit.png"></a>
+                            <a class="btn-delete-rule" data-key="@Model.ScoreRules[i].eva_key" data-section="rule-@Model.ScoreRules[i].eva_key"><img src="~/Content/images/delete.png"></a>
+                            <a class="btn btn-primary hide btn-auto btn-save-rule" data-key="@Model.ScoreRules[i].eva_key" data-section="rule-@Model.ScoreRules[i].eva_key">OK</a>
+                            <a class="btn btn-primary hide btn-auto btn-cancel-rule" data-key="@Model.ScoreRules[i].eva_key" data-section="rule-@Model.ScoreRules[i].eva_key">Cancel</a>
+                        </td>-->
+                                </tr>
+                                }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+</div>
+<div class="ht500"></div>
+<script>
+    score_rules = @Html.Raw(serializer.Serialize(Model.ScoreRules));
+</script>

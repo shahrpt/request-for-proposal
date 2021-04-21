@@ -1,0 +1,134 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@using System.Web.Script.Serialization;
+
+@model ICMA.Models.RACIViewModel
+@{
+    var contact = Model.NewContact;
+    var org = Model.Organization;
+    var serializer = new JavaScriptSerializer();
+}
+<script src="~/Content/Scripts/AppScripts/contact.js"></script>
+<style>
+    .modal-dialog {
+        width: 800px;
+        margin: 30px auto;
+    }
+</style>
+<div class="row new-contact">
+    <h4 class="text-blue" style="padding-left:15px;">Add New <span class="raci-service-title"></span> Team Member</h4>
+    <hr />
+    @if (TempData["Message"] != null)
+    {
+        <p class="alert alert-success"><i class="fa fa-trophy"></i>&nbsp;@(TempData["Message"])</p>
+    }
+    <div class="col-md-7">
+        @using (Html.BeginForm("RACI", "Contact", FormMethod.Post, new { @id = "form-add-contact" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("NewContact.OrgDomain", org.org_domain, new { @id = "OrgDomain" })
+            <div class="row">
+                <div class="col-lg-offset-2">
+                    <div class="alert alert-danger" id="ErrorMsg" style="display:none">
+                        <i class="fa fa-exclamation-triangle"></i>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5 individualdt">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 individualdt">
+                    @Html.LabelFor(model => model.NewContact.Email, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.NewContact.Email, new { @class = "form-control email", @placeholder = "Please enter email..." })
+                    @Html.ValidationMessageFor(m => m.NewContact.Email, "", new { @class = "text-danger" })
+                    <span class="text-danger check-user-exists" style="display:none;">This email is already registered</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 individualdt">
+                    @Html.LabelFor(model => model.NewContact.Password, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7">
+                    @Html.PasswordFor(m => m.NewContact.Password, new { @class = "form-control", @placeholder = "Please enter password..." })
+                    @Html.ValidationMessageFor(m => m.NewContact.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 individualdt">
+                    @Html.LabelFor(model => model.NewContact.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7">
+                    @Html.PasswordFor(m => m.NewContact.ConfirmPassword, new { @class = "form-control", @placeholder = "Please confirm password..." })
+                    @Html.ValidationMessageFor(m => m.NewContact.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 individualdt">
+                    @Html.LabelFor(model => model.NewContact.FirstName, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.NewContact.FirstName, new { @class = "form-control", @placeholder = "Please enter first name..." })
+                    @Html.ValidationMessageFor(m => m.NewContact.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 individualdt">
+                    @Html.LabelFor(model => model.NewContact.LastName, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.NewContact.LastName, new { @class = "form-control", @placeholder = "Please enter last name..." })
+                    @Html.ValidationMessageFor(m => m.NewContact.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 individualdt">
+                    @Html.LabelFor(model => model.NewContact.Phone, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.NewContact.Phone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.NewContact.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-5" style="padding-left:15px">
+                    <button type="submit" class="btn btn-lg btn-default">Create</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Org contacts</th>
+                            <th>RACI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ct in Model.Contacts)
+                        {
+                            <tr data-ct-key="@ct.ct_key" >
+                                <td><input type="checkbox" class="form-control chk-contact" data-contact="@serializer.Serialize(ct)"/></td>
+                                <td>@ct.ct_first_name @ct.ct_last_name</td>
+                                <td>
+                                    @Html.DropDownList("raci-role-" + Guid.NewGuid(), new SelectList((List<RACI>)ViewData["RACI"], "lk5_key", "lk5_value"), new { @class = "form-control raci-role" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"><button type="button" data-toggle="modal" data-target="#modal-raci" class="btn btn-primary add-team"><i class="fa fa-plus"></i>&nbsp;Add team member(s)</button></div>
+        </div>
+    </div>
+</div>

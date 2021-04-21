@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "My dashboard - RFP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/bootstrap-nav-wizard.css" rel="stylesheet" />
+<link href="~/Content/css/charts.css" rel="stylesheet" />
+<script src="~/Content/Scripts/AppScripts/charts.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("", "Dashboard")">My dashboard</a></li>
+        <li><a href="/home/rfp">RFP: Real time traffic detection</a></li>
+        <li><a href="#">Response 1.1</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/home/dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="col-md-12">
+        <p class="srchtxt pt15 dspinline" style="padding-bottom:0px;margin-bottom:0px">RFP: Real time traffic detection</p>
+    </div>
+    <div class="col-md-6">
+        <table class="tbldashboard" style="margin-left:15px;">
+            <thead>
+                <tr class="throw">
+                    <th class="mainth nav-td"> PLAN & PUBLISH</th>
+                    <th class="mainth nav-td">COLLECT</th>
+                    <th class="mainth nav-td">EVALUATE</th>
+                    <th class="mainth nav-td">AWARD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <ul class="nav nav-wizard">
+                            <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                            <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;3 RFPs</a></li>
+                            <li class="done rfq-evaluate"><a href="#">3 scored</a></li>
+                            <li class="done rfq-award"><a href="#">Sent</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 text-right">
+        <button class="btn btn-lg btn-default" style="margin-top: 50px;margin-right: 15px;">Submit</button>
+    </div>
+</div>
+<div class="mt26 mt0 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="bdrline bdrline2"></div>
+            <div class=" mgbody ovflow">
+                <table class="tbldashboard">
+                    <thead>
+                        <tr class="throw">
+                            <td class="width2"></td>
+                            <td class="mainth ht47 wdth10">ISSUE DATE</td>
+                            <td class="mainth wdth10">RFP DEADLINE</td>
+                            <td class="mainth wdth10">RFP CLOSE DATE</td>
+                            <td class="mainth wdth10">RFP AWARD DATE</td>
+                            <td class="mainth wdth10">LOCAL GOVERNMENT</td>
+                            <td class="mainth wdth10">DIVISION</td>
+                            <td class="mainth wdth10">DEPARTMENT</td>
+                            <td class="mainth wdth10">CATEGORY</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>1.4.19 0.00</td>
+                            <td>1.18.19 0.00</td>
+                            <td>1.25.19 0.00</td>
+                            <td>1.25.19 0.00</td>
+                            <td>City of Chino, CA</td>
+                            <td>Infrastructure</td>
+                            <td>Public Transport</td>
+                            <td>Mobility</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="margin-top:0px;">
+            <div class="srchtxt myrfps">
+                <br />PROPOSAL SNAPSHOT
+            </div>
+            <div class="bdrline bdrline2 bdrline-blue" style="margin: 10px 15px !important;"></div>
+            <div class="mgbody ovflow">
+                <table class="tbldashboard" style="margin: 0px 0px 15px 45px;width: 96%;">
+                    <thead>
+                        <tr class="throw">
+                            <td class="ht47 wdth10">NUMBER</td>
+                            <td class="wdth10">VENDOR</td>
+                            <td class="wdth10">KEY CONTACT</td>
+                            <td class="wdth10">CONTACT EMAIL</td>
+                            <td class="wdth10">SCORE</td>
+                            <td class="wdth10">EVALUATION TEAM</td>
+                            <td class="wdth10">DECISION</td>
+                            <td class="wdth10">STATUS</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.1</td>
+                            <td><a>Skybrowse</a></td>
+                            <td><a>Joe Smith</a></td>
+                            <td><a>jsmith@urbanfootprint.com</a></td>
+                            <td style="font-size:20px"><b>12</b></td>
+                            <td><a>Lucus Manning</a></td>
+                            <td><a class="text-success"><b>AWARDED</b></a></td>
+                            <td>Notified</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="col-md-12 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />SUMMARY</p>
+                            <p class="individualpara">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="col-md-12 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />PROPOSED SOLUTION</p>
+                            <p class="individualpara">
+                                <ol style="margin:0px 15px;">
+                                    <li>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </li>
+                                    <li>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </li>
+                                </ol>
+                            </p>
+                        </div>
+                        <div class="col-md-12 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />PROJECT TIMELINE</p>
+                            <p class="individualpara">
+                                01.02.19<br />
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <br />03.22.19<br />
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </div>
+                        <div class="col-md-12 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />PRICING</p>
+                            <p class="individualpara">
+                                <div class="col-md-9 border-bottom padding-zero">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit<br />
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum<br />
+                                    Excepteur sint occaecat cupidatat non proident in culpa qui officia<br />
+                                </div>
+                                <div class="col-md-3 text-right border-bottom padding-zero">
+                                    <b>$123,456</b><br />
+                                    <b>$987,654</b><br />
+                                    <b>$321,098</b>
+                                </div>
+                                <div class="col-md-9 padding-zero">
+                                    Lorem ipsum dolor sit amet
+                                </div>
+                                <div class="col-md-3 text-right padding-zero">
+                                    <b>$1,432,208</b>
+                                </div>
+                            </p>
+                        </div>
+                        <div class="col-md-12 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />REFERENCES</p>
+                            <p class="individualpara text-blue">
+                                A. B. Norman		<a>a.b.noman@domain.com</a><br />
+                                Jack Smythe			<a>jack.smythe@mail.com</a><br />
+                                Steve Leaweather	<a>steve.l@somethinggreat.net</a>
+                            </p>
+                        </div>
+                        <div class="col-md-12 rfq-box rfq-box-lightblue">
+                            <p class="individualdt"><br />ATTACHMENTS</p>
+                            <p class="individualpara admin-docs">
+                                <a><img src="/Content/images/icon-doc.png">Letters</a>
+                                <a><img src="/Content/images/icon-doc.png">Checklist</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-3 rfq-box rfq-box-lightblue" style="float:right;padding-bottom: 10px;">
+                        <h4 class="text-blue">EVALUATION TEAM</h4>
+                        <p class="text-center">
+                            <div class="prop-pieID pie"></div>
+                        </p>
+                        <p class="individualpara">
+                            <div class="col-md-8">
+                                John Cook<br /><a>jcook@icma.org</a>
+                            </div>
+                            <div class="col-md-4 text-right prop-pieID legend">
+                                <strong><span class="score">32</span></strong>
+                            </div>
+                        </p>
+                        <p class="individualpara">
+                            <div class="col-md-8">
+                                Monica<br /><a>monica@icma.org</a>
+                            </div>
+                            <div class="col-md-4 text-right prop-pieID legend">
+                                <strong><span class="score">21</span></strong>
+                            </div>
+                        </p>
+                        <p class="individualpara">
+                            <div class="col-md-8">
+                                Xavier<br /><a>xhughes@icma.org</a>
+                            </div>
+                            <div class="col-md-4 text-right prop-pieID legend">
+                                <strong><span class="score">28</span></strong>
+                            </div>
+                        </p>
+                        <p class="individualpara">
+                            <div class="col-md-8">
+                                Xavier<br /><a>xhughes@icma.org</a>
+                            </div>
+                            <div class="col-md-4 text-right prop-pieID legend">
+                                <strong><span class="score">28</span></strong>
+                            </div>
+                        </p>
+                        <p class="individualpara">
+                            <div class="col-md-8">
+                                Norah Xiao<br /><a>nxiao@icma.org</a>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <span class="score-text text-warning">Awaiting</span>
+                            </div>
+                        </p>
+                        <div style="border-bottom: 2px solid #6DC30F;clear:both;margin:5px -15px;padding-top: 10px;"></div>
+                        <p class="individualpara">
+                            <div class="col-md-12 text-right">
+                                <span class="score"><strong>27</strong></span>
+                                <br />
+                                <span class="score-text">Average Score</span>
+                            </div>
+                        </p>
+                        <p class="individualpara">
+                            <a><i class="fa fa-plus"></i>&nbsp;Add evaluator</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

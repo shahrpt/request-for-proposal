@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Admin Dashboard</a></li>
+    </ul>
+</div>
+
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <p class="srchtxt pt15 dspinline">Admin Dashboard</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <a class="srchtxt pt15 dspinline"  href="@Url.Action("index","SystemUsers")">System Users Management</a>
+        </div>
+    </div>
+</div>

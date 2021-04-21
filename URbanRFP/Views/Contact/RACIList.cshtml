@@ -1,0 +1,80 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@using System.Web.Script.Serialization;
+
+@model List<ContactRACI>
+
+<div class="rfq-box rfq-box-lightblue">
+    <br />
+    <div class="row">
+        <div class="col-md-9"><p class="f30">RACI team</p></div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="raci-list">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <div class="row raci-contact" data-ct-key="@Model[i].ct_key" data-raci-role="@Model[i].lk5_key" style="margin:5px">
+                <input name="RACIContactList[@i].ct_key" id="RACIContactList[@i].ct_key" type="hidden" value="@Model[i].ct_key" />
+                <input name="RACIContactList[@i].lk5_key" id="RACIContactList[@i].lk5_key" type="hidden" value="@Model[i].lk5_key" />
+                <input name="RACIContactList[@i].ct_first_name" id="RACIContactList[@i].ct_first_name" type="hidden" value="@Model[i].ct_first_name" />
+                <input name="RACIContactList[@i].ct_last_name" id="RACIContactList[@i].ct_last_name" type="hidden" value="@Model[i].ct_last_name" />
+                <input name="RACIContactList[@i].ct_email" id="RACIContactList[@i].ct_email" type="hidden" value="@Model[i].ct_email" />
+                <input name="RACIContactList[@i].cxo_title" id="RACIContactList[@i].cxo_title" type="hidden" value="@Model[i].cxo_title" />
+                <input name="RACIContactList[@i].lk5_value" id="RACIContactList[@i].lk5_value" type="hidden" value="@Model[i].lk5_value" />
+                <div class="col-md-12 "><a style="float:right" class="btn-remove"><i class="fa fa-times"></i></a></div>
+                <div class="col-md-6 sec-raci-team padding-zero">
+                    @(Model[i].ct_first_name + " " + Model[i].ct_last_name)
+                </div>
+                <div class="col-md-6 sec-raci-team padding-zero">
+                    @Model[i].ct_email
+                </div>
+                <div class="col-md-6 sec-raci-team padding-zero">
+                    @Model[i].cxo_title
+                </div>
+                <div class="col-md-6 sec-raci-team padding-zero">
+                    @Model[i].lk5_value
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br /><a id="show-raci-modal" data-toggle="modal" data-target="#modal-raci"><i class="fa fa-plus"></i>&nbsp;Add team member</a>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-raci" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div id="partial"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#show-raci-modal").click(function () {
+            var selected_contacts = new Array();
+            $(".raci-contact").each(function (i, e) {
+                selected_contacts.push($(this).data('ct-key'));
+            });
+
+            var route = '/Contact/GetRACI';
+            $('#partial').load(route, { 'contact_keys': selected_contacts }, function (data, status, jqXGR) {  // callback function 
+                if ($('.service-title').val().length > 0)
+                    setTimeout(function () { $('.raci-service-title').html("(" + $('.service-title').val() + ")"); }, 100);
+            });
+        });
+
+        $(document).on('click', '.btn-remove', function () {
+            if (typeof(remove_raci) === "function") {
+                remove_raci($(this).parent().parent().data("ct-key"));
+            }
+
+            $(this).parent().parent().remove();
+        });
+    });
+</script>

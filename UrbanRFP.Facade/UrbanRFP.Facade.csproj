@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DCF8E0F-1013-4BF1-B785-8A7E7E767243}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UrbanRFP.Facade</RootNamespace>
+    <AssemblyName>UrbanRFP.Facade</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Facade\AuthFacade.cs" />
+    <Compile Include="Facade\ContactFacade.cs" />
+    <Compile Include="Facade\GeneralFacade.cs" />
+    <Compile Include="Facade\MiscFacade.cs" />
+    <Compile Include="Facade\OrganizationFacade.cs" />
+    <Compile Include="Facade\ProductRfpTypeFacade.cs" />
+    <Compile Include="Facade\RfpAttachmentFacade.cs" />
+    <Compile Include="Facade\ProductSubtypeFacade.cs" />
+    <Compile Include="Facade\ProductFacade.cs" />
+    <Compile Include="Facade\ProductTypeFacade.cs" />
+    <Compile Include="Facade\RfpRequestFacade.cs" />
+    <Compile Include="Facade\ScoreRuleFacade.cs" />
+    <Compile Include="Facade\SearchFacade.cs" />
+    <Compile Include="Interfaces\IAuthFacade.cs" />
+    <Compile Include="Interfaces\IContactFacade.cs" />
+    <Compile Include="Interfaces\IGeneralFacade.cs" />
+    <Compile Include="Interfaces\IMiscFacade.cs" />
+    <Compile Include="Interfaces\IOrganizationFacade.cs" />
+    <Compile Include="Interfaces\IProductRfpTypeFacade.cs" />
+    <Compile Include="Interfaces\IProductSubtypeFacade.cs" />
+    <Compile Include="Interfaces\IProductFacade.cs" />
+    <Compile Include="Interfaces\IProductTypeFacade.cs" />
+    <Compile Include="Interfaces\IRfpAttachmentFacade.cs" />
+    <Compile Include="Interfaces\IRfpRequestFacade.cs" />
+    <Compile Include="Interfaces\IScoreRuleFacade.cs" />
+    <Compile Include="Interfaces\ISearchFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UrbanRFP.Domain\UrbanRFP.Domain.csproj">
+      <Project>{387e7381-7a12-4317-95ba-32c559622ae3}</Project>
+      <Name>UrbanRFP.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UrbanRFP.Infrastructure\UrbanRFP.Infrastructure.csproj">
+      <Project>{aa226d69-1d70-44be-82dc-e6729eb3449b}</Project>
+      <Name>UrbanRFP.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UrbanRFP.Mapping\UrbanRFP.Mapping.csproj">
+      <Project>{443a0f2e-0949-4aad-92a1-89370e3fbadd}</Project>
+      <Name>UrbanRFP.Mapping</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

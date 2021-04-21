@@ -1,0 +1,88 @@
+﻿@model ICMA.Models.contact_x_organization
+
+<input type="hidden" value="@Model.co_organization.org_key" id="keyOrg" />
+<div class="row">
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">ORGANIZATION</h5>
+        <p class="text-blue">@Model.co_organization.org_legal_name</p>
+    </div>
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">ORG TYPE</h5>
+        <p class="text-blue"> @Model.co_organization.org_entity_type</p>
+    </div>
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">BUSINESS</h5>
+        <span class="text-blue">@Model.co_organization.org_description</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">ESTABLISHED</h5>
+        <p class="text-blue">@(Model.co_organization.org_date_created.HasValue ? Model.co_organization.org_date_created.Value.ToShortDateString() : "N/A")</p>
+    </div>
+
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">WEBSITE</h5>
+        <p class="text-blue">@Model.co_organization.org_website</p>
+    </div>
+
+
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">LOCATION
+        <a class="btn-edit text-warning btnAddAddress" data-id="@Model.cxo_org_key" data-section="sec-sow"><i class="fa fa-plus text-warning"></i> add</a></h5>
+        <span class="text-blue">
+            @Html.Raw(String.Join("<br />",
+            Model.co_organization.address_x_organization.Where(w=>w.oxa_delete_flag!=1)
+            .Select(s => "<a class='btnDelAdd' data-id='"+s.oxa_key+"'><i class='fa fa-trash-o text-danger'></i></a> " + s.co_address.adr_city + "," + s.co_address.adr_county + "," + s.co_address.adr_state + "," + s.co_address.adr_country)) + "")
+        </span>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">NUMBER OF EMPLOYEES</h5>
+        <p class="text-blue">@Model.co_organization.org_vendor_number_of_employees</p>
+    </div>
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">ANNUAL REVENUE</h5>
+        <p class="text-blue" id="org_ann_revenue">@Model.co_organization.org_ann_revenue</p>
+    </div>
+
+    <div class="col-sm-4">
+        <h5 class="color-site small-weight m-b-0">Federal Tax ID</h5>
+        <span class="text-blue">@Model.co_organization.org_federal_tax_id</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <h5 class="color-site small-weight m-b-0">SPECIALITIES</h5>
+        <span class="text-blue">
+            @Model.co_organization.org_specialities
+        </span>
+    </div>
+    <div class="col-sm-4" style="display:none">
+        <h5 class="color-site small-weight m-b-0">CUSTOMERS</h5>
+        <span class="text-blue">
+            50 Customers as of 2019 <br />
+            Validated Customers: <br />
+            City of Dunnellon
+            <span class="color-site d-inline-block">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </span><br />
+            City of Leesburg
+            <span class="color-site d-inline-block">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </span>
+        </span>
+    </div>
+</div>
+

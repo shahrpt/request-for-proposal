@@ -1,0 +1,284 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@using ICMA.Models
+@model RfpRequest
+@{
+    ViewBag.Title = "RFP - " + Model.rfp_name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/dropzone.css" rel="stylesheet" />
+<link href="~/Content/css/step-wizard.css" rel="stylesheet" />
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">@Model.rfp_name</a></li>
+    </ul>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-8">
+                <span class="srchtxt">@Model.rfp_name @(string.IsNullOrWhiteSpace(Model.rfp_bid_number_in_LG) ? "" : "(RFP# " + Model.rfp_bid_number_in_LG + ")")</span>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-10 text-right" style="padding-top: 15px;"><a href="/rfp" target="_blank">See all RFPs from this organization&nbsp;&nbsp;<img src="/content/images/external-link.png" /></a></div>
+                <div class="col-md-1" style="float:right;margin-top:15px"><i class="fa fa-star-o fa-custom" data-key="@Model.rfp_key" data-type="rfp" onclick="mark_favorite(this);"></i></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-6">
+                <p class="text-blue font-18">@Model.total_views Views / @Model.total_likes <i class="fa fa-star fa-custom"></i></p>
+            </div>
+            <div class="col-md-6">
+                @if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type == "RFP" && SessionHelper.CurrentUser.User.org_key == @Model.rfp_org_key)
+                {
+                    <div style="float:right"><a href="/rfp/edit?rfp_key=@Model.rfp_key" class="btn btn-default"><i class="fa fa-edit"></i>&nbsp;Edit</a></div>
+                }
+                <!--<div style="float:right"><button class="btn btn-default btn-auto">Submit a proposal</button></div>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Introduction</p>
+                                @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_summary))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Scope of work</p>
+                                <div class="sec-sow">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_scope_of_work))
+                                </div>
+                                <p class="text-blue">1. Introduction</p>
+                                <div class="sec-sow">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_introduction))
+                                </div>
+                                <p class="text-blue">2. Solution requirements</p>
+                                <div class="sec-sow">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_solution_requirements))
+                                </div>
+                                <p class="text-blue">3. Project timeline</p>
+                                <div class="sec-sow">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_project_timeline))
+                                </div>
+                                <p class="text-blue">4. Cost</p>
+                                <div class="sec-sow">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_sow_cost))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Questionnaire</p>
+                                <div class="sec-questionnaire">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_questionnaire))
+                                </div>
+                                <!-- Change /upload-target to your upload address -->
+                                <div style="padding-right: 0%;">
+                                    @if (TempData["Files"] != null && ((IList<RfpAttachment>)TempData["Files"]).Where(p => p.rfa_type == "QA").Count() > 0)
+                                    {
+                                        <table class="table table-responsive table-striped">
+                                            <tbody>
+                                                @foreach (var item in ((IList<RfpAttachment>)TempData["Files"]).Where(p => p.rfa_type == "QA"))
+                                                {
+                                                    <tr>
+                                                        <td class="admin-docs">
+                                                            <a target="_blank" href="@(UrbanRFP.Helpers.ConfigHelper.GetSettingAsString("UploadsURL") + item.rfa_file_path + "/" + item.rfa_file_name)"><img src="/Content/images/icon-doc.png">@item.rfa_file_name</a>
+                                                        </td>
+                                                        <td>@item.rfa_add_date.ToString("MMMM d, yyyy h:mm tt")</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Evaluation process</p>
+                                <div class="sec-evaluation-process">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_evaluation_process))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Evaluation criteria</p>
+                                <div class="sec-evaluation-criteria">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_evaluation_criteria))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Submission instructions</p>
+                                <div class="sec-submission-instructions">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_submission_instructions))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Terms & conditions</p>
+                                <div class="sec-tnc">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_terms_conditions))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <div>
+                                <a class="btn-exp-coll"><i class="fa fa-plus"></i></a>
+                                <br />
+                                <p class="f30">Attachments</p>
+                                @if (TempData["Files"] != null && ((IList<RfpAttachment>)TempData["Files"]).Where(p => p.rfa_type == "AA").Count() > 0)
+                                {
+                                    <table class="table table-responsive table-striped">
+                                        <tbody>
+                                            @foreach (var item in ((IList<RfpAttachment>)TempData["Files"]).Where(p => p.rfa_type == "AA"))
+                                            {
+                                                <tr>
+                                                    <td class="admin-docs">
+                                                        <a target="_blank" href="@(UrbanRFP.Helpers.ConfigHelper.GetSettingAsString("UploadsURL") + item.rfa_file_path + "/" + item.rfa_file_name)"><img src="/Content/images/icon-doc.png">@item.rfa_file_name</a>
+                                                    </td>
+                                                    <td>@item.rfa_add_date.ToString("MMMM d, yyyy h:mm tt")</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <br />
+                            <p class="f30">Important dates</p>
+                            <table class="table table-responsive">
+                                <tr>
+                                    <td>Publish date</td>
+                                    <td class="text-right">@(Model.rfp_issue_date == null ? "" : ((DateTime)Model.rfp_issue_date).ToString("MMM d, yyyy"))</td>
+                                </tr>
+                                <tr>
+                                    <td>Question date</td>
+                                    <td class="text-right">@(Model.rfp_question_deadline == null ? "" : ((DateTime)Model.rfp_question_deadline).ToString("MMM d, yyyy"))</td>
+                                </tr>
+                                <tr>
+                                    <td>Question answer date</td>
+                                    <td class="text-right">@(Model.rfp_question_answer_deadline == null ? "" : ((DateTime)Model.rfp_question_answer_deadline).ToString("MMM d, yyyy"))</td>
+                                </tr>
+                                <tr>
+                                    <td>Close date</td>
+                                    <td class="text-right">@(Model.rfp_close_date == null ? "" : ((DateTime)Model.rfp_close_date).ToString("MMM d, yyyy"))</td>
+                                </tr>
+                                <tr>
+                                    <td>Close time</td>
+                                    <td class="text-right">@(Model.rfp_close_date == null ? "" : ((DateTime)Model.rfp_close_date).ToString("HH:mm:ss"))</td>
+                                </tr>
+                                <tr>
+                                    <td>Anticipated award date</td>
+                                    <td class="text-right">@(Model.rfp_award_date == null ? "" : ((DateTime)Model.rfp_award_date).ToString("MMM d, yyyy"))</td>
+                                </tr>
+                            </table>
+                            <hr />
+                            <p>
+                                <em>
+                                    @Html.Raw(HttpUtility.HtmlDecode(Model.rfp_date_notes))
+                                </em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="rfq-box rfq-box-lightblue">
+                            <br />
+                            <div class="row">
+                                <div class="col-md-9"><p class="f30">RACI team</p></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="raci-list">
+                                @for (int i = 0; i < Model.RACIContactList.Count(); i++)
+                                {
+                                    <div class="row raci-contact" data-ct-key="@Model.RACIContactList[i].ct_key" data-raci-role="@Model.RACIContactList[i].lk5_key" style="margin:5px">
+                                        <div class="col-md-6 sec-raci-team padding-zero">
+                                            @(Model.RACIContactList[i].ct_first_name + " " + Model.RACIContactList[i].ct_last_name)
+                                        </div>
+                                        <div class="col-md-6 sec-raci-team padding-zero">
+                                            <a href="mailto:@Model.RACIContactList[i].ct_email">@Model.RACIContactList[i].ct_email</a>
+                                        </div>
+                                        <div class="col-md-6 sec-raci-team padding-zero">
+                                            @Model.RACIContactList[i].cxo_title
+                                        </div>
+                                        <div class="col-md-6 sec-raci-team padding-zero">
+                                            @Model.RACIContactList[i].lk5_value
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="rfq-box rfq-box-lightblue">
+                                <br />
+                                <p class="f30">Categories</p><br />
+                                <p class="text-blue">CATEGORY 1</p>
+                                <p>
+                                    @(string.IsNullOrWhiteSpace(Model.rfp_type_name) ? "" : Model.rfp_type_name.ToUpper())
+                                    @*<ul class="rfp" style="padding-left:18px;">
+                                        <li>Public Transportation </li>
+                                        <li>Smart technology</li>
+                                        <li>Hardware</li>
+                                    </ul>*@
+                                </p>
+                                <p class="text-blue">CATEGORY 2</p>
+                                <p>
+                                    @(string.IsNullOrWhiteSpace(Model.rfp_subtype_name) ? "" : Model.rfp_subtype_name.ToUpper())
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/Scripts/dropzone.js"></script>
+<script src="~/Content/Scripts/AppScripts/rfp.js"></script>

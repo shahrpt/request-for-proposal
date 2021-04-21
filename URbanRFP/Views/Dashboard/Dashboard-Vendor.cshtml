@@ -1,0 +1,342 @@
+﻿@using Syncfusion.EJ2;
+@using Syncfusion.EJ2.Charts
+@using UrbanRFP.Domain.ViewModel;
+@{
+	ViewBag.title = "My Dashboard";
+}
+<link href="~/Content/css/charts.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-nav-wizard.css" rel="stylesheet" />
+<script src="~/Content/Scripts/AppScripts/text-shortner.js"></script>
+<script src="~/Content/Scripts/AppScripts/charts.js"></script>
+<div class="col-md-12 bdcrumb">
+	<ul class="breadcrumb">
+		<li><a href="@Url.Action("Index", "Home")">Home</a></li>
+		<li><a href="#">My dashboard</a></li>
+	</ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+	<div class=" col-md-12 text-blue">
+		<a class="bckresult" href="/dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+	</div>
+</div>
+<!--<div id="b-australia" style="height: 50px">
+	@Html.EJS().Sparkline("b-australia").AxisSettings(new SparklineAxisSettings { MinY = 12 }).Load("sparkload").Height("50px").Width("90%").LineWidth(2).Type(SparklineType.Column).ValueType(SparklineValueType.Category).Fill("#3C78EF").NegativePointColor("#fc5070").TooltipSettings(tool => tool.Visible(true).Format("${xval} : ${yval30}")).XName("xval").YName("yval30").DataSource(ViewBag.datasource).Render()
+</div>-->
+<div class="mt26 clrwhite mgbody">
+	
+	<div class="page-content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="clrwhite">
+
+					<p class="srchtxt dspinline" style="margin-top:0px;float:left;">Products & services overview</p>
+					<!--<div style="float:right;padding-top: 15px;"><a class="btn btn-default" href="/product/create"><i class="fa fa-plus"></i>&nbsp;Add new product</a></div>-->
+				</div>
+			</div>
+		</div>
+		<div class="bordered-section bordered-section-no-shadow">
+			<div class="row">
+				<div class="">
+					<div class="mt26 mt0 clrwhite mgbody">
+						<div class="rfp-list mgbody ovflow">
+							<table class="table-responsive  tablesorter" style="margin-top: 0px;border-top: 0px;">
+								<thead>
+									<tr>
+										<th class="mainth table-th-header product-and-services-thead" colspan="2" style="width:20%;">
+											SOLUTIONS
+										</th>
+										<th class="mainth table-th-header product-and-services-thead" style="width:20%;">
+											ANALYTICS LAST 12 MONTHS
+										</th>
+										<th class="mainth text-center table-th-header product-and-services-thead">
+											VIEWS LAST MONTH
+										</th>
+										<th class="mainth text-center table-th-header product-and-services-thead">
+											AVG. VIEWS PER MONTH
+										</th>
+										<th class="mainth text-center table-th-header product-and-services-thead">
+											RFQs
+										</th>
+										<th class="mainth text-center table-th-header product-and-services-thead">
+											INVITATIONS
+										</th>
+										<th class="mainth text-center table-th-header product-and-services-thead">
+											VALIDATION
+										</th>
+									</tr>
+								</thead>
+								<tbody class="tblbdydash">
+									@if (ViewData["Products"] != null && ((IList<ProductOrganizationViewModel>)ViewData["Products"]).Count() > 0)
+									{
+										var product_list = (IList<ProductOrganizationViewModel>)ViewData["Products"];
+
+										foreach (var product in product_list)
+										{
+											<tr class="tr-border">
+												<td>1.1</td>
+												<td class="fzpd"><a href="/dashboard/product?prd_key=@product.prd_key">@product.prd_name</a></td>
+												<td class="fzpd"><img src="~/Content/images/analytics.png" /></td>
+												<td class="fzpd text-center"><b>@product.last_month_views</b></td>
+												<td class="fzpd text-center"><b>@product.avg_month_views</b></td>
+												<td class="fzpd text-center"><a href="/dashboard/product?prd_key=@product.prd_key"><b>@product.total_rfq</b></a></td>
+												<td class="fzpd text-center"><b>@product.invites</b></td>
+												<td class="txtcenter"></td>
+											</tr>
+										}
+									}
+									else
+									{
+										<tr><td colspan="8" class="text-center">No product/service found!</td></tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br class="rfp-list" />
+		<div class="bordered-section">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="srchtxt myrfps" style="float:left;margin-top:15px">My Proposals</p>
+					@{
+						int saved_proposals = 0, inprogress_proposals = 0, won_proposals = 0, completed_proposals = 0;
+						List<RfpReqResponse> proposal_list = new List<RfpReqResponse>();
+
+						if (ViewData["Proposals"] != null && ((IList<RfpReqResponse>)ViewData["Proposals"]).Count() > 0)
+						{
+							proposal_list = (List<RfpReqResponse>)ViewData["Proposals"];
+							saved_proposals = proposal_list.Count;
+							inprogress_proposals = proposal_list.Count(p => p.rfp_award_date == null);
+							completed_proposals = proposal_list.Count(p => p.rfp_award_date != null);
+							won_proposals = proposal_list.Count(p => p.rfp_award_date != null && p.rfr_awarded == 1);
+
+						}
+					}
+					<div class="rfp-list txtcenter" style="margin-top:15px">
+						<div class="vendor rfp-pieID legend left" style="margin: 0px 10px; padding-right: 0px; margin-right: 2px;"><span class="span-saved-proposal-count">@saved_proposals</span><em class="span-saved-proposal-status"> Saved</em></div>
+						<div class="vendor rfp-pieID pie"></div>
+						<div class="vendor rfp-pieID legend right" style="margin: 0px 10px; margin-left: 2px; padding-left: 0px;"><span class="span-won-proposal-count">@won_proposals</span><em class="span-won-proposal-status"> Won / </em><span class="span-completed-proposal-count">@completed_proposals</span> <em class="span-completed-proposal-status">Completed</em></div>
+						<br />
+						<div class="vendor rfp-pieID legend right" style="margin: 0px 10px; padding-top: 2px; margin-left: 300px; margin-top: -25px;"><span class="span-inprogress-proposal-count">@inprogress_proposals</span><em class="span-inprogress-proposal-status"> in progress</em></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div>
+					<div class="mt26 mt0 clrwhite mgbody">
+						<div class="rfp-list mgbody ovflow">
+							<table class="wd100 table-responsive tablesorter" style="margin-top: 0px;border-top: 0px;">
+								<thead>
+									<tr class="throw">
+										<th style="width:1px;"></th>
+										<th class="mainth table-th-header header">
+											RFP NAME
+										</th>
+										<th class="mainth table-th-header header">
+											RFP NUMBER
+										</th>
+										<th class="mainth table-th-header header">
+											LOCAL GOVERNMENT
+										</th>
+										<th class="mainth table-th-header header">
+											SOLUTIONS
+										</th>
+										<th class="mainth table-th-header header">
+											PROGRESS
+										</th>
+										<th class="mainth table-th-header header">
+											NEXT STEP
+										</th>
+									</tr>
+								</thead>
+								<tbody class="tblbdydash">
+									@if (proposal_list.Count() > 0)
+									{
+										foreach (var proposal in proposal_list)
+										{
+											<tr>
+												<td></td>
+												<td class="fzpd" style="width:100px;">
+													<a href="/dashboard/proposal?rfp_key=@proposal.rfp_key">@proposal.rfp_name</a>
+												</td>
+												<td class="fzpd text-blue"><a>@proposal.rfp_bid_number_in_LG</a></td>
+												<td>@proposal.org_legal_name</td>
+												<td><a>Pay & Walk</a></td>
+												<td>
+													@if (proposal.rfp_progress == 0)
+													{
+														<a class="btn btn-warning badge-button-warning">Plan and scope</a>
+														<!--<a class="btn btn-round btn-warning badge-plan-scope">Plan and scope</a>-->
+													}
+													else if (proposal.rfp_progress == 1)
+													{
+														<span>Post-RFP</span>
+													}
+													else if (proposal.rfp_progress == 2)
+													{
+														<a class="btn btn-round btn-success">Awarded; Validated</a>
+													}
+													else if (proposal.rfp_progress == 3)
+													{
+														<span class="text-danger">Rejected</span>
+													}
+
+
+												</td>
+												<td class="fzpd">
+													@if (proposal.rfp_progress == 0)
+													{
+														<span>Prepare &amp; submit</span>
+													}
+													else if (proposal.rfp_progress == 1)
+													{
+														<span>Awaiting</span>
+													}
+													else if (proposal.rfp_progress == 2)
+													{
+														<span>Project management</span>
+													}
+													else if (proposal.rfp_progress == 3)
+													{
+														<span>Cry</span>
+													}
+												</td>
+											</tr>
+										}
+									}
+									else
+									{
+										<tr><td colspan="7" class="text-center">No proposal found!</td></tr>
+									}
+									<!--<tr>
+											<td></td>
+											<td class="fzpd">PARKING METER REPLACEMENT</td>
+											<td class="fzpd text-blue"><a>12345678-001</a></td>
+											<td>City of Leesburg, VA</td>
+											<td><a>Pay & Walk</a></td>
+											<td><a class="btn btn-round btn-success badge-button-success">Awarded; Validated</a></td>
+											<td class="fzpd">Project management</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="fzpd">PARKING PAY BY PHONE SERVICE</td>
+											<td class="fzpd text-blue"><a>12345678-002</a></td>
+											<td>City of Phoenix, AZ</td>
+											<td><a>Pay & Walk , ANPR</a></td>
+											<td>
+												<a class="btn btn-round btn-warning badge-button-warning">Plan and scope</a><br />
+												(Invite to a RFP received)
+											</td>
+											<td class="fzpd">Prepare and submit</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="fzpd">Parking Management - Software, Meter Maintenance, Collections, and Parking Violations Bureau</td>
+											<td class="fzpd text-blue"><a>12345678-003</a></td>
+											<td>City of St. Louis, MO</td>
+											<td>
+												<a>
+													Pay & Walk, ANPR;
+													Park cloud service
+												</a>
+											</td>
+											<td><a>Post-RFP</a></td>
+											<td class="fzpd">Awaiting</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="fzpd">Parking Meter Purchase and Installation</td>
+											<td class="fzpd text-blue"><a>12345678-004</a></td>
+											<td>The City of Dunnellon</td>
+											<td><a>Pay & Walk, ANPR</a></td>
+											<td><a class="btn btn-round btn-success badge-button-success">Awarded; Validated</a></td>
+											<td class="fzpd">Project management</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="fzpd">PARKING ENFORCEMENT MANAGEMENT SERVICES</td>
+											<td class="fzpd text-blue"><a>12345678-005</a></td>
+											<td>City of South Miami</td>
+											<td><a>Pay & Walk, ANPR</a></td>
+											<td><span class="text-danger">Rejected</span></td>
+											<td class="fzpd">Cry</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td class="fzpd">PARKING PERMIT MANAGEMENT AND CITATION PROCESSING SERVICES</td>
+											<td class="fzpd text-blue"><a>12345678-006</a></td>
+											<td>City of Chino</td>
+											<td><a>Pay & Walk, ANPR</a></td>
+											<td>
+												<a class="btn btn-round btn-warning badge-button-warning">Plan and scope</a><br />
+												(1 Favorited RFP)
+											</td>
+											<td class="fzpd">Prepare & submit</td>
+										</tr>-->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br class="rfp-list" />
+		<div class="bordered-section">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="srchtxt myrfps" style="float:left;margin-top:15px">My favorite RFPs</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 padding-zero">
+					<div class="mt26 mt0 clrwhite mgbody">
+						<div class="rfp-list mgbody ovflow">
+							<table class="wd100 table-responsive tablesorter table-favorite">
+								<thead>
+									<tr class="throw">
+										<th style="width:2%;"></th>
+										<th class="mainth ht47 table-th-header table-tr-td-grey" style="width:20%;">RFP</th>
+										<th class="mainth wd10 table-th-header table-tr-td-grey" style="width:20%;">PUBLISH DATE</th>
+										<th class="mainth wd19 table-th-header table-tr-td-grey" style="width:20%;">CLOSE DATE</th>
+										<th class="mainth wd25 table-th-header table-tr-td-grey" style="width:18%;">DESCRIPTION</th>
+										<th class="mainth orgndiv table-th-header table-tr-td-grey" style="width:18%;">LOCAL GOVERNMENTS</th>
+										<th class="mainth" style="width:2%;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (ViewData["Favorite"] != null && ((IList<RfpOrgViewModel>)ViewData["Favorite"]).Count() > 0)
+									{
+										var favorite_list = (IList<RfpOrgViewModel>)ViewData["Favorite"];
+
+										foreach (RfpOrgViewModel rfp in favorite_list)
+										{
+											<tr>
+												<td></td>
+												<td><a href="/rfp?rfp_key=@rfp.rfp_key">@rfp.rfp_name</a></td>
+												<td><a href="/rfp?rfp_key=@rfp.rfp_key">@(((DateTime)rfp.rfp_issue_date).ToString("MM-dd-yyyy"))</a></td>
+												<td><a href="/rfp?rfp_key=@rfp.rfp_key">@(((DateTime)rfp.rfp_close_date).ToString("MM-dd-yyyy"))</a></td>
+												<td>
+													<p class="comment">
+														@rfp.rfp_summary
+													</p>
+												</td>
+												<td><a href="/rfp?rfp_key=@rfp.rfp_key">@rfp.org_legal_name</a><div style="margin-top: 5px;"><a href="#" class="btn btn-default btn-auto">Submit my proposal</a></div></td>
+												<td class="clrtext" style="vertical-align:bottom"></td>
+											</tr>
+										}
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="ht500"></div>
+<script src="~/Content/tablesorter/jquery.metadata.js"></script>
+<script src="~/Content/tablesorter/jquery.tablesorter.min.js"></script>
+<script src="~/Content/Scripts/AppScripts/dashboard.js"></script>

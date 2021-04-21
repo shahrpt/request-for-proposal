@@ -1,0 +1,148 @@
+﻿@using UrbanRFP.Domain.ViewModel
+@model UrbanRFP.Infrastructure.Entity.RfpRequest
+@{
+    ViewBag.Title = "Request for quote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ProductOrganizationViewModel product = (ProductOrganizationViewModel)ViewData["Product"];
+}
+<link href="~/Content/css/simple-calendar.css" rel="stylesheet" />
+<script src="~/Content/Scripts/jquery.simple-calendar.js"></script>
+<script src="~/Content/Scripts/AppScripts/rfq.js"></script>
+<script src="~/Content/Scripts/AppScripts/home.js"></script>
+
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">City Traffic Management</a></li>
+    </ul>
+</div>
+<div class="logo-desc d-flexs">
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <a style="margin-left:25px;" href="/Search/Result" class="bckresult"><img class="bckimg" src="~/Content/images/left-arrow_2.png" /> Back to search results</a>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12 desc mgbody">
+                <div class="search">
+                    <input type="text" class="ht45 txtSearch" placeholder="city traffic management" autofocus>
+                    <span class="icnsrch">
+                        <img src="~/Content/images/search-icon.png" alt="">
+                    </span>
+                    <input type="button" name="btnSearch" class="ht45 btnSearch" value="Search">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt26 clrwhite mgbody">
+    @if (Model != null)
+    {
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-8">
+                <span class="srchtxt">@product.prd_name</span><br />
+                <span><a class="text-blue" href="@product.prd_website" target="_blank">@product.prd_website</a></span>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-offset-2 col-md-8" style="padding-top: 15px;"><a href="#" target="_blank">See all products from this vendor&nbsp;&nbsp;<img src="/content/images/external-link.png" /></a></div>
+                <div class="col-md-1" style="float:right;margin-top:15px"><i class="fa fa-star-o fa-custom" onclick="mark_favorite(this);"></i></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-6">
+                <p class="text-blue font-18">16 Views / 3 <i class="fa fa-star fa-custom"></i></p>
+            </div>
+            <div class="col-md-6">
+                <div style="float:right"><button class="btn btn-default btn-auto">RFQ</button><button class="btn btn-default btn-auto">Invite to a RFP</button></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <p class="individualdt">DESCRIPTION</p>
+                <p class="individualpara mr">@product.prd_description</p>
+            </div>
+            <div class="col-md-4">
+                <p class="individualdt">FEATURES</p>
+                <p class="individualpara mr">@product.prd_features</p>
+            </div>
+            <div class="col-md-4">
+                <p class="individualdt">BENEFITS</p>
+                <p class="individualpara mr">@product.prd_benefits</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p class="individualdt">PRICING STRUCTURE</p>
+                <p class="individualpara mr">@product.prd_pricing</p>
+            </div>
+            <div class="col-md-4">
+                <p class="individualdt">KEY CONTACT</p>
+                <p class="individualpara mr">
+                    Charlie Hobbs<br />
+                    213-551-0131<br />
+                    <a href="mailto:CHobbs@smartparking.com">CHobbs@smartparking.com</a>
+                </p>
+            </div>
+        </div>
+        <hr style="border-color:#3A97D0; border-width:6px" />
+        <div class="row row-margin">
+            <div class="srchtxt" style="float:left">My Request for Quote</div>
+            <div style="float:right">
+                <a class="anchortag" href="#"><img class="imgmr" src="~/Content/images/arrow-down.png" /> Cancel My RFQ</a>
+            </div>
+        </div>
+        <div class="row row-margin">
+            <div class="col-md-8 padding-zero">
+                <div>
+                    <p class="individualdt">SUBJECT</p>
+                    <p class="individualpara">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p class="individualdt">SUMMARY</p>
+                    <p class="individualpara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="individualdt">REQUIREMENTS</p>
+                    <p class="individualpara">
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <span id="dots"><a class="anchortag show-more">(show more)</a></span>
+                        <span id="more-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><a class="anchortag show-less">(show less)</a>
+                    </p>
+                </div>
+                <div class="col-md-8 padding-zero">
+                    <p class="individualdt">CONTACT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="anchortag" id="hide-contact">(hide full details)</a></p>
+                    <div id="contact-details">
+                        <div class="col-md-6 padding-zero"><p>Name<br /><span class="color-navy">J. Q. Public</span></p></div>
+                        <div class="col-md-6 padding-zero"><p>Title<br /><span class="color-navy">Director of Operations</span></p></div>
+                        <div class="col-md-6 padding-zero"><p>Email<br /><span class="color-navy">JQPublic@skybrowse.net</span></p></div>
+                        <div class="col-md-6 padding-zero"><p>Phone<br /><span class="color-navy">1(246) 555 1234</span></p></div>
+                        <div class="col-md-6 padding-zero"><p>Organization<br /><span class="color-navy">Widgets R Us</span></p></div>
+                        <div class="col-md-6 padding-zero"><p>Address<br /><span class="color-navy">123 Main Street,<br />Springfield, MA 12345</span></p></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p class="individualdt">AVAILABLE DOCS</p>
+                    <p class="admin-docs">
+                        <a><img src="~/Content/images/icon-pdf.png" />Document Abc</a>
+                        <a><img src="~/Content/images/icon-pdf.png" />Another document</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <p class="individualdt border-bottom" style="padding-bottom: 10px;">DUE BY DATE<a style="float:right" class="anchortag" href="#">Hide Details</a></p>
+                <div id="calendar"></div>
+                <p style="padding: 0px 15px;">
+                    <span class="dot dot-today"></span>&nbsp;Today&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dot dot-event"></span>&nbsp;Due date
+                </p>
+            </div>
+        </div>
+        <hr />
+        <div class="text-right">
+            <button id="btnSendRfq" type="submit" class="btn btn-default btn-auto sendreq">Save for later</button>
+            <button type="button" class="btn btn-default btn-auto sndinvite">Send</button>
+        </div>
+    </div>
+    }
+    else
+    {
+        <p class="no-individual-record">No record found.</p>
+    }
+</div>

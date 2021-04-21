@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ICMA.Models.co_contact>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Fax</th>
+            <th>Roles</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.ct_first_name @item.ct_last_name</td>
+            <td>@item.ct_email</td>
+            <td>@item.ct_phone</td>
+            <td>@item.ct_fax</td>
+            <td>
+                @foreach (var role in item.co_permission.ToList())
+                {
+                    <label class="label label-default">@role.per_type</label>
+                }
+            </td>
+            <td>
+               
+                @if (item.ct_active == 1)
+                {
+                    <label class="cbContainer" data-id="@item.ct_key">
+                        <span class="cbText">Active</span>
+                        <input type="checkbox" value="true" class="cbActive" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                }
+                else
+                {
+                    <label class="cbContainer" data-id="@item.ct_key">
+                        <span class="cbText">Inactive</span>
+                        <input type="checkbox" value="true" class="cbActive">
+                        <span class="checkmark"></span>
+                    </label>
+                }
+            </td>
+            <td class="text-right">
+                <a class="btn-link btnEdit" data-id="@item.ct_key"><i class="fa fa-pencil text-blue"></i></a>
+                <a class="btn-link btnDel" data-id="@item.ct_key"><i class="fa fa-trash-o text-danger"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

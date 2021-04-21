@@ -1,0 +1,360 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@model RfpRequest
+@{
+    ViewBag.Title = "Plan a RFP: templates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .bordered-section {
+        min-height: 200px;
+    }
+</style>
+<link href="~/Content/css/step-wizard.css" rel="stylesheet" />
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="/rfp">My Toolkit</a></li>
+        <li><a href="#">Plan a RFP: templates</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/rfp"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <p class="srchtxt pt15 dspinline">Plan a RFP: templates</p>
+        </div>
+        @using (Html.BeginForm("Templates", "RFP", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-offset-1 col-md-11">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <span class="srchtxt">
+                        Title<br />
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.rfp_name, new { @class = "form-control", placeholder="Enter RFP title..."})
+                    @Html.ValidationMessageFor(model => model.rfp_name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2"><button class="btn btn-lg btn-default">Save</button></div>
+            </div>
+        }
+            <div class="row">
+                <div class="col-md-9">
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 padding-zero">
+                    <div class="col-md-3">
+                        <a href="#raci">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">RACI</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Setup the Responsibility Assignment Matrix
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#timeline">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">Timeline</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        1. Application Solution<br />
+                                        2. Major Project Objectives
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#categories">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">Categories</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Enter category key words for search and discovery
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#sow">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">SOW</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#questionnaire">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Questionaire
+                                            Proposed
+                                            solutions
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#questionnaire">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Questionaire
+                                            Project timeline and deliverables
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#questionnaire">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Questionaire
+                                            Resource
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#questionnaire">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Questionaire
+                                            Cost/Pricing
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#criteria">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Evaluation
+                                            criteria
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#evaluation">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Evaluation
+                                            process
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#instructions">
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Submission
+                                            instructions
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a>
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">
+                                            Intend to
+                                            award letter
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a>
+                            <div class="bordered-section">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="legend-box legend-box-lg btn-gray"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="f30">+ add more content</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

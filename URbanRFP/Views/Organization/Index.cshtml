@@ -1,0 +1,128 @@
+﻿@model IEnumerable<UrbanRFP.Infrastructure.Entity.CoOrganization>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/Scripts/AppScripts/organization.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("Organization", "home")">Organizations</a></li>
+    </ul>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <p class="srchtxt pt15 dspinline">Organizations</p>
+    <div class="mgbody mt5">
+        <div style="float:right;padding:0px 15px;" class="text-blue">
+            <a class="btn btn-lg btn-primary" href="/organization/create"><i class="fa fa-plus"></i>&nbsp;Add New Organization</a>
+        </div>
+    </div>
+</div>
+<div class="mt26 mt0 clrwhite mgbody">
+    <div class="bdrline bdrline2"></div>
+    <div class=" mgbody ovflow" style="padding: 0px 15px;">
+        <table class="table table-responsive tbldashboard" id="tbl-org">
+            <thead>
+                <tr class="throw">
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_legal_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_specialities)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_vendor_flag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_date_created)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_timezone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_entity_type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_special_type_flag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_qualified_LG_flag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_federal_tax_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_website)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_ann_revenue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_vendor_number_of_employees)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.org_LG_population_range)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-org-key="@item.org_key">
+                            @Html.DisplayFor(modelItem => item.org_legal_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_specialities)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_vendor_flag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_date_created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_timezone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_entity_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_special_type_flag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_qualified_LG_flag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_federal_tax_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_website)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_ann_revenue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_vendor_number_of_employees)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.org_LG_population_range)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { org_key = item.org_key }) |
+                            <a class="btn-del-org" data-orgkey="@item.org_key">Delete</a>
+                        </td>
+                    </tr>
+                 }
+            </tbody>
+        </table>
+    </div>
+</div>

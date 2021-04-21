@@ -1,0 +1,329 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section styles{
+
+    <style>
+        .btnEdit, .btnDel {
+            margin-left: 5px;
+        }
+
+        .individualdt {
+            margin-top: 10px;
+        }
+
+
+        .cbContainer {
+            display: block;
+            position: relative;
+            padding-left: 24px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            margin-top: 0 !important;
+        }
+
+            /* Hide the browser's default checkbox */
+            .cbContainer input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #eee;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .cbContainer:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .cbContainer input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+
+
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .cbContainer input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .cbContainer .checkmark:after {
+            left: 7px;
+            top: 4px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    </style>
+}
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="">Organization Dashboard</a></li>
+    </ul>
+</div>
+
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <p class="srchtxt pt15 dspinline">Organization Dashboard</p>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="row" style="margin-top: 15px;">
+
+                    <div class="col-md-6">
+                        <p class="text-blue font-18"> <i class="fa fa-user fa-custom"></i> My Profile</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div><button class="btn btn-default btn-auto btnEditUser"><i class="fa fa-plus"></i> Edit </button></div>
+                    </div>
+                </div>
+                <div class="rfq-box rfq-box-lightblue">
+                    <div class="" id="userData">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-md-6">
+                        <p class="text-blue font-18"> <i class="fa fa-building fa-custom"></i> Organization Data</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div><button class="btn btn-default btn-auto btnEditOrg"><i class="fa fa-plus"></i> Edit</button></div>
+                    </div>
+                </div>
+                <div class="rfq-box rfq-box-lightblue">
+                    <div class="" id="orgData">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="mod-form" class="modal fade">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content ">
+            <div class="mod-form">
+                <p class="text-center text-blue">Loading form..</p>
+            </div>
+        </div>
+    </div><!-- MODAL DIALOG -->
+</div>
+
+@section scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
+
+
+    <script src="~/Content/Scripts/jquery.mask.min.js"></script>
+    <script>
+
+        var successSaveUser = function (data) {
+
+            console.log(data);
+            if (data.status == "error") {
+                alertMsg("error", "Error", data.msg);
+
+                $('.btnSubmit').prop('disabled', false);
+            }
+            else {
+                userData();
+                $('#mod-form').modal('hide');
+            }
+        };
+
+        var successChangePassword = function (data) {
+
+            console.log(data);
+            if (data.status == "error") {
+                alertMsg("error", "Error", data.msg);
+                $('.btnSubmit').prop('disabled', false);
+            }
+            else {
+                $('#mod-form').modal('hide');
+                alertMsg("success", "Done", "Password changed successfully");
+            }
+        };
+
+
+        var successSaveOrg = function (data) {
+
+            console.log(data);
+            if (data.status == "error") {
+                alertMsg("error", "Error", data.msg);
+                $('.btnSubmit').prop('disabled', false);
+            }
+            else {
+                $('#mod-form').modal('hide');
+                getOrgData();
+            }
+        };
+        var successSaveAddress = function (data) {
+
+            console.log(data);
+            if (data.status == "error") {
+                alertMsg("error", "Error", data.msg);
+                $('.btnSubmit').prop('disabled', false);
+            }
+            else {
+                $('#mod-form').modal('hide');
+                getOrgData();
+            }
+        };
+        //
+        var getOrgData = function () {
+            $.ajax({
+                "url": "/OrgDashboard/OrgData",
+                "type": "GET",
+                "success": function (response) {
+                    $('#orgData').html(response);
+                }
+            });
+        }
+        var userData = function () {
+            $.ajax({
+                "url": "/OrgDashboard/UserData",
+                "type": "GET",
+                "success": function (response) {
+                    $('#userData').html(response);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            getOrgData();
+            userData();
+
+
+            $(document).on('click', '.btnEditOrg', function () {
+                var id = $('#keyOrg').val();
+
+                $('#mod-form').modal('show');
+                $('.mod-form').html('<p class="text-center text-blue">Loading form..</p>');
+                $.ajax({
+                    "url": "/OrgDashboard/EditOrgData/" + id,
+                    "type": "GET",
+                    "success": function (response) {
+                        $('.mod-form').html(response);
+
+                    }
+                });
+            });
+            $(document).on('click', '.btnEditUser', function () {
+                var id = $('#keyUser').val();
+
+                $('#mod-form').modal('show');
+                $('.mod-form').html('<p class="text-center text-blue">Loading form..</p>');
+                $.ajax({
+                    "url": "/OrgDashboard/EditUserDate/" + id,
+                    "type": "GET",
+                    "success": function (response) {
+                        $('.mod-form').html(response);
+                        $("#ct_phone, #ct_fax").mask("(000)-000-0000", { placeholder: "(000)-000-0000" });
+
+                    }
+                });
+            });
+            $(document).on('click', '.btnAddAddress', function () {
+                var id = $(this).data('id');
+                $('#mod-form').modal('show');
+                $('.mod-form').html('<p class="text-center text-blue">Loading form..</p>');
+                $.ajax({
+                    "url": "/OrgDashboard/addAddress/" + id,
+                    "type": "GET",
+                    "success": function (response) {
+                        $('.mod-form').html(response);
+
+                    }
+                });
+            });
+            $(document).on('click', '.btnSaveUser', function () {
+                $('.alertemail').hide();
+                var email = $('#txtEmail').val();
+                if (email.includes("@@")) {
+                    $('#txtEmail').focus();
+                    $('.alertemail').show();
+                    return false;
+                }
+            });
+
+            $(document).on('click', '.btnChangePassword', function () {
+                $('#mod-form').modal('show');
+                $('.mod-form').html('<p class="text-center text-blue">Loading form..</p>');
+                $.ajax({
+                    "url": "/OrgDashboard/ChangePassword/",
+                    "type": "GET",
+                    "success": function (response) {
+                        $('.mod-form').html(response);
+
+                    }
+                });
+            });
+
+            $(document).on('click', '.btnDelAdd', function () {
+                var id = $(this).data('id');
+                var title = "";
+
+                Swal.fire({
+                    title: "Are you sure you want to delete this Address?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            "url": "/OrgDashboard/removeAddress",
+                            "type": "POST",
+                            "data": JSON.stringify({ id: id }),
+                            "dataType": "json",
+                            "contentType": "application/json;charset=utf-8",
+                            "success": function (response) {
+                                getOrgData();
+                            }
+                        });
+                    }
+                });
+
+
+            });
+        });
+    </script>
+}

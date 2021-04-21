@@ -1,0 +1,50 @@
+﻿@using ICMA.Models;
+@{
+    ViewBag.title = "Search results";
+}
+
+<script src="~/Content/Scripts/AppScripts/search.js"></script>
+<script src="~/Content/Scripts/AppScripts/home.js"></script>
+<script src="~/Content/Scripts/AppScripts/text-shortner.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Opportunity</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+        <a class="bckresult btn-filter" style="text-decoration:underline" onclick="toggle_filter(this);">Show Filters</a>
+    </div>
+</div>
+<div class="logo-desc d-flexs" style="margin:0px">
+    <div class="col-md-12 desc mgbody">
+        <div class="search">
+            <input type="text" value="@(ViewData["SearchText"] != null ? ViewData["SearchText"].ToString() : string.Empty)" class="ht45 txtSearch" placeholder="Search for RFPs..." autofocus>
+            <span class="icnsrch">
+                <img src="~/Content/images/search-icon.png" alt="">
+            </span>
+            <input type="button" name="btnSearch" class="ht45 btnSearch" value="Search">
+            <input id="type_id" type="hidden" value="2" />
+        </div>
+    </div>
+</div>
+<div class="mt35 mgbody mt5">
+    <p class="srchtxt">Search results</p>
+</div>
+<div class="mgbody padding-zero">
+    <div id="div-search-filter">
+        @{Html.RenderPartial("SearchFilter");}
+    </div>
+    <div id="div-search-result" class="clrwhite">
+        @if (@ViewData["SearchText"] != null)
+        {
+            <input type="hidden" id="txtSearch" value="@ViewData["SearchText"]" />
+        }
+        <table class="wd100 table-responsive tablesorter table-search" id="tbl-rfp"> </table>
+    </div>
+</div>
+<div class="ht300"></div>
+<script src="~/Content/tablesorter/jquery.metadata.js"></script>
+<script src="~/Content/tablesorter/jquery.tablesorter.min.js"></script>

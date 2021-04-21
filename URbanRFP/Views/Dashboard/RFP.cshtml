@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.title = "My dashboard - RFP";
+}
+<link href="~/Content/css/bootstrap-nav-wizard.css" rel="stylesheet" />
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="@Url.Action("", "Dashboard")">My dashboard</a></li>
+        <li><a href="#">RFP: Real time traffic detection</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <p class="srchtxt pt15 dspinline">RFP: Real time traffic detection <span class="text-blue font-18">16 Views / 3 <i class="fa fa-star fa-custom"></i></span></p>
+        </div>
+        <div class="row">
+            <div class="bdrline bdrline2"></div>
+            <div class=" mgbody ovflow">
+                <table class="tbldashboard">
+                    <thead>
+                        <tr class="throw">
+                            <th class="width2"></th>
+                            <th class="mainth ht47 wdth10"><span class="text-blue">ISSUE DATE</span></th>
+                            <th class="mainth wdth10"><span class="text-blue">RFP DEADLINE</span></th>
+                            <th class="mainth wdth10"><span class="text-blue">RFP CLOSE DATE</span></th>
+                            <th class="mainth wdth10"><span class="text-blue">RFP AWARD DATE</span></th>
+                            <th class="mainth"><span class="text-blue">RFP SCOPE OF WORK</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>1.4.19 0.00</td>
+                            <td>1.18.19 0.00</td>
+                            <td>1.25.19 0.00</td>
+                            <td>1.25.19 0.00</td>
+                            <td>Real time detection; integration to current system; data-analytics for accidents prediction</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bdrline bdrline2"></div>
+            <div class="mgbody ovflow">
+                <table class="tbldashboard">
+                    <thead>
+                        <tr class="throw">
+                            <th style="width:2.5%"></th>
+                            <th class="mainth ht47 wdth10"><span class="text-blue">DIVISION</span></th>
+                            <th class="mainth wdth10"><span class="text-blue">DEPARTMENT</span></th>
+                            <th class="mainth wdth10"><span class="text-blue">CATEGORIES</span></th>
+                            <th class="mainth wdth10"><span class="text-blue">BUDGET</span></th>
+                            <th class="mainth nav-td"> PLAN & PUBLISH</th>
+                            <th class="mainth nav-td">COLLECT</th>
+                            <th class="mainth nav-td">EVALUATE</th>
+                            <th class="mainth nav-td">AWARD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>Infrastructure</td>
+                            <td>Public Transport</td>
+                            <td>Mobility</td>
+                            <td>$123,456,789</td>
+                            <td colspan="4">
+                                <ul class="nav nav-wizard">
+                                    <li class="done rfq-plan"><a href="#"><i class="fa fa-check"></i></a></li>
+                                    <li class="done rfq-collect"><a href="#"><i class="fa fa-check"></i>&nbsp;3 RFPs</a></li>
+                                    <li class="done rfq-evaluate"><a href="#">3 scored</a></li>
+                                    <li class="done rfq-award"><a href="#">Sent</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bdrline bdrline2"></div>
+            <div class="mgbody ovflow">
+                <div class="srchtxt myrfps">
+                    <br />RACI team
+                </div>
+                <div class="col-md-12">
+                    <table class="tbldashboard" style="width:60%">
+                        <thead>
+                            <tr class="throw">
+                                <th class="mainth ht47 wdth10"><span class="text-blue">NAME</span></th>
+                                <th class="mainth wdth10"><span class="text-blue">TITLE</span></th>
+                                <th class="mainth wdth10"><span class="text-blue">ROLE</span></th>
+                                <th class="mainth wdth10"><span class="text-blue">CONTACT</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Jameson</td>
+                                <td>Vice President</td>
+                                <td>Recommender</td>
+                                <td><a>Johnj@abcdefg.org</a></td>
+                            </tr>
+                            <tr>
+                                <td>Alice Applegate</td>
+                                <td>President</td>
+                                <td>Approver</td>
+                                <td><a>AliceA@abcdefg.org</a></td>
+                            </tr>
+                            <tr>
+                                <td>Bob Bailey</td>
+                                <td>Senior Vice President</td>
+                                <td>Consultant</td>
+                                <td><a>BobB@abcdefg.org</a></td>
+                            </tr>
+                            <tr>
+                                <td>Jane Jonesley</td>
+                                <td>Executive Vice President</td>
+                                <td>Informee</td>
+                                <td><a>JaneJ@abcdefg.org</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="bdrline bdrline2"></div>
+        </div>
+        <div class="row" style="margin-top:0px;">
+            <div class="srchtxt myrfps">
+                <br />PROPOSALS
+            </div>
+            <div class="bdrline bdrline2 bdrline-blue"></div>
+            <div class="row">
+                <table class="table tablesorter" id="tbl-response" style="width:100%">
+                    <thead>
+                        <tr class="throw">
+                            <th class="width2"></th>
+                            <th class="mainth ht47 wdth10">NUMBER</th>
+                            <th class="mainth wdth10">VENDOR</th>
+                            <th class="mainth wdth10">KEY CONTACT</th>
+                            <th class="mainth wdth10">CONTACT EMAIL</th>
+                            <th class="mainth">SCORE</th>
+                            <th class="mainth">EVALUATION TEAM</th>
+                            <th class="mainth">DECISION</th>
+                            <th class="mainth">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="form-control" /></td>
+                            <td>1.1</td>
+                            <td><a href="/home/rfpresponse">Skybrowse</a></td>
+                            <td><a>Joe Smith</a></td>
+                            <td><a>jsmith@urbanfootprint.com</a></td>
+                            <td><b>12</b></td>
+                            <td><a>Lucus Manning</a></td>
+                            <td><a class="text-danger">NOT awarded</a></td>
+                            <td>Not notified</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-control" /></td>
+                            <td>1.2</td>
+                            <td><a>CivicSmart</a></td>
+                            <td><a>Henry Zhang</a></td>
+                            <td><a>hzhang@qq.com</a></td>
+                            <td><b>24</b></td>
+                            <td><a>Ellen Van</a></td>
+                            <td><a class="text-danger">NOT awarded</a></td>
+                            <td>Not notified</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-control" /></td>
+                            <td>1.3</td>
+                            <td><a>NIC</a></td>
+                            <td><a>Vincent Law</a></td>
+                            <td><a>v_law@egov.com</a></td>
+                            <td><b>34</b></td>
+                            <td><a>Matt Swanton</a></td>
+                            <td><a class="text-success"><b>AWARDED</b></a></td>
+                            <td>Notified</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/tablesorter/jquery.metadata.js"></script>
+    <script src="~/Content/tablesorter/jquery.tablesorter.min.js"></script>
+    <script src="~/Content/Scripts/AppScripts/dashboard.js"></script>
+}

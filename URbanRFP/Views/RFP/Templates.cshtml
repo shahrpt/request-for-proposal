@@ -1,0 +1,377 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@model RfpRequest
+@{
+    ViewBag.Title = "Plan a RFP: templates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .bordered-section {
+        min-height: 200px;
+    }
+</style>
+<link href="~/Content/css/step-wizard.css" rel="stylesheet" />
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="/rfp">My Toolkit</a></li>
+        <li><a href="#">Plan a RFP: templates</a></li>
+    </ul>
+</div>
+<div class="mt26 mgbody" style="margin-left: 15px;margin-top: 0px;">
+    <div class=" col-md-12 text-blue">
+        <a class="bckresult" href="/rfp"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<span>Back to...</span></a>
+    </div>
+</div>
+<div class="mt26 clrwhite mgbody">
+    <div class="page-content">
+        <div class="row">
+            <p class="srchtxt pt15 dspinline">Plan a RFP: templates</p>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table-responsive tbldashboard">
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align:text-top"><span class="legend-box btn-success"></span></td>
+                            <td class="text-blue" style="vertical-align:text-top"><a href="/rfp?rfp_key=@Model.rfp_key">@Model.rfp_name</a></td>
+                            <td>
+                                <div class="stepwizard">
+                                    <div class="stepwizard-row setup-panel">
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-1" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>RACI</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-2" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Timeline</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-3" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>SOW</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="/rfp/criteria?rfp_key=@Model.rfp_key" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Scoring</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-5" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Score process</p>
+                                        </div>
+                                        <div class="stepwizard-step col-xs-2">
+                                            <a href="#step-6" type="button" class="btn btn-circle-success btn-circle"><i class="fa fa-check"></i></a>
+                                            <p>Submission instructions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9 padding-zero">
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#raci">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-success"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">RACI</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Setup the Responsibility Assignment Matrix
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#timeline">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-success"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">Timeline</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    1. Application Solution<br />
+                                    2. Major Project Objectives
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#categories">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">Categories</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Enter category key words for search and discovery
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#sow">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">SOW</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#questionnaire">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Questionaire
+                                        Proposed
+                                        solutions
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#questionnaire">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Questionaire
+                                        Project timeline and deliverables
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#questionnaire">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Questionaire
+                                        Resource
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#questionnaire">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Questionaire
+                                        Cost/Pricing
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#criteria">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Evaluation
+                                        criteria
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#evaluation">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Evaluation
+                                        process
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key#instructions">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Submission
+                                        instructions
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">
+                                        Intend to
+                                        award letter
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/rfp/edit?rfp_key=@Model.rfp_key">
+                        <div class="bordered-section">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="legend-box legend-box-lg btn-gray"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="f30">+ add more content</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

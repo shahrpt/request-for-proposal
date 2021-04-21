@@ -1,0 +1,79 @@
+﻿@using ICMA.Models;
+@{
+    ViewBag.Title = "Home Search";
+}
+<div class="logo-desc">
+    <div class="logo">
+        <a href=""><img src="~/Content/images/civiq-bid.png" class="home-logo" alt=""></a>
+    </div>
+    <div class="desc">
+        <p>CiviqBid is a new way to connect products and services providers with local governments who are looking for solutions. Solution providers can market their products, and find local government RFPs that match their products and services. Local governments can search for solutions matching their needs and create RFPs and RFQs for those solutions.</p>
+
+        @*<div class="search home text-center">
+                <input type="button" id="btnSearchRFP" value="Search">
+                <input type="button" id="btnSearchProduct" value="Search products" autofocus>
+            </div>*@
+    </div>
+    <div class="home-search row">
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-8">
+            <div class="search">
+
+                <input type="text" class="txtSearch" placeholder="Search for RFPs, vendors, anything">
+                <span>
+                    <img src="~/Content/images/search-icon.svg" alt="">
+                </span>
+                @if (SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.User.per_type == "Vendor")
+                {
+                    <input type="button" id="btnSearchRFP" value="Search">
+                }
+                else
+                {
+                    <input type="button" id="btnSearchProduct" value="Search" autofocus>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="partner-section">
+    <h2 class="default-partner color-site">Our Partner</h2>
+    <div class="row ">
+        <div class="col-sm-3">
+            <a href="#">
+                <img src="~/Content/images/our-partners1.png" class="img-partner" />
+            </a>
+        </div>
+        <div class="col-sm-3">
+            <a href="#">
+                <img src="~/Content/images/our-partners2.png" class="img-partner" />
+            </a>
+        </div>
+        <div class="col-sm-3">
+            <a href="#">
+                <img src="~/Content/images/our-partners3.png" class="img-partner" />
+            </a>
+        </div>
+        <div class="col-sm-3">
+            <a href="#">
+                <img src="~/Content/images/our-partners4.png" class="img-partner" />
+            </a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            var sheight = $(document).height();
+            sheight = sheight - 550;
+
+            $('.partner-section').css('margin-top', sheight);
+        });
+    </script>
+}
+
+
+

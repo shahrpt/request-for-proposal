@@ -1,0 +1,180 @@
+﻿@model UrbanRFP.Infrastructure.Entity.RfpProduct
+@{
+    ViewBag.title = "Product Information";
+    string action = string.IsNullOrWhiteSpace(Request.QueryString["prd_key"]) ? "Add" : "Edit";
+}
+
+<script src="~/Content/Scripts/AppScripts/prod.js"></script>
+
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="/search/result">Marketplace</a></li>
+        <li><a href="#">City Traffic Management</a></li>
+    </ul>
+</div>
+<div class="logo-desc d-flexs">
+    <div class="col-md-12 desc mgbody">
+        <div class="search">
+            <input type="text" class="ht45 txtSearch" placeholder="city traffic management" autofocus>
+            <span class="icnsrch">
+                <img src="~/Content/images/search-icon.png" alt="">
+            </span>
+            <input type="button" name="btnSearch" class="ht45 btnSearch" value="Search">
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="mt35 mgbody">
+        @if (@ViewData["prdkey"] != null)
+        {
+            <input type="hidden" id="txtProductId" value="@ViewData["prdkey"]" />
+            <a href="/Search/Result?searchText=@ViewData["prdkey"]" class="bckresult"><img class="bckimg" src="~/Content/images/left-arrow_2.png" /> Back to search results</a>
+        }
+        else
+        {
+            <a href="/Search/Result" class="bckresult"><img class="bckimg" src="~/Content/images/left-arrow_2.png" /> Back to search results</a>
+        }
+    </div>
+
+    <div class="mt26 clrwhite mgbody">
+        <div class="page-content">
+            @if (Model != null)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="srchtxt">Product Information</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="individualdt">Name:</div>
+                                <div class="">
+                                    @Html.HiddenFor(model => model.prd_key)
+                                    @Html.HiddenFor(model => model.prd_org_key)
+                                    @Html.TextBoxFor(model => model.prd_name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="individualdt">WEB:</div>
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.prd_website, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_website, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:15px;">
+                            <div class="col-md-6">
+                                <div class="individualdt">CATEGORY:</div>
+                                <div class="">
+                                    @Html.DropDownListFor(model => model.prd_type, new SelectList((List<UrbanRFP.Infrastructure.Entity.ProductType>)ViewData["Types"], "Id", "Name"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="individualdt">SUBCATEGORY:</div>
+                                <div class="">
+                                    @Html.Hidden("tmpSubTypeId", Model.prd_subtype)
+                                    @Html.DropDownListFor(model => model.prd_subtype, new SelectList(new List<string>()), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_subtype, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:15px;">
+                            <div class="col-md-6">
+                                <div class="individualdt">DESCRIPTION:</div>
+                                <div class="">
+                                    @Html.TextAreaFor(model => model.prd_description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="individualdt">FEATURES:</div>
+                                <div class="">
+                                    @Html.TextAreaFor(model => model.prd_features, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_features, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:15px;">
+                            <div class="col-md-6">
+                                <div class="individualdt">BENEFITS:</div>
+                                <div class="">
+                                    @Html.TextAreaFor(model => model.prd_benefits, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_benefits, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="individualdt">PRICING STRUCTURE:</div>
+                                <div class="">
+                                    @Html.TextAreaFor(model => model.prd_pricing, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prd_pricing, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row">
+                            <div class="col-md-12" style="margin-bottom:10px; margin:12px; padding-bottom:10px;">
+                                <div class="col-md-6">
+                                    <div class="col-md-12 individualdt">KEY CONTACT:</div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.prd_target_users, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.prd_target_users, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-12 individualdt">WEB:</div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.prd_website, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.prd_website, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="row">
+                            <div class="col-md-12 text-center" style="margin-bottom:10px; margin:12px; padding-bottom:10px;">
+                                <a href="/product" class="btn btn-lg btn-default">Cancel</a>
+                                <button class="btn btn-lg btn-default" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @{Html.RenderPartial("~/Views/Contact/RACIList.cshtml", Model.RACIContactList);}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            }
+            else
+            {
+                <p class="no-individual-record">No record found.</p>
+            }
+        </div>
+    </div>
+}
+
+@if(Model.prd_type > 0)
+{
+    <text>
+        <script>
+            $(document).ready(function () {
+                $("#prd_type").trigger("change");
+            });
+        </script>
+    </text>
+}

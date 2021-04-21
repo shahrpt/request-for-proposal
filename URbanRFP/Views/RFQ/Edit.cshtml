@@ -1,0 +1,183 @@
+﻿@using UrbanRFP.Infrastructure.Entity
+@using UrbanRFP.Domain.ViewModel
+@using System.Web.Script.Serialization;
+@model RfpRequest
+@{
+    ViewBag.Title = "Request for quote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ProductOrganizationViewModel product = (ProductOrganizationViewModel)ViewData["Product"];
+}
+<link href="~/Content/css/dropzone.css" rel="stylesheet" />
+<link href="~/Content/css/simple-calendar.css" rel="stylesheet" />
+<script src="~/Content/Scripts/jquery.simple-calendar.js"></script>
+<script src="~/Content/Scripts/AppScripts/rfq.js"></script>
+<script src="~/Content/Scripts/AppScripts/home.js"></script>
+<link href="~/Content/summernote/summernote.min.css" rel="stylesheet" />
+<script src="~/Content/Scripts/dropzone.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">Marketplace</a></li>
+        <li><a href="#">City Traffic Management</a></li>
+    </ul>
+</div>
+<div class="logo-desc d-flexs">
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <a style="margin-left:25px;" href="/Search/Result" class="bckresult"><img class="bckimg" src="~/Content/images/left-arrow_2.png" /> Back to search results</a>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12 desc mgbody">
+                <div class="search">
+                    <input type="text" class="ht45 txtSearch" placeholder="city traffic management" autofocus>
+                    <span class="icnsrch">
+                        <img src="~/Content/images/search-icon.png" alt="">
+                    </span>
+                    <input type="button" name="btnSearch" class="ht45 btnSearch" value="Search">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt26 clrwhite mgbody">
+    @if (product != null)
+    {
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-8">
+                <span class="srchtxt">@product.prd_name</span><br />
+                <span><a class="text-blue" href="@product.prd_website" target="_blank">@product.prd_website</a></span>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-offset-2 col-md-8" style="padding-top: 15px;"><a href="#" target="_blank">See all products from this vendor&nbsp;&nbsp;<img src="/content/images/external-link.png" /></a></div>
+                <div class="col-md-1" style="float:right;margin-top:15px"><i class="fa fa-star-o fa-custom" onclick="mark_favorite(this);"></i></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-6">
+                <p class="text-blue font-18">16 Views / 3 <i class="fa fa-star fa-custom"></i></p>
+            </div>
+            <div class="col-md-6">
+                <div style="float:right"><button class="btn btn-default btn-auto">RFQ</button><button class="btn btn-default btn-auto">Invite to a RFP</button></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <p class="individualdt">DESCRIPTION</p>
+                <p class="individualpara mr">@product.prd_description</p>
+            </div>
+            <div class="col-md-4">
+                <p class="individualdt">FEATURES</p>
+                <p class="individualpara mr">@product.prd_features</p>
+            </div>
+            <div class="col-md-4">
+                <p class="individualdt">BENEFITS</p>
+                <p class="individualpara mr">@product.prd_benefits</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p class="individualdt">PRICING STRUCTURE</p>
+                <p class="individualpara mr">@product.prd_pricing</p>
+            </div>
+            <div class="col-md-4">
+                <p class="individualdt">KEY CONTACT</p>
+                <p class="individualpara mr">
+                    Charlie Hobbs<br />
+                    213-551-0131<br />
+                    <a href="mailto:CHobbs@smartparking.com">CHobbs@smartparking.com</a>
+                </p>
+            </div>
+        </div>
+        <hr style="border-color:#3A97D0; border-width:6px" />
+        <div class="row row-margin">
+            <div class="srchtxt" style="float:left">My Request for Quote</div>
+            @*<div style="float:right">
+                <a class="anchortag" href="#"><img class="imgmr" src="~/Content/images/arrow-down.png" /> Cancel My RFQ</a>
+            </div>*@
+        </div>
+        @using (Html.BeginForm("Edit", "RFQ", FormMethod.Post, new { @id = "form-add-rfq" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row row-margin">
+                <div class="col-md-11">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row row-margin">
+                <div class="col-md-8 padding-zero">
+                    <div>
+                        <p class="individualdt">SUBJECT<br /></p>
+                        @Html.Hidden("prdkey", product.prd_key)
+                        @Html.HiddenFor(m=> m.rfp_key)
+                        @Html.TextBoxFor(m => m.rfp_name, new { @class = "form-control service-title" })
+                        @Html.ValidationMessageFor(model => model.rfp_name, "", new { @class = "text-danger" })
+                        <p class="individualdt"><br />SUMMARY</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.rfp_summary, new { @class = "form-control summernote", rows = "3" })
+                                @Html.ValidationMessageFor(model => model.rfp_summary, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p class="individualdt">REQUIREMENTS</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.rfp_sow_solution_requirements, new { @class = "form-control summernote", rows = "3" })
+                                @Html.ValidationMessageFor(model => model.rfp_sow_solution_requirements, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p class="individualdt">ATTACHMENTS</p>
+                        <!-- Change /upload-target to your upload address -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                @{Html.RenderAction("FileUploader", "File", new { name = "RfpAttachments", maxFiles = 5, PicId = Model.RfpAttachments });}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-11">
+                            <div class="rfq-box rfq-box-lightblue">
+                                <br />
+                                <p class="f30">Important dates</p>
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <td>Deadline date<i class="text-danger">&nbsp;*</i></td>
+                                        <td class="text-right">
+                                            @Html.TextBoxFor(m => m.rfp_close_date, new { @class = "form-control datepicker-input" })
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr />
+                                <i class="text-danger">*&nbsp;</i>mandatory information<br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(m => m.rfp_date_notes, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-11">
+                            @{Html.RenderPartial("~/Views/Contact/RACIList.cshtml", Model.RACIContactList);}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="text-right">
+                <button id="btnSaveRfq" type="submit" class="btn btn-default btn-auto sendreq">Save for later</button>
+                <button type="button" class="btn btn-default btn-auto sndinvite">Send</button>
+            </div>
+        }
+    </div>
+    }
+    else
+    {
+        <p class="no-individual-record">No record found.</p>
+    }
+</div>
+<script src="~/Content/summernote/summernote.min.js"></script>

@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Manage Product Types";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/Scripts/AppScripts/prod-type.js"></script>
+<div class="col-md-12 bdcrumb">
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li><a href="#">RFP</a></li>
+        <li><a href="#">Product Types</a></li>
+    </ul>
+</div>
+<div class="logo-desc d-flexs">
+    <div class="col-md-12 desc mgbody">
+        <div class="search">
+            <input type="text" class="ht45 txtSearch" placeholder="city traffic management" autofocus>
+            <span class="icnsrch">
+                <img src="~/Content/images/search-icon.png" alt="">
+            </span>
+            <input type="button" name="btnSearch" class="ht45 btnSearch" value="Search">
+        </div>
+    </div>
+</div>
+<div class="col-md-12 padding-zero mt26 clrwhite mgbody">
+    <div class="main-heading">
+        <p class="srchtxt">Manage Product Types</p><i class="fas fa-fish"></i>
+    </div>
+    <div class="col-md-10 col-md-offset-2">
+        <div class="alert alert-danger alert-dismissible hide">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span class="message"></span>
+        </div>
+    </div>
+    <div class="form-horizontal col-md-10 col-md-offset-2">
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <h2>Types</h2>
+            </div>
+            <div class="col-md-12">
+                <table id="tblTypes" class="table table-responsive table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="60%">Name</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-8">@Html.TextBox("txtNewType", "", new { @placeholder = "Please enter type name", @class = "form-control", @required="required" })</div>
+                <div class="col-md-4"><button id="btnAddType" class="btn btn-default">Add</button></div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <h2>Sub types</h2>
+            </div>
+            <div class="col-md-12">
+                <table id="tblSubTypes" class="table table-responsive table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="60%">Name</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-8">@Html.TextBox("txtNewSubType", "", new { @placeholder = "Please enter sub-type name", @class = "form-control", @required="required" })</div>
+                <div class="col-md-4"><button id="btnAddSubType" class="btn btn-default">Add</button></div>
+            </div>
+        </div>
+    </div>
+</div>

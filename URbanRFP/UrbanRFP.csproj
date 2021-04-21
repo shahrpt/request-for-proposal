@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EA4FDB89-080A-4AF9-96A6-1D48AA8B3C4F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICMA</RootNamespace>
+    <AssemblyName>ICMA</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.6.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.4.6.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.4.6.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ2, Version=17.3500.0.14, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.EJ2.MVC5.17.3.0.14\lib\net45\Syncfusion.EJ2.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=17.3460.0.14, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.17.3.0.14\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.0.3.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.2.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SimpleInjectorConfig .cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminDashboardController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\GeneralController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LookupController.cs" />
+    <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\OrgDashboardController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductTypeController.cs" />
+    <Compile Include="Controllers\RFPController.cs" />
+    <Compile Include="Controllers\RFQController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\SystemUsersController.cs" />
+    <Compile Include="Filters\RoleAuthorizeAttribute.cs" />
+    <Compile Include="Filters\SessionExpireFilterAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\Configuration.cs" />
+    <Compile Include="Helpers\Constant.cs" />
+    <Compile Include="Helpers\EmailManager.cs" />
+    <Compile Include="Helpers\HtmlRequestHelper.cs" />
+    <Compile Include="Helpers\HttpPostedFileBaseExtensions.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\address_x_contact.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\address_x_organization.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppResponseModel.cs" />
+    <Compile Include="Models\attachment_x_event.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\attachment_x_organization.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\attachment_x_product.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\attachment_x_request.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\attachment_x_response.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContactView.cs" />
+    <Compile Include="Models\contact_x_organization.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_x_product.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_x_RACI.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_x_request.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_x_response.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\co_address.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\co_contact.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\co_favourite.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\co_organization.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\co_page_view.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\co_permission.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lkup_cxr_rlt_code.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lkup_population.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lkup_RACI.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lkup_rfp_type.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lkup_solo_multiple.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\organization_x_request.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductSubtype.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductType.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product_x_request.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RACIViewModel.cs" />
+    <Compile Include="Models\rfp_attachment.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_event.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_event_invitee.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_page.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_product.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_question.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_request.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_respond_invitation.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_response.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_scope_of_work.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_score.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_score_rules.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_sop_section.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_task.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_timeline_master_template.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_timeline_org_template.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_validation_reference.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rfp_vendor_allowance.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\score_x_request.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SessionHelper.cs" />
+    <Compile Include="Models\SystemMenu.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\timeline.cs">
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UrbanRFP_DB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UrbanRFP_DB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UrbanRFP_DB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UrbanRFP_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UrbanRFP_DB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UrbanRFP_DB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\bootstrap-confirm-delete.css" />
+    <Content Include="Content\css\bootstrap-datepicker.css" />
+    <Content Include="Content\css\bootstrap-nav-wizard.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\datatables.min.css" />
+    <Content Include="Content\css\dropzone.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\simple-calendar.css" />
+    <Content Include="Content\css\step-wizard.css" />
+    <Content Include="Content\css\vanillaCalendar.css" />
+    <Content Include="Content\ej2\bootstrap.css" />
+    <Content Include="Content\ej2\bootstrap4.css" />
+    <Content Include="Content\ej2\compatibility\bootstrap.css" />
+    <Content Include="Content\ej2\compatibility\fabric.css" />
+    <Content Include="Content\ej2\compatibility\highcontrast.css" />
+    <Content Include="Content\ej2\compatibility\material.css" />
+    <Content Include="Content\ej2\fabric.css" />
+    <Content Include="Content\ej2\highcontrast.css" />
+    <Content Include="Content\ej2\material.css" />
+    <Content Include="Content\images\analytics.png" />
+    <Content Include="Content\images\arrow-down.png" />
+    <Content Include="Content\images\arrow-downwards.png" />
+    <Content Include="Content\images\arrow-down_2.png" />
+    <Content Include="Content\images\arrow-upwards.png" />
+    <Content Include="Content\images\brifecase.png" />
+    <Content Include="Content\images\btn-menu.png" />
+    <Content Include="Content\images\Car1.png" />
+    <Content Include="Content\images\Car2.png" />
+    <Content Include="Content\images\civiq-bid.png" />
+    <Content Include="Content\images\civiq-bid.svg" />
+    <Content Include="Content\images\close-menu.svg" />
+    <Content Include="Content\images\dashboardtblarrow.png" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\directions.svg" />
+    <Content Include="Content\images\docs.png" />
+    <Content Include="Content\images\dropdown-box.png" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\external-link.png" />
+    <Content Include="Content\images\fa-edit.png" />
+    <Content Include="Content\images\home1.png" />
+    <Content Include="Content\images\icon-doc.png" />
+    <Content Include="Content\images\icon-pdf.png" />
+    <Content Include="Content\images\idea.png" />
+    <Content Include="Content\images\idea.svg" />
+    <Content Include="Content\images\layout.svg" />
+    <Content Include="Content\images\left-arrow.png" />
+    <Content Include="Content\images\left-arrow_2.png" />
+    <Content Include="Content\images\levels.svg" />
+    <Content Include="Content\images\line-graph.png" />
+    <Content Include="Content\images\list-view.png" />
+    <Content Include="Content\images\menu.svg" />
+    <Content Include="Content\images\move.png" />
+    <Content Include="Content\images\NotConect.png" />
+    <Content Include="Content\images\notice.svg" />
+    <Content Include="Content\images\notification.png" />
+    <Content Include="Content\images\old\brifecase.png" />
+    <Content Include="Content\images\old\btn-menu.png" />
+    <Content Include="Content\images\old\idea.png" />
+    <Content Include="Content\images\old\left-arrow.png" />
+    <Content Include="Content\images\old\move.png" />
+    <Content Include="Content\images\old\notification.png" />
+    <Content Include="Content\images\old\right-arrow.png" />
+    <Content Include="Content\images\old\user-setting.png" />
+    <Content Include="Content\images\old\user.png" />
+    <Content Include="Content\images\old\windows.png" />
+    <Content Include="Content\images\our-partners1.png" />
+    <Content Include="Content\images\our-partners2.png" />
+    <Content Include="Content\images\our-partners3.png" />
+    <Content Include="Content\images\our-partners4.png" />
+    <Content Include="Content\images\plug.svg" />
+    <Content Include="Content\images\progress_circle.png" />
+    <Content Include="Content\images\rfp.svg" />
+    <Content Include="Content\images\right-arrow.png" />
+    <Content Include="Content\images\save.png" />
+    <Content Include="Content\images\search-icon.png" />
+    <Content Include="Content\images\search-icon.svg" />
+    <Content Include="Content\images\search-results.png" />
+    <Content Include="Content\images\tick-img.png" />
+    <Content Include="Content\images\tick.png" />
+    <Content Include="Content\images\tile-view.png" />
+    <Content Include="Content\images\updown-arrow.png" />
+    <Content Include="Content\images\UrbanRFP-old.svg" />
+    <Content Include="Content\images\UrbanRFP.svg" />
+    <Content Include="Content\images\user-setting.png" />
+    <Content Include="Content\images\user.png" />
+    <Content Include="Content\images\user.svg" />
+    <Content Include="Content\images\windows.png" />
+    <Content Include="Content\Scripts\AppScripts\bootstrap-confirm-delete.js" />
+    <Content Include="Content\Scripts\AppScripts\charts.js" />
+    <Content Include="Content\Scripts\AppScripts\contact.js" />
+    <Content Include="Content\Scripts\AppScripts\dashboard.js" />
+    <Content Include="Content\Scripts\AppScripts\organization.js" />
+    <Content Include="Content\Scripts\AppScripts\prod-type.js" />
+    <Content Include="Content\Scripts\AppScripts\prod.js" />
+    <Content Include="Content\Scripts\AppScripts\registration.js" />
+    <Content Include="Content\Scripts\AppScripts\rfp.js" />
+    <Content Include="Content\Scripts\AppScripts\rfq.js" />
+    <Content Include="Content\Scripts\AppScripts\score-card.js" />
+    <Content Include="Content\Scripts\AppScripts\score-criteria.js" />
+    <Content Include="Content\Scripts\AppScripts\search.js" />
+    <Content Include="Content\Scripts\AppScripts\home.js" />
+    <Content Include="Content\css\charts.css" />
+    <Content Include="Content\Scripts\AppScripts\text-shortner.js" />
+    <Content Include="Content\Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Content\Scripts\datatables.min.js" />
+    <Content Include="Content\Scripts\dropzone.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Content\Scripts\jquery-ui.min.js" />
+    <Content Include="Content\Scripts\jquery.canvasjs.min.js" />
+    <Content Include="Content\Scripts\jquery.mask.min.js" />
+    <Content Include="Content\Scripts\jquery.simple-calendar.js" />
+    <Content Include="Content\Scripts\popper.min.js" />
+    <Content Include="Content\Scripts\sweetalert.min.js" />
+    <Content Include="Content\Scripts\vanillaCalendar.js" />
+    <Content Include="Content\summernote\lang\summernote-ar-AR.js" />
+    <Content Include="Content\summernote\lang\summernote-ar-AR.min.js" />
+    <Content Include="Content\summernote\lang\summernote-bg-BG.js" />
+    <Content Include="Content\summernote\lang\summernote-bg-BG.min.js" />
+    <Content Include="Content\summernote\lang\summernote-ca-ES.js" />
+    <Content Include="Content\summernote\lang\summernote-ca-ES.min.js" />
+    <Content Include="Content\summernote\lang\summernote-cs-CZ.js" />
+    <Content Include="Content\summernote\lang\summernote-cs-CZ.min.js" />
+    <Content Include="Content\summernote\lang\summernote-da-DK.js" />
+    <Content Include="Content\summernote\lang\summernote-da-DK.min.js" />
+    <Content Include="Content\summernote\lang\summernote-de-DE.js" />
+    <Content Include="Content\summernote\lang\summernote-de-DE.min.js" />
+    <Content Include="Content\summernote\lang\summernote-es-ES.js" />
+    <Content Include="Content\summernote\lang\summernote-es-ES.min.js" />
+    <Content Include="Content\summernote\lang\summernote-es-EU.js" />
+    <Content Include="Content\summernote\lang\summernote-es-EU.min.js" />
+    <Content Include="Content\summernote\lang\summernote-fa-IR.js" />
+    <Content Include="Content\summernote\lang\summernote-fa-IR.min.js" />
+    <Content Include="Content\summernote\lang\summernote-fi-FI.js" />
+    <Content Include="Content\summernote\lang\summernote-fi-FI.min.js" />
+    <Content Include="Content\summernote\lang\summernote-fr-FR.js" />
+    <Content Include="Content\summernote\lang\summernote-fr-FR.min.js" />
+    <Content Include="Content\summernote\lang\summernote-he-IL.js" />
+    <Content Include="Content\summernote\lang\summernote-he-IL.min.js" />
+    <Content Include="Content\summernote\lang\summernote-hu-HU.js" />
+    <Content Include="Content\summernote\lang\summernote-hu-HU.min.js" />
+    <Content Include="Content\summernote\lang\summernote-id-ID.js" />
+    <Content Include="Content\summernote\lang\summernote-id-ID.min.js" />
+    <Content Include="Content\summernote\lang\summernote-it-IT.js" />
+    <Content Include="Content\summernote\lang\summernote-it-IT.min.js" />
+    <Content Include="Content\summernote\lang\summernote-ja-JP.js" />
+    <Content Include="Content\summernote\lang\summernote-ja-JP.min.js" />
+    <Content Include="Content\summernote\lang\summernote-ko-KR.js" />
+    <Content Include="Content\summernote\lang\summernote-ko-KR.min.js" />
+    <Content Include="Content\summernote\lang\summernote-lt-LT.js" />
+    <Content Include="Content\summernote\lang\summernote-lt-LT.min.js" />
+    <Content Include="Content\summernote\lang\summernote-nb-NO.js" />
+    <Content Include="Content\summernote\lang\summernote-nb-NO.min.js" />
+    <Content Include="Content\summernote\lang\summernote-nl-NL.js" />
+    <Content Include="Content\summernote\lang\summernote-nl-NL.min.js" />
+    <Content Include="Content\summernote\lang\summernote-pl-PL.js" />
+    <Content Include="Content\summernote\lang\summernote-pl-PL.min.js" />
+    <Content Include="Content\summernote\lang\summernote-pt-BR.js" />
+    <Content Include="Content\summernote\lang\summernote-pt-BR.min.js" />
+    <Content Include="Content\summernote\lang\summernote-pt-PT.js" />
+    <Content Include="Content\summernote\lang\summernote-pt-PT.min.js" />
+    <Content Include="Content\summernote\lang\summernote-ro-RO.js" />
+    <Content Include="Content\summernote\lang\summernote-ro-RO.min.js" />
+    <Content Include="Content\summernote\lang\summernote-ru-RU.js" />
+    <Content Include="Content\summernote\lang\summernote-ru-RU.min.js" />
+    <Content Include="Content\summernote\lang\summernote-sk-SK.js" />
+    <Content Include="Content\summernote\lang\summernote-sk-SK.min.js" />
+    <Content Include="Content\summernote\lang\summernote-sl-SI.js" />
+    <Content Include="Content\summernote\lang\summernote-sl-SI.min.js" />
+    <Content Include="Content\summernote\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="Content\summernote\lang\summernote-sr-RS-Latin.min.js" />
+    <Content Include="Content\summernote\lang\summernote-sr-RS.js" />
+    <Content Include="Content\summernote\lang\summernote-sr-RS.min.js" />
+    <Content Include="Content\summernote\lang\summernote-sv-SE.js" />
+    <Content Include="Content\summernote\lang\summernote-sv-SE.min.js" />
+    <Content Include="Content\summernote\lang\summernote-th-TH.js" />
+    <Content Include="Content\summernote\lang\summernote-th-TH.min.js" />
+    <Content Include="Content\summernote\lang\summernote-tr-TR.js" />
+    <Content Include="Content\summernote\lang\summernote-tr-TR.min.js" />
+    <Content Include="Content\summernote\lang\summernote-uk-UA.js" />
+    <Content Include="Content\summernote\lang\summernote-uk-UA.min.js" />
+    <Content Include="Content\summernote\lang\summernote-vi-VN.js" />
+    <Content Include="Content\summernote\lang\summernote-vi-VN.min.js" />
+    <Content Include="Content\summernote\lang\summernote-zh-CN.js" />
+    <Content Include="Content\summernote\lang\summernote-zh-CN.min.js" />
+    <Content Include="Content\summernote\lang\summernote-zh-TW.js" />
+    <Content Include="Content\summernote\lang\summernote-zh-TW.min.js" />
+    <Content Include="Content\summernote\summernote.css" />
+    <Content Include="Content\summernote\summernote.js" />
+    <Content Include="Content\summernote\summernote.min.css" />
+    <Content Include="Content\summernote\summernote.min.js" />
+    <Content Include="Content\tablesorter\jquery.metadata.js" />
+    <Content Include="Content\tablesorter\jquery.tablesorter.min.js" />
+    <Content Include="Content\tablesorter\themes\blue\asc.gif" />
+    <Content Include="Content\tablesorter\themes\blue\bg.gif" />
+    <Content Include="Content\tablesorter\themes\blue\desc.gif" />
+    <Content Include="Content\tablesorter\themes\blue\style.css" />
+    <Content Include="Content\tablesorter\themes\green\asc.png" />
+    <Content Include="Content\tablesorter\themes\green\bg.png" />
+    <Content Include="Content\tablesorter\themes\green\desc.png" />
+    <Content Include="Content\tablesorter\themes\green\style.css" />
+    <Content Include="Database\USP_GetMenuItems.sql" />
+    <Content Include="Database\USP_GetRfpProduct.sql" />
+    <Content Include="Database\USP_GetSearchRfpOrganization.sql" />
+    <Content Include="favicon.ico" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\ibm-plex-sans.regular.ttf" />
+    <Content Include="Content\fonts\ibm-plex-sans.regular-webfont.woff" />
+    <Content Include="Content\fonts\ibm-plex-sans.regular-webfont.woff2" />
+    <None Include="Content\Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Content\Scripts\AppScripts\custom.js" />
+    <Content Include="Content\Scripts\jquery-3.3.1.js" />
+    <Content Include="Content\Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Content\Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Content\Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\modernizr-2.8.3.js" />
+    <Content Include="menu\menu.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Models\UrbanRFP_DB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UrbanRFP_DB.Context.cs</LastGenOutput>
+      <DependentUpon>UrbanRFP_DB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\UrbanRFP_DB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UrbanRFP_DB.edmx</DependentUpon>
+      <LastGenOutput>UrbanRFP_DB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Search\Result.cshtml" />
+    <Content Include="Views\Search\IndividualResult.cshtml" />
+    <Content Include="Views\Search\RFQProgress.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\ProductType\Index.cshtml" />
+    <Content Include="Views\Product\_AddEditProduct.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\RFQ\Index.cshtml" />
+    <Content Include="Views\Dashboard\RFP.cshtml" />
+    <Content Include="Views\Dashboard\RfpResponse.cshtml" />
+    <Content Include="Views\Organization\Index.cshtml" />
+    <Content Include="Views\Organization\_AddEditOrg.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
+    <Content Include="Views\Organization\Create.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\RFP\Index.cshtml" />
+    <Content Include="Views\RFP\ViewRFP.cshtml" />
+    <Content Include="Views\RFP\Edit.cshtml" />
+    <Content Include="Views\RFP\Create.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\FileUploader.cshtml" />
+    <Content Include="Views\Account\Unauthorized.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard-Vendor.cshtml" />
+    <Content Include="Views\Dashboard\Product.cshtml" />
+    <Content Include="Views\Dashboard\Proposal.cshtml" />
+    <Content Include="Views\Search\Result-RFP.cshtml" />
+    <Content Include="Views\RFQ\Edit.cshtml" />
+    <Content Include="Views\Contact\RACIList.cshtml" />
+    <Content Include="Views\Contact\RACI.cshtml" />
+    <Content Include="Views\Search\SearchFilter.cshtml" />
+    <Content Include="Views\RFP\Criteria.cshtml" />
+    <Content Include="Views\RFP\Templates.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\RFP\Templates-Create.cshtml" />
+    <Content Include="Views\RFP\Score.cshtml" />
+    <Content Include="Views\AdminDashboard\Index.cshtml" />
+    <Content Include="Views\SystemUsers\Create.cshtml" />
+    <Content Include="Views\SystemUsers\Index.cshtml" />
+    <Content Include="Views\SystemUsers\_List.cshtml" />
+    <Content Include="Views\OrgDashboard\Index.cshtml" />
+    <Content Include="Views\OrgDashboard\UserData.cshtml" />
+    <Content Include="Views\OrgDashboard\OrgData.cshtml" />
+    <Content Include="Views\OrgDashboard\EditUserDate.cshtml" />
+    <Content Include="Views\OrgDashboard\ChangePassword.cshtml" />
+    <Content Include="Views\OrgDashboard\EditOrgData.cshtml" />
+    <Content Include="Views\OrgDashboard\addAddress.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppConstants\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\General\" />
+    <Folder Include="Views\Lookup\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\summernote\font\summernote.eot" />
+    <Content Include="Content\summernote\font\summernote.ttf" />
+    <Content Include="Content\summernote\font\summernote.woff" />
+    <EntityDeploy Include="Models\UrbanRFP_DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UrbanRFP_DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UrbanRFP_DB.edmx.diagram">
+      <DependentUpon>UrbanRFP_DB.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Content\Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Content\Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UrbanRFP.Domain\UrbanRFP.Domain.csproj">
+      <Project>{387e7381-7a12-4317-95ba-32c559622ae3}</Project>
+      <Name>UrbanRFP.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UrbanRFP.Facade\UrbanRFP.Facade.csproj">
+      <Project>{2dcf8e0f-1013-4bf1-b785-8a7e7e767243}</Project>
+      <Name>UrbanRFP.Facade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UrbanRFP.Infrastructure\UrbanRFP.Infrastructure.csproj">
+      <Project>{aa226d69-1d70-44be-82dc-e6729eb3449b}</Project>
+      <Name>UrbanRFP.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UrbanRFP.Mapping\UrbanRFP.Mapping.csproj">
+      <Project>{443a0f2e-0949-4aad-92a1-89370e3fbadd}</Project>
+      <Name>UrbanRFP.Mapping</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56847</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56847/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

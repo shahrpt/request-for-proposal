@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<submenu>
+  <marketPlace>
+    <marketPlaceItems name="Clear all" type="button"/>
+    <marketPlaceItems name="Security" type="text"/>
+    <marketPlaceItems name="Health &amp; Wellness" type="text"/>
+    <marketPlaceItems name="Mobility" type="text"/>
+    <marketPlaceItems name="Parking Personal transit (bike, car)" type="checkbox"/>
+    <marketPlaceItems name="Public transit" type="checkbox"/>
+    <marketPlaceItems name="Traffic management" type="checkbox"/>
+    <marketPlaceItems name="Highway Administration Transportation Fleet" type="checkbox"/>
+    <marketPlaceItems name="Energy &amp; Utilities" type="text"/>
+    <marketPlaceItems name="Environment" type="text"/>
+    <marketPlaceItems name="Economic Development" type="text"/>
+    <marketPlaceItems name="Engagement &amp; Community" type="text"/>
+    <marketPlaceItems name="Open Government &amp; Services" type="text"/>
+    <marketPlaceItems name="Public Services" type="text"/>
+  </marketPlace>
+</submenu>

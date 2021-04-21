@@ -1,0 +1,93 @@
+﻿
+@model ICMA.Models.co_contact
+
+@{
+    Layout = null;
+}
+
+
+@using (Ajax.BeginForm("SaveUser", "OrgDashboard", new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "successSaveUser(data)",
+    OnFailure = "errorAjax()"
+}))
+{
+    @Html.AntiForgeryToken()
+
+
+    <input type="hidden" id="hdnUserID" name="upID" value="@Model.ct_key" />
+    <div class="modal-body ">
+        <span class="srchtxt" id="formTitle" style="font-size:28px;">Edit My Profile</span>
+        <hr />
+        <div class="">
+            <div class="individualdt">
+                <label class="control-label">Email</label>
+
+            </div>
+            <div class="">
+                <div style="width:40%; display:inline-block">
+                    <div class="">
+                        <input type="text" class="form-control" id="txtEmail"
+                               name="ct_email"
+                               value="@Model.ct_email.Substring(0,Model.ct_email.IndexOf("@"))" required="required" />
+                    </div>
+                </div>
+                <div style="width:40%; display:inline-block; padding-top:4px">
+                    @Model.ct_email.Substring(Model.ct_email.IndexOf("@"))
+                </div>
+                <div class="text-danger alertemail" style="display:none">Email name must be without '@@'</div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">First Name</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_first_name, new { @class = "form-control", @placeholder = "Please enter first name...", required = "required" })
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Last Name</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_last_name, new { @class = "form-control", @placeholder = "Please enter last name...", required = "required" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="individualdt">
+                        <label class="control-label">Phone</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_phone, new { @class = "form-control", @placeholder = "Please enter Phone...", required = "required" })
+                    </div>
+                </div>
+                <div class="col-lg-6" style="display:none">
+                    <div class="individualdt">
+                        <label class="control-label">Fax</label>
+                    </div>
+                    <div class="">
+                        @Html.TextBoxFor(m => m.ct_fax, new { @class = "form-control", @placeholder = "Please enter fax..." })
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btnSaveUser btnSubmit bLink"><i class="fa fa-save"></i> Save</button>
+        <button type="button" class="btn btn-secondary bLink" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+    </div>
+}
+
+
